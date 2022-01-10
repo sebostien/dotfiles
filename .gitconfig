@@ -1,0 +1,23 @@
+[user]
+	name = sebostien
+	email = info@nielsen.run
+[ui "color"]
+	ui = always
+[color]
+	ui = true
+[commit]
+	template = ~/.gitmessage
+[core]
+	editor = nvim
+	autocrlf = input
+	safecrlf = true
+[alias]
+	c = commit
+	s = status
+	lg = log --oneline
+	last = log -1 HEAD
+	sl = stash list
+[help]
+	autocorrect = 1
+[credential]
+	helper = cache --timeout=3600

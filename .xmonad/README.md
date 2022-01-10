@@ -17,3 +17,7 @@ Install [Haskell and cabal](https://www.haskell.org/downloads/)
 | nm-applet      | Network manager            |
 | lxsession      | Session manager            |
 | picom          | Xorg compositor            |
+
+More specific programs found in [Globals.hs][Globals.hs]
+
+[Globals.hs]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/lib/SN/Globals.hs

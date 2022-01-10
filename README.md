@@ -1,6 +1,6 @@
 # Dotfiles
 
-Configurationfiles for various programs
+config-fies for various programs
 
 ## Setup
 
@@ -23,13 +23,13 @@ config config --local status.showUntrackedFiles no
 | **xmonad**      | Window manager, see [README][xmonad]        |
 | **zsh**         | zsh shell with oh-my-zsh                    |
 | **alacritty**   | Terminal emulator                           |
+| **thunar**      | File manager                                |
 
-[xmonad]: https://github.com/sebostien/dotfiles/blob/master/xmonad/README.md
+[xmonad]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/README.md
 
 ### Other
 
 - aria2c
-- thunar `File manager`
 - discord
 - spotify
 - google-chrome

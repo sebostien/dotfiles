@@ -1,6 +1,7 @@
 module SN.Globals where
 
 import XMonad
+    ( mod4Mask, gets, KeyMask, Dimension, X, XState(windowset) )
 
 import qualified XMonad.StackSet as W
 
@@ -8,7 +9,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "alacritty"    -- Sets default terminal
+myTerminal = "alacritty"
 
 mySelectScreenshot :: String
 mySelectScreenshot = "select-screenshot"

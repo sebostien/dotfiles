@@ -13,8 +13,11 @@ import XMonad
       Resize(Expand, Shrink) )
 import XMonad.Actions.CopyWindow ( kill1 )
 import XMonad.Actions.WithAll ( killAll )
+
+import qualified XMonad.Layout.MultiToggle as MT
 import XMonad.Layout.MultiToggle.Instances
     ( StdTransformers(NBFULL) )
+
 import XMonad.Actions.CycleWS
     ( moveTo,
       nextScreen,
@@ -27,13 +30,14 @@ import XMonad.Util.NamedScratchpad ( namedScratchpadAction )
 import XMonad.Hooks.ManageDocks ( ToggleStruts(ToggleStruts) )
 
 import qualified XMonad.StackSet as W
-import qualified XMonad.Layout.MultiToggle as MT
 
 import SN.Globals ( myTerminal, myBrowser )
 import SN.Grid ( mygridConfig, spawnSelected', myAppGrid )
 import SN.ScratchPad ( myScratchPads )
 import SN.Theme ( myGridColorizer )
 import XMonad.Actions.SpawnOn (spawnOn)
+import XMonad.Layout.Gaps ( Direction2D(U), GapMessage(ToggleGap) ) 
+import SN.EwwBar (myEwwSpawnBar, myEwwCloseBar)
 
 myNamedKeys :: [KeySection]
 myNamedKeys =
@@ -58,6 +62,10 @@ myNamedKeys =
         , ("M-l", "Expand window", sendMessage Expand)
         , ("M-<Space>", "Toggle fullscreen", sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)
         , ("M-t", "Push floating window to tile", withFocused $ windows . W.sink)
+        ]
+    , KeySection "Eww Widgets"
+        [ ("M-e o", "Open top bar", myEwwSpawnBar)
+        , ("M-e c", "Close top bar", myEwwCloseBar)
         ]
     , KeySection "Grid Select"
         [ ("M-g g", "Grid select launch", spawnSelected' myAppGrid)

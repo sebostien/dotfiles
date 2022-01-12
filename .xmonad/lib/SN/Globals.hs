@@ -20,18 +20,21 @@ myScreenshot = "xfce4-screenshooter"
 myBrowser :: String
 myBrowser = "google-chrome "  -- Sets chrome as browser
 
+myFileManager :: String
+myFileManager = "nautilus "
+
 myEditor :: String
 myEditor = "code --wait "  -- Sets VS Code as editor
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
 
 myBorderWidth :: Dimension
-myBorderWidth = 0           -- Sets border width for windows
+myBorderWidth = 2           -- Sets border width for windows
 
 myNormColor :: String
 myNormColor   = "#3b4252"   -- Border color of normal windows
 
 myFocusColor :: String
-myFocusColor  = "#bc96da"   -- Border color of focused windows
+myFocusColor  = "#2196E3"   -- Border color of focused windows
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset

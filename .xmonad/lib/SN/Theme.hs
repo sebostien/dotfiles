@@ -29,7 +29,7 @@ base01  = "#586e75"
 base00  = "#666666"
 base0   = "#839496"
 base1   = "#93a1a1"
-base2   = "#eee8d5"
+base2   = "#fafafa"
 base3   = "#fdf6e3"
 
 yellow,orange,red,magenta,violet,blue,cyan,green :: String
@@ -38,9 +38,10 @@ orange  = "#cb4b16"
 red     = "#dc322f"
 magenta = "#d33682"
 violet  = "#6c71c4"
-blue    = "#268bd2"
+blue    = "#2196E3"
 cyan    = "#2aa198"
-green   = "#98be65"
+green   = "#4CAF50"
+
 
 -- sizes
 
@@ -62,20 +63,6 @@ activeWarn  = red
 inactive    = base02
 focusColor  = blue
 unfocusColor = base02
-
-topBarTheme :: Theme
-topBarTheme = def
-    { fontName              = myFont
-    , inactiveBorderColor   = base03
-    , inactiveColor         = base03
-    , inactiveTextColor     = base03
-    , activeBorderColor     = active
-    , activeColor           = active
-    , activeTextColor       = active
-    , urgentBorderColor     = red
-    , urgentTextColor       = yellow
-    , decoHeight            = topbar
-    }
 
 
 myGridColorizer :: Window -> Bool -> X (String, String)

@@ -1,0 +1,74 @@
+
+; Windows foldstart
+(defwindow bar
+  :monitor 0
+  :hexpand false
+  :vexpand false
+  :geometry (geometry :x 0 :y 0 :width "100%")
+  :anchor "top left"
+  :reserve (struts :distance "30px" :side "top")
+  (bar :screen 0))
+; foldend
+
+; Bar foldstart
+(defwidget bar [screen]
+  (box :orientation "h"
+       :space-evenly false
+       :class "bar"
+    (workspaces) ; from xmonad as yuck
+    (box :halign "end"
+         :spacing 12
+         :hexpand true
+         :space-evenly false
+      (sidestuff))))
+; foldend
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric :label "🔊"
+            :value volume
+            :onchange "amixer set Master {}%")
+    (metric :label ""
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label "💾"
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")
+    time))
+
+; Polybar-Style modules foldstart
+(defwidget workspaces []
+  (literal :content "${workspaces_listen}"))
+
+(defwidget music []
+  (box :class "music"
+        :orientation "h"
+        :space-evenly false
+        :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+        :class "metric"
+        :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+            :max 101
+            :active {onchange != ""}
+            :value value
+            :onchange onchange)))
+
+(deflisten workspaces_listen :initial ""
+  "xmonad-log")
+
+; (deflisten workspaces_listen "./modules/workspaces.sh")
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")

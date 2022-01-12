@@ -18,14 +18,23 @@ config config --local status.showUntrackedFiles no
 
 ## Applications
 
-|                 | Description                                 |
-|-----------------|---------------------------------------------|
-| **xmonad**      | Window manager, see [README][xmonad]        |
-| **zsh**         | zsh shell with oh-my-zsh                    |
-| **alacritty**   | Terminal emulator                           |
-| **thunar**      | File manager                                |
+|               | Description                                     |
+| ------------- | ----------------------------------------------- |
+| **xmonad**    | Window manager, see [README][xmonad]            |
+| **gdm3**      | Desktop Manager                                 |
+| **zsh**       | zsh shell with oh-my-zsh                        |
+| **alacritty** | Terminal emulator                               |
+| **nautilus**  | File manager                                    |
+| **Spotify**   | Music, spicetify [Dribbblish][dribbblish] theme |
+| **Discord**   | Chat, with [BetterDiscord][BetterDiscord]       |
+| **Eww**       | Widgets [Eww](https://github.com/elkowar/eww)   |
 
 [xmonad]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/README.md
+[dribbblish]: https://github.com/morpheusthewhite/spicetify-themes/tree/master/Dribbblish
+[BetterDiscord]: https://github.com/BetterDiscord/BetterDiscord
+
+**Browser**: Google Chrome
+Extensions: - nighttab, config in .config/nightTab.json
 
 ### Other
 

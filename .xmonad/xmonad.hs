@@ -4,16 +4,20 @@
 import XMonad
 import Data.Monoid ( Endo )
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops ( ewmh ) 
+import XMonad.Hooks.EwmhDesktops ( ewmh )
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers ( doCenterFloat, doFullFloat, isDialog, isFullscreen )
 import XMonad.Hooks.SetWMName ( setWMName )
-import XMonad.Layout.ShowWName ( showWName' ) 
-import XMonad.Util.EZConfig ( additionalKeysP ) 
+import XMonad.Layout.ShowWName ( showWName' )
+import XMonad.Util.EZConfig ( additionalKeysP )
 import XMonad.Util.NamedScratchpad ( namedScratchpadFilterOutWorkspacePP, namedScratchpadManageHook )
 import XMonad.Util.Run ( spawnPipe )
 import XMonad.Util.SpawnOnce ( spawnOnce )
 import qualified XMonad.Layout.ToggleLayouts as T
+
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
 
 import System.IO ( hPutStrLn )
 
@@ -23,7 +27,7 @@ import SN.Workspaces ( myWorkspaces, clickable )
 import SN.Keys ( myKeys )
 import SN.Layouts (tall, myLayoutHook)
 import SN.Theme as SNT
-import Xmobar (Config(wmName), xmobar)
+import SN.EwwBar
 import Graphics.X11 (wM_ICON_NAME)
 
 
@@ -33,12 +37,16 @@ import Graphics.X11 (wM_ICON_NAME)
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "lxsession &"
-    spawnOnce "picom &"
-    spawnOnce "nm-applet &"
+    spawn "killall trayer"  -- kill current trayer on each restart
+
+    spawnOnce "lxsession"
+    spawnOnce "picom"
+    spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
+
+    myEwwStartupHook
     spawnOnce mySysTray
-    spawnOnce "nitrogen --restore &"   -- nitrogen last wallpaper
+    spawnOnce "nitrogen --restore"   -- nitrogen last wallpaper
     setWMName "LG3D"
 
 
@@ -69,17 +77,12 @@ myManageHook =
             , className =? "discord"            --> doShift " chat "
             , className =? "Steam"              --> doShift " game "
             , className =? ""                   --> doShift " mus "      -- spotify hopefully
-            , title     =? "Bluetooth Devices"  --> doCenterFloat        
+            , title     =? "Bluetooth Devices"  --> doCenterFloat
             , className =? "VirtualBox Manager" --> doShift  " vbox "
             , isDialog     --> doCenterFloat
             , isFullscreen -->  doFullFloat
             ]
         isRole = stringProperty "WM_WINDOW_ROLE"
-
-
-
-
-
 
 -----------------------------------------------------------
 -- | main | -----------------------------------------------
@@ -87,8 +90,12 @@ myManageHook =
 main :: IO ()
 main = do
     -- Launching two instances of xmobar on seperate monitors.
-    xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc0"
-    xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc1"
+    dbus <- D.connectSession
+    -- Request access to the DBus name
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+
+    spawn "~/.config/eww/launch" -- start eww
     xmonad $ ewmh def
         { manageHook         = myManageHook <+> manageDocks
         , handleEventHook    = docksEventHook
@@ -100,18 +107,5 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
-        , logHook = dynamicLogWithPP $ namedScratchpadFilterOutWorkspacePP $ xmobarPP
-              -- the following variables beginning with 'pp' are settings for xmobar.
-              { ppOutput = \x -> hPutStrLn xmproc0 x                            -- xmobar on monitor 1
-                              >> hPutStrLn xmproc1 x                            -- xmobar on monitor 2
-              , ppCurrent = xmobarColor SNT.green "" . wrap "[" "]"             -- Current workspace
-              , ppVisible = xmobarColor SNT.green "" . clickable                -- Visible but not current workspace
-              , ppHidden = xmobarColor SNT.blue "" . wrap "*" "" . clickable    -- Hidden workspaces
-              , ppHiddenNoWindows = xmobarColor SNT.magenta ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor SNT.base2 "" . shorten 60                 -- Title of active window
-              , ppSep =  "<fc=" ++ SNT.base00 ++ "> <fn=1>|</fn> </fc>"         -- Separator character
-              , ppUrgent = xmobarColor SNT.orange "" . wrap "!" "!"             -- Urgent workspace
-              , ppExtras  = [windowCount]                                       -- # of windows current workspace
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                      -- order of things in xmobar
-              }
+        , logHook = myEwwLogHook dbus
         } `additionalKeysP` myKeys

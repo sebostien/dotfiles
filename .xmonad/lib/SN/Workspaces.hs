@@ -8,6 +8,9 @@ import XMonad (WorkspaceId)
 myWorkspaces :: [String]
 myWorkspaces = [" dev ", " www ", " dax ", " doc ", " vbox ", " chat ", " mus ", " game ", " gfx "]
 
+myWorkspaceIcons :: [String]
+myWorkspaceIcons = [" e796 ", " www ", " dax ", " doc ", " vbox ", " chat ", " mus ", " game ", " gfx "]
+
 myWorkspaceIndices :: M.Map String Integer
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..]
 

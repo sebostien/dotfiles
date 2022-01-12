@@ -1,0 +1,11 @@
+{
+  "name": "eww-config",
+  "version": "1.0.0",
+  "description": "My eww config",
+  "author": "sebostien",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "nord": "^0.2.1"
+  }
+}

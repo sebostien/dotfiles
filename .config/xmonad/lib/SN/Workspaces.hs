@@ -13,7 +13,3 @@ myWorkspaceIcons = [" e796 ", " www ", " dax ", " doc ", " vbox ", " chat ", " m
 
 myWorkspaceIndices :: M.Map String Integer
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..]
-
-clickable :: String -> String
-clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
-    where i = fromJust $ M.lookup ws myWorkspaceIndices

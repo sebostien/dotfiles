@@ -1,0 +1,27 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;; Left bar ;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;; Includes ;;;;;;;;;;;;;;;;;;;
+(include "src/widgets.yuck")
+
+(defwindow leftBar
+  :monitor 0
+  :hexpand false
+  :vexpand false
+  :geometry (geometry :x "2%" :y 5 :width "96%")
+  :anchor "top center"
+  :reserve (struts :distance "32px" :side "top")
+  (leftBar)
+)
+
+
+(defwindow rightBar
+  :monitor 1
+  :hexpand false
+  :vexpand false
+  :geometry (geometry :x "2%" :y 5 :width "96%")
+  :anchor "top center"
+  :reserve (struts :distance "32px" :side "top")
+  (rightBar)
+)

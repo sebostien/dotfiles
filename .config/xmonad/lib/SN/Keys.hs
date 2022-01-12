@@ -1,6 +1,7 @@
-module SN.Keys (myKeys, myNamedKeys) where
+module SN.Keys (myKeys, myNamedKeys, makeMyKeyFile) where
 
 import System.Exit ( exitSuccess )
+import System.IO
 
 import XMonad
     ( io,
@@ -28,15 +29,14 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect ( bringSelected, goToSelected )
 import XMonad.Util.NamedScratchpad ( namedScratchpadAction )
 import XMonad.Hooks.ManageDocks ( ToggleStruts(ToggleStruts) )
+import XMonad.Actions.SpawnOn (spawnOn)
+import XMonad.Layout.Gaps ( Direction2D(U), GapMessage(ToggleGap) ) 
 
 import qualified XMonad.StackSet as W
 
 import SN.Globals ( myTerminal, myBrowser )
-import SN.Grid ( mygridConfig, spawnSelected', myAppGrid )
 import SN.ScratchPad ( myScratchPads )
-import SN.Theme ( myGridColorizer )
-import XMonad.Actions.SpawnOn (spawnOn)
-import XMonad.Layout.Gaps ( Direction2D(U), GapMessage(ToggleGap) ) 
+
 import SN.EwwBar (myEwwSpawnBar, myEwwCloseBar)
 
 myNamedKeys :: [KeySection]
@@ -64,13 +64,8 @@ myNamedKeys =
         , ("M-t", "Push floating window to tile", withFocused $ windows . W.sink)
         ]
     , KeySection "Eww Widgets"
-        [ ("M-e o", "Open top bar", myEwwSpawnBar)
-        , ("M-e c", "Close top bar", myEwwCloseBar)
-        ]
-    , KeySection "Grid Select"
-        [ ("M-g g", "Grid select launch", spawnSelected' myAppGrid)
-        , ("M-g t", "Grid select goto", goToSelected $ mygridConfig myGridColorizer)
-        , ("M-g b", "Grid select bring", bringSelected $ mygridConfig myGridColorizer)
+        [ ("M-e o", "Open top bar", spawn myEwwSpawnBar)
+        , ("M-e c", "Close top bar", spawn myEwwCloseBar)
         ]
     , KeySection "Scratchpad"
         [ ("M-s t", "Toggle terminal scratchpad", namedScratchpadAction myScratchPads "terminal")
@@ -110,3 +105,9 @@ instance Show KeySection where
         keys = unlines $ map (\(a,b,_) -> ' ' : a ++ replicate (l - length a) ' ' ++ b) ks
         l = maximum (map (\(a,_,_) -> length a) ks) + 3
 
+
+-- | Create a file which has all keybindings
+makeMyKeyFile :: String
+makeMyKeyFile = "echo '" ++ myFileKeys ++ "' >> ~/.config/xmonad/xmonadKeys.txt"
+    where
+        myFileKeys = unlines $ map show myNamedKeys

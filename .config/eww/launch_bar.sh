@@ -7,4 +7,5 @@ if [[ ! `pidof eww` ]]; then
 fi
 
 eww open-many \
-    bar
+    leftBar \
+	rightBar

@@ -1,35 +1,24 @@
--- https://gitlab.com/dwt1/dotfiles/-/blob/master/.xmonad/xmonad.hs
--- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
-
 import XMonad
 import Data.Monoid ( Endo )
-import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops ( ewmh )
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks (docks, manageDocks)
 import XMonad.Hooks.ManageHelpers ( doCenterFloat, doFullFloat, isDialog, isFullscreen )
 import XMonad.Hooks.SetWMName ( setWMName )
 import XMonad.Layout.ShowWName ( showWName' )
 import XMonad.Util.EZConfig ( additionalKeysP )
-import XMonad.Util.NamedScratchpad ( namedScratchpadFilterOutWorkspacePP, namedScratchpadManageHook )
-import XMonad.Util.Run ( spawnPipe )
+import XMonad.Util.NamedScratchpad ( namedScratchpadManageHook )
 import XMonad.Util.SpawnOnce ( spawnOnce )
-import qualified XMonad.Layout.ToggleLayouts as T
 
-import qualified DBus as D
-import qualified DBus.Client as D
-import qualified Codec.Binary.UTF8.String as UTF8
+import XMonad.Hooks.StatusBar (statusBarProp, withSB)
 
-import System.IO ( hPutStrLn )
-
-import SN.Globals
-import SN.ScratchPad ( myScratchPads )
-import SN.Workspaces ( myWorkspaces, clickable )
-import SN.Keys ( myKeys )
-import SN.Layouts (tall, myLayoutHook)
-import SN.Theme as SNT
+-- Personal libraries
 import SN.EwwBar
-import Graphics.X11 (wM_ICON_NAME)
-
+import SN.Globals
+import SN.ScratchPad
+import SN.Keys
+import SN.Layouts
+import SN.Workspaces
+import SN.Theme (myShowWNameTheme)
 
 ------------------------------------------------------------------------
 -- | Startup| ----------------------------------------------------------
@@ -44,7 +33,7 @@ myStartupHook = do
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
 
-    myEwwStartupHook
+    spawnOnce myEwwStartupHook
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore"   -- nitrogen last wallpaper
     setWMName "LG3D"
@@ -65,6 +54,7 @@ myManageHook =
     where
         manageSpecific = composeAll
             [ className =? "confirm"            --> doCenterFloat
+            , className =? "xmessage"           --> doCenterFloat -- XMonad error
             , className =? "file_progress"      --> doFloat
             , className =? "dialog"             --> doFloat
             , className =? "download"           --> doFloat
@@ -79,7 +69,7 @@ myManageHook =
             , className =? ""                   --> doShift " mus "      -- spotify hopefully
             , title     =? "Bluetooth Devices"  --> doCenterFloat
             , className =? "VirtualBox Manager" --> doShift  " vbox "
-            , isDialog     --> doCenterFloat
+            , isDialog     -->  doCenterFloat
             , isFullscreen -->  doFullFloat
             ]
         isRole = stringProperty "WM_WINDOW_ROLE"
@@ -87,18 +77,15 @@ myManageHook =
 -----------------------------------------------------------
 -- | main | -----------------------------------------------
 -----------------------------------------------------------
+
+mySB = statusBarProp "ewwWidget" (pure myEwwPP)
+
 main :: IO ()
 main = do
-    -- Launching two instances of xmobar on seperate monitors.
-    dbus <- D.connectSession
-    -- Request access to the DBus name
-    D.requestName dbus (D.busName_ "org.xmonad.Log")
-        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
-
-    spawn "~/.config/eww/launch" -- start eww
-    xmonad $ ewmh def
+    spawn makeMyKeyFile
+    spawn myEwwSpawnBar
+    xmonad . withSB mySB . docks $ ewmh def
         { manageHook         = myManageHook <+> manageDocks
-        , handleEventHook    = docksEventHook
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
@@ -107,5 +94,4 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
-        , logHook = myEwwLogHook dbus
         } `additionalKeysP` myKeys

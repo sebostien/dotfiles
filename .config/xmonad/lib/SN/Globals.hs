@@ -3,8 +3,6 @@ module SN.Globals where
 import XMonad
     ( mod4Mask, gets, KeyMask, Dimension, X, XState(windowset) )
 
-import qualified XMonad.StackSet as W
-
 myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
 
@@ -35,9 +33,6 @@ myNormColor   = "#3b4252"   -- Border color of normal windows
 
 myFocusColor :: String
 myFocusColor  = "#2196E3"   -- Border color of focused windows
-
-windowCount :: X (Maybe String)
-windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True

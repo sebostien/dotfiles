@@ -1,0 +1,12 @@
+
+(deflisten workspaces_listen "~/.config/eww/scripts/xprop_xmonad.sh")
+  
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+  
+(defpoll volume :interval "1s"
+  "scripts/getvol.sh")
+  
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+  

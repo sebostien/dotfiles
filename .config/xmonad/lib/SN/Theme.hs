@@ -65,26 +65,6 @@ focusColor  = blue
 unfocusColor = base02
 
 
-myGridColorizer :: Window -> Bool -> X (String, String)
-myGridColorizer = colorRangeFromClassName
-                  (0x28,0x2c,0x34) -- lowest inactive bg
-                  (0x28,0x2c,0x34) -- highest inactive bg
-                  (0xc7,0x92,0xea) -- active bg
-                  (0xc0,0xa7,0x9a) -- inactive fg
-                  (0x28,0x2c,0x34) -- active fg
-
-
-myTabTheme :: Theme
-myTabTheme = def { fontName            = myFont
-                 , activeColor         = blue
-                 , inactiveColor       = "#313846"
-                 , activeBorderColor   = blue
-                 , inactiveBorderColor = "#282c34"
-                 , activeTextColor     = "#282c34"
-                 , inactiveTextColor   = "#d0d0d0"
-                 }
-
-
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
 myShowWNameTheme = def

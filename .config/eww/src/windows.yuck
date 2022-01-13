@@ -9,9 +9,9 @@
   :monitor 0
   :hexpand false
   :vexpand false
-  :geometry (geometry :x "2%" :y 5 :width "96%")
+  :geometry (geometry :x "16px" :y 5 :width {2560-32 + "px"})
   :anchor "top center"
-  :reserve (struts :distance "32px" :side "top")
+  :reserve (struts :distance "46px" :side "top")
   (leftBar)
 )
 
@@ -20,8 +20,8 @@
   :monitor 1
   :hexpand false
   :vexpand false
-  :geometry (geometry :x "2%" :y 5 :width "96%")
+  :geometry (geometry :x "16px" :y 5 :width {1920-32 + "px"})
   :anchor "top center"
-  :reserve (struts :distance "32px" :side "top")
+  :reserve (struts :distance "46px" :side "top")
   (rightBar)
 )

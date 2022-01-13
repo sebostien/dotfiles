@@ -6,66 +6,90 @@
 (include "src/variables.yuck")
 
 (defwidget leftBar []
-  (box :orientation "h"
-       :class "workspace-bar"
-      (workspaces) ; from xmonad as yuck
+  (centerbox :orientation "h"
+    (box :orientation "h"
+         :space-evenly false
+      (time)
+      (windowTitle)
+    )
+    (workspaces)
+    (box :orientation "h"
+         :space-evenly false
+         :halign "end"
+      (network)
+      (statContainer :label ""
+                     :value {round(EWW_CPU.avg, 0) + "%"})
+      (statContainer :label ""
+                     :value {round(EWW_RAM.used_mem_perc, 0) + "%"})
+      (statContainer :label ""
+                     :value {round(EWW_DISK["/"].free / 1073741824, 0) + "G" })
+    )
   )
 )
 
 (defwidget rightBar []
   (centerbox :orientation "h"
-    (box :orientation "h" :space-evenly false (workspaces) )
-    (label :class "timeText" :text "${time}")
-    (sidestuff)
-  )
-)
-
-(defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric :label "🔊"
-            :value volume
-            :onchange "amixer set Master {}%")
-    (metric :label ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    (metric :label "💾"
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
-  )
-)
-
-; Polybar-Style modules foldstart
-(defwidget workspaces []
-  (literal :content "${workspaces_listen}")
-)
-
-(defwidget music []
-  (box  :class "music"
-        :orientation "h"
-        :space-evenly false
-        :halign "center"
-    {music != "" ? " ${music}" : ""}
-  )
-)
-
-  
-(defwidget metric [label value onchange]
-  (box  :orientation "h"
-        :class "metric"
-        :space-evenly false
-    (box :class "label" label)
-    (scale  :min 0
-            :max 101
-            :active {onchange != ""}
-            :value value
-            :onchange onchange
+             :space-evenly false
+    (box :orientation "h"
+         :space-evenly false
+      (time)
+      (statContainer :label "嬨"
+                     :value vpn)
+    )
+    (workspaces)
+    (box :class "stats"
+         :orientation "h"
+         :space-evenly false
+         :halign "end"
+      (music)
     )
   )
 )
 
-
-(defwidget time []
-  (box :class "timeText"
-    time)
+(defwidget statContainer [value label]
+  (box :orientation "h"
+       :space-evenly false
+       :class "stat-container"
+    (label :class "label" :text label)
+    (label :text value) 
+  )
 )
 
+(defwidget workspaces []
+  (box :orientation "h" :class "workspace-bar"
+    (literal :content "${workspaces_listen}")  ; from xmonad as yuck
+  )
+)
+
+(defwidget windowTitle []
+  (box :orientation "h"
+       :class "window-title"
+    (label :text windowTitle :limit-width 80 :wrap true)    
+  )
+)
+
+(defwidget music []
+  (box :orientation "h"
+       :space-evenly false
+       :class "stat-container"
+    (label :class "label" :text "")
+    (label :text music :wrap true :limit-width 80) 
+  )
+)
+
+(defwidget time []
+  (box :class "time-text"
+       :orientation "h"
+    time
+  )
+)
+
+(defwidget network []
+  (box :orientation "h"
+       :space-evenly false
+       :class "stat-container"
+    (label :text "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)}")
+    (label :class "green" :text "   ")
+    (label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}")
+  )
+)

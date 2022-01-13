@@ -17,7 +17,6 @@ import SN.Globals
 import SN.ScratchPad
 import SN.Keys
 import SN.Layouts
-import SN.Workspaces
 import SN.Theme (myShowWNameTheme)
 
 ------------------------------------------------------------------------
@@ -27,16 +26,16 @@ import SN.Theme (myShowWNameTheme)
 myStartupHook :: X ()
 myStartupHook = do
     spawn "killall trayer"  -- kill current trayer on each restart
+    setWMName "LG3D"
 
     spawnOnce "lxsession"
     spawnOnce "picom"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
 
-    spawnOnce myEwwStartupHook
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore"   -- nitrogen last wallpaper
-    setWMName "LG3D"
+    spawnOnce myEwwStartupHook
 
 
 ------------------------------------------------------------------------
@@ -62,13 +61,7 @@ myManageHook =
             , className =? "notification"       --> doFloat
             , isRole    =? "pop-up"             --> doCenterFloat
             , className =? "Yad"                --> doCenterFloat
-            , className =? "Gimp"               --> doShift " gfx "
-            , isRole    =? "browser"            --> doShift " www "
-            , className =? "discord"            --> doShift " chat "
-            , className =? "Steam"              --> doShift " game "
-            , className =? ""                   --> doShift " mus "      -- spotify hopefully
             , title     =? "Bluetooth Devices"  --> doCenterFloat
-            , className =? "VirtualBox Manager" --> doShift  " vbox "
             , isDialog     -->  doCenterFloat
             , isFullscreen -->  doFullFloat
             ]
@@ -90,7 +83,6 @@ main = do
         , terminal           = myTerminal
         , startupHook        = myStartupHook
         , layoutHook         = showWName' myShowWNameTheme myLayoutHook
-        , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor

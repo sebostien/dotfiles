@@ -39,32 +39,33 @@ createBox c color yuck = unwords
     , yuck ++ ")"
     ]
 
-createLabel :: Color -> String -> String
-createLabel c text = unwords
+createLabel :: Color -> String -> String -> String
+createLabel c font text = unwords
     [ "(label"
-    , ":style \"color:" ++ c ++ "\""
+    , ":style \"color:" ++ c ++ "; font-weight: " ++ font ++ "\""
     , ":text \"" ++ text ++ "\")"
     ]
 
 yuckPPSep :: Yuck
-yuckPPSep = createLabel SNT.base00 "| "
+yuckPPSep = createLabel SNT.base00 "normal" "| "
 
 myEwwPP :: PP
 myEwwPP = def
-    { ppCurrent = createLabel SNT.green . wrap "[" "]"
+    { ppCurrent = const (createLabel SNT.green "bold" "\xf111 ")
     , ppExtras  = []
-    , ppVisible = createLabel SNT.green
-    , ppHidden = createLabel SNT.blue
-    , ppHiddenNoWindows = createLabel SNT.magenta
-    , ppUrgent = createLabel SNT.orange 
-    , ppTitle = createLabel SNT.base2 . shorten 120
+    , ppVisible = const (createLabel "#ffffff" "bold" "\xf111 ")
+    , ppHidden = const (createLabel "#acacac" "bold" "\xf10c ")
+    , ppHiddenNoWindows = const (createLabel "#6c6c6c" "bold" "\xf10c ")
+    , ppUrgent = const (createLabel SNT.orange "bold" "\xf10c ")
+    , ppTitle = shorten 120
     , ppSep = ""
     , ppOrder  = \(ws:l:t:ex) -> [
             createBox "workspaces" "" (concat
                 [ ws
-                , yuckPPSep
-                , createLabel SNT.magenta l
+                -- , yuckPPSep
+                -- , createLabel "#ffffff" "normal" l
                 ])
+            ++ "|||" ++ t -- used by eww to seperate title
             ]
     }
 

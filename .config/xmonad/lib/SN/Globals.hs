@@ -1,5 +1,7 @@
 module SN.Globals where
 
+import SN.Theme as SNT
+
 import XMonad
     ( mod4Mask, gets, KeyMask, Dimension, X, XState(windowset) )
 
@@ -32,7 +34,7 @@ myNormColor :: String
 myNormColor   = "#3b4252"   -- Border color of normal windows
 
 myFocusColor :: String
-myFocusColor  = "#2196E3"   -- Border color of focused windows
+myFocusColor  = SNT.green   -- Border color of focused windows
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True

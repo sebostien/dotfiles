@@ -1,6 +1,11 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;; Variables ;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(deflisten workspaces_listen "~/.config/eww/scripts/xprop_xmonad.sh")
-  
+
+(deflisten workspaces_listen "scripts/xprop_xmonad.sh body")
+(deflisten windowTitle "scripts/xprop_xmonad.sh title")  
+
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
   
@@ -8,5 +13,11 @@
   "scripts/getvol.sh")
   
 (defpoll time :interval "10s"
-  "date '+%H:%M %b %d, %Y'")
+  "date '+%b %d, %Y  %H:%M'")
   
+(defpoll vpn :interval "1m"
+  "./scripts/getvpnstatus.sh")
+
+
+(defpoll interfaceId
+  :interval "60s" "route | grep default | head -n1 | awk '{print $8}'")

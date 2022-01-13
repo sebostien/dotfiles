@@ -7,5 +7,21 @@
 # Remove last "
 # Replace \" with "
 
-xprop -root -spy -notype _XMONAD_LOG | \
-    stdbuf -oL sed -e 's/^_XMONAD_LOG = "//'  -e 's/.$//'   -e 's/\\"/"/g'
+
+if [ ! "$1" ]
+then
+    echo "ERROR: No argumnet for body or title"
+fi
+
+case "$1" in
+    *"body"*)
+        xprop -root -spy -notype _XMONAD_LOG | \
+            stdbuf -oL sed -e 's/^_XMONAD_LOG = "//'  -e 's/|||.*//'   -e 's/\\"/"/g'
+    ;;
+    *"title"*)
+        xprop -root -spy -notype _XMONAD_LOG | \
+            stdbuf -oL sed -e 's/.*|||//' -e 's/.$//'
+    ;;
+esac
+
+

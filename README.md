@@ -1,6 +1,6 @@
 # Dotfiles
 
-config-fies for various programs
+config-files for various programs
 
 ## Setup
 
@@ -15,6 +15,8 @@ git clone --bare https://www.github.com/sebostien/dotfiles.git $HOME/dotfiles
 config checkout
 config config --local status.showUntrackedFiles no
 ```
+
+Picom: <https://github.com/yshui/picom>
 
 ## Applications
 

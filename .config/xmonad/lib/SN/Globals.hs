@@ -40,20 +40,22 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 mySysTray :: String
-mySysTray = unwords [ "trayer"
+mySysTray = unwords [ "killall trayer ; trayer"
                     , "--edge top"
-                    , "--align right"
+                    , "--align center"
                     , "--SetDockType true"
-                    , "--SetPartialStrut true"
                     , "--expand true"
-                    , "--widthtype pixel"
-                    , "--width 260"
+                    , "--widthtype percent"
+                    , "--width 10"
                     , "--transparent true"
                     , "--alpha 0"
-                    , "--distancefrom right"
-                    , "--distance 1100 "
+                    , "--distancefrom left"
+                    , "--distance 440"
                     , "--tint 0x282c34"
                     , "--monitor 0"
                     , "--padding 0"
                     , "--height 22 &"
                     ]
+
+killMySysTray :: String
+killMySysTray = "killall trayer"

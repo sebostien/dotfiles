@@ -34,7 +34,7 @@ import XMonad.Layout.Gaps ( Direction2D(U), GapMessage(ToggleGap) )
 
 import qualified XMonad.StackSet as W
 
-import SN.Globals ( myTerminal, myBrowser )
+import SN.Globals ( myTerminal, myBrowser, mySysTray, killMySysTray )
 import SN.ScratchPad ( myScratchPads )
 
 import SN.EwwBar (myEwwSpawnBar, myEwwCloseBar)
@@ -45,13 +45,13 @@ myNamedKeys =
         [ ("M-C-r", "Recompile XMonad", spawn "xmonad --recompile")
         , ("M-S-r", "Restart XMonad", spawn "xmonad --restart")
         , ("M-S-q", "Quit XMonad", io exitSuccess)
-        , ("M-S-k", "Show keybindings", spawn "/home/sn/.xmonad/bin/showXMonadKeys.sh")
+        , ("M-S-k", "Show keybindings", spawn "/home/sn/.config/xmonad/scripts/showXMonadKeys.sh")
         ]
     , KeySection "Run"
         [ ("M-S-<Return>", "Run Prompt", spawn "dmenu_run -i -p \"Run: \"")
+        , ("M-<Return>", "Open Terminal", spawn myTerminal)
         , ("M-p s", "Open Spotify", spawn "spotify")
         , ("M-p b", "Open Browser", spawn myBrowser)
-        , ("M-<Return>", "Open Terminal", spawn myTerminal)
         ]
     , KeySection "Window Management"
         [ ("M-S-c", "Kill focused window", kill1)
@@ -63,9 +63,11 @@ myNamedKeys =
         , ("M-<Space>", "Toggle fullscreen", sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)
         , ("M-t", "Push floating window to tile", withFocused $ windows . W.sink)
         ]
-    , KeySection "Eww Widgets"
+    , KeySection "Widgets"
         [ ("M-e o", "Open top bar", spawn myEwwSpawnBar)
         , ("M-e c", "Close top bar", spawn myEwwCloseBar)
+        , ("M-S-t o", "Open tray", spawn mySysTray)
+        , ("M-S-t c", "Close tray", spawn killMySysTray)
         ]
     , KeySection "Scratchpad"
         [ ("M-s t", "Toggle terminal scratchpad", namedScratchpadAction myScratchPads "terminal")
@@ -80,10 +82,10 @@ myNamedKeys =
         , ("M-<Tab>", "Switch to next layout", sendMessage NextLayout)
         ]
     , KeySection "Media"
-        [ ("<XF86AudioStop>", "Pause audio", spawn "/home/sn/.xmonad/bin/pause-music.sh")
-        , ("<XF86AudioPlay>", "Play audio", spawn "/home/sn/.xmonad/bin/play-music.sh")
-        , ("<XF86AudioNext>", "Next audio", spawn "/home/sn/.xmonad/bin/next-music.sh")
-        , ("<XF86AudioPrev>", "Prev audio", spawn "/home/sn/.xmonad/bin/prev-music.sh")
+        [ ("<XF86AudioStop>", "Pause audio", spawn "/home/sn/.config/xmonad/scripts/pause-music.sh")
+        , ("<XF86AudioPlay>", "Play audio", spawn "/home/sn/.config/xmonad/scripts/play-music.sh")
+        , ("<XF86AudioNext>", "Next audio", spawn "/home/sn/.config/xmonad/scripts/next-music.sh")
+        , ("<XF86AudioPrev>", "Prev audio", spawn "/home/sn/.config/xmonad/scripts/prev-music.sh")
         , ("<XF86AudioMute>", "Mute audio", spawn "amixer -q set Master toggle")
         , ("<XF86AudioRaiseVolume>", "Lower volume", spawn "amixer -q set Master 2%+")
         , ("<XF86AudioLowerVolume>", "Raise volume", spawn "amixer -q set Master 2%-")
@@ -108,6 +110,7 @@ instance Show KeySection where
 
 -- | Create a file which has all keybindings
 makeMyKeyFile :: String
-makeMyKeyFile = "echo '" ++ myFileKeys ++ "' >> ~/.config/xmonad/xmonadKeys.txt"
+makeMyKeyFile = "rm -f " ++ fileName ++ " && echo '" ++ myFileKeys ++ "' >> "++ fileName
     where
         myFileKeys = unlines $ map show myNamedKeys
+        fileName = "~/.config/xmonad/xmonadKeys.txt"

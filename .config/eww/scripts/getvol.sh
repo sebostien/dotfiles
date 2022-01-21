@@ -1,2 +1,6 @@
 #!/bin/sh
-amixer sget Master | grep Mono: | awk -F'[][]' '{ print $2 }' | tr -d '%'
+
+pactl get-sink-volume @DEFAULT_SINK@ | \
+    grep 'Volume:' | \
+    awk '{ print $5 }' | \
+    sed -e 's/%//'

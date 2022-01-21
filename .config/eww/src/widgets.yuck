@@ -17,6 +17,8 @@
          :space-evenly false
          :halign "end"
       (network)
+      (statContainer :label {volumeIcon}
+                     :value {volume + "%"})
       (statContainer :label ""
                      :value {round(EWW_CPU.avg, 0) + "%"})
       (statContainer :label ""

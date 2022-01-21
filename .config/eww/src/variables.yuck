@@ -18,6 +18,8 @@
 (defpoll vpn :interval "1m"
   "./scripts/getvpnstatus.sh")
 
+(defpoll volumeIcon :interval "2s"
+  "scripts/getvolicon.sh")
 
 (defpoll interfaceId
   :interval "60s" "route | grep default | head -n1 | awk '{print $8}'")

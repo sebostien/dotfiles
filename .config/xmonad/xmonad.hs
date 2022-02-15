@@ -32,6 +32,7 @@ myStartupHook = do
     spawnOnce "picom"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
+    spawnOnce "dunst"
 
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore"   -- nitrogen last wallpaper

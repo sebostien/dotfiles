@@ -2,9 +2,6 @@
 ### ALIASES ###
 ###############
 
-# file manager
-alias start.='nautilus .'
-
 # git
 alias add.='git add .'
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
@@ -35,6 +32,9 @@ alias rm='rm -i'
 # Flags
 alias df='df -h'      # human-readable sizes
 alias free='free -m'  # show sizes in MB
+
+# Bat
+alias bat='batcat'
 
 # Spicetify
 export SPICETIFY_INSTALL="/home/sn/spicetify-cli"

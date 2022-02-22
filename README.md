@@ -37,7 +37,10 @@ config config --local status.showUntrackedFiles no
 | **[TexMaker][texMaker]**            | LaTex editor                                      |
 | **[Master PDF Editor][MpdfEditor]** | Pdf editor                                        |
 | **[fzf][fzf]**                      | cli fuzzy finder                                  |
-| **[bat][bat]                        | cat clone with features                           |
+| **[bat][bat]**                      | cat clone with features                           |
+| **[HTTPie][HTTPie]**                | curl alternative / HTTP testing tool              |
+| **[tldr][tldr]**                    | Simplified man pages                              |
+| **[LiteCLI][LiteCLI**               | SQLite client with Auto-Completion                |
 
 [xmonad]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/README.md
 [dribbblish]: https://github.com/morpheusthewhite/spicetify-themes/tree/master/Dribbblish
@@ -52,6 +55,7 @@ config config --local status.showUntrackedFiles no
 [MpdfEditor]: https://code-industry.net/free-pdf-editor/
 [fzf]: https://github.com/junegunn/fzf
 [bat]: https://github.com/sharkdp/bat
+[tldr]: https://tldr.sh/
 
 ## Themes
 

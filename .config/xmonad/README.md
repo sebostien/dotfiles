@@ -69,8 +69,8 @@ Check that `where xmonad` returns `~/.local/bin` so that we use the latest versi
 
 Next we install `xmonad` and `xmonad-contrib`, follow the guide at [GitHub][xmonadInstall].
 
-See the guide to on how to [make XMonad your window manager][xmonadWM]
+See the guide to on how to [make XMonad your window manager][xmonadWMGuide]
 
 [stackInstall]: https://docs.haskellstack.org/en/stable/README/
 [xmonadInstall]: https://github.com/xmonad/xmonad/blob/master/INSTALL.md
-[xmonadWMGuid]: https://github.com/xmonad/xmonad/blob/master/INSTALL.md#make-xmonad-your-window-manager
+[xmonadWMGuide]: https://github.com/xmonad/xmonad/blob/master/INSTALL.md#make-xmonad-your-window-manager

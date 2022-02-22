@@ -63,6 +63,7 @@ myManageHook =
             , isRole    =? "pop-up"             --> doCenterFloat
             , className =? "Yad"                --> doCenterFloat
             , title     =? "Bluetooth Devices"  --> doCenterFloat
+            , className =? "Dunst"              --> doFloat
             , isDialog     -->  doCenterFloat
             , isFullscreen -->  doFullFloat
             ]
@@ -87,4 +88,5 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
+        , focusFollowsMouse  = myFocusFollowsMouse
         } `additionalKeysP` myKeys

@@ -16,34 +16,37 @@ config checkout
 config config --local status.showUntrackedFiles no
 ```
 
-Picom: <https://github.com/yshui/picom>
-
 ## Applications
 
-|               | Description                                     |
-| ------------- | ----------------------------------------------- |
-| **xmonad**    | Window manager, see [README][xmonad]            |
-| **gdm3**      | Desktop Manager                                 |
-| **zsh**       | zsh shell with oh-my-zsh                        |
-| **alacritty** | Terminal emulator                               |
-| **nautilus**  | File manager                                    |
-| **Spotify**   | Music, spicetify [Dribbblish][dribbblish] theme |
-| **Discord**   | Chat, with [BetterDiscord][BetterDiscord]       |
-| **Eww**       | Widgets [Eww](https://github.com/elkowar/eww)   |
+| Name                       | Description                                     |
+| -------------------------- | ----------------------------------------------- |
+| **[xmonad][xmonad]**       | Window manager                                  |
+| **gdm3**                   | Desktop Manager                                 |
+| **zsh**                    | zsh shell with oh-my-zsh                        |
+| **alacritty**              | Terminal emulator                               |
+| **nautilus**               | File manager                                    |
+| **Spotify**                | Music, spicetify [Dribbblish][dribbblish] theme |
+| **Discord**                | Chat, with [BetterDiscord][BetterDiscord]       |
+| **[Eww][eww]**             | Widgets                                         |
+| **[neofetch][neofetch]**   | System information tool                         |
+| **[onefetch][onefetch]**   | neofetch for git                                |
+| **aria2c**                 |                                                 |
+| **Google Chrome**          | Browser, [nightTab extension][nightTab]         |
+| **[picom][picom]**         | Compositor picom fork                           |
+| **[flameshot][flameshot]** | Screenshot utility                              |
+| **[TexMaker][texMaker]**   | LaTex editor                                    |
+
 
 [xmonad]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/README.md
 [dribbblish]: https://github.com/morpheusthewhite/spicetify-themes/tree/master/Dribbblish
 [BetterDiscord]: https://github.com/BetterDiscord/BetterDiscord
-
-**Browser**: Google Chrome
-Extensions: - nighttab, config in .config/nightTab.json
-
-### Other
-
-- aria2c
-- discord
-- spotify
-- google-chrome
+[neofetch]: https://github.com/dylanaraps/neofetch
+[onefetch]: https://github.com/o2sh/onefetch
+[eww]: https://github.com/elkowar/eww
+[nightTab]: ./.config/nightTab.json
+[picom]: https://github.com/yshui/picom
+[texMaker]: https://www.xm1math.net/texmaker/
+[flameshot]: https://github.com/flameshot-org/flameshot/
 
 ## Themes
 

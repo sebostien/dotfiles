@@ -42,15 +42,6 @@ blue    = "#2196E3"
 cyan    = "#2aa198"
 green   = "#4CAF50"
 
-
--- sizes
-
-topbar      = 10
-
-border      = 0
-prompt      = 20
-status      = 20
-
 myNormalBorderColor :: String
 myNormalBorderColor     = "#000000"
 
@@ -68,7 +59,7 @@ unfocusColor = base02
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
 myShowWNameTheme = def
-    { swn_font              = "xft:Ubuntu:bold:size=60"
+    { swn_font              = myFont
     , swn_fade              = 1.0
     , swn_bgcolor           = "#1c1f24"
     , swn_color             = "#ffffff"

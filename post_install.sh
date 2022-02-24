@@ -63,14 +63,14 @@ gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
 ####################################
 
 # VS Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc -y
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
 # RPM Fusion 
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
 
 # RPM Sphere, for trayer
-sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm
+sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm -y
 
 ####################################
 next_part "System update"
@@ -80,7 +80,7 @@ next_part "System update"
 sudo dnf install fedora-workstation-repositories
 
 # Optimize dnf config
-sudo echo -e "\nfastestmirror=True \nmax_parallel_downloads=10 \ndefaultyes=True " >> /etc/dnf/dnf.conf
+echo "\nfastestmirror=True \nmax_parallel_downloads=10 \ndefaultyes=True " >> tee -a /etc/dnf/dnf.conf >> /dev/null
 sudo dnf upgrade --refresh -y
 sudo dnf check
 sudo dnf makecache
@@ -134,7 +134,7 @@ nvm install node
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # VS Code
-sudo dnf install code
+sudo dnf install code -Y
 
 ####################################
 if ask "Install picom?"; then

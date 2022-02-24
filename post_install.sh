@@ -55,6 +55,9 @@ mkdir ~/install_tmp
 mkdir -p ~/Apps
 cd ~/install_tmp
 
+# Dark mode for gnome
+gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
+
 ####################################
 # Add repositories
 ####################################

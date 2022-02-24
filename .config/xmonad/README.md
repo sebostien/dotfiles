@@ -12,46 +12,21 @@ Prelude> :set -i:lib
 Prelude> :r
 ```
 
-## Dependencies
-
-Debian, Ubuntu
-
-``` console
-$ sudo apt install \
-> git \
-> libx11-dev libxft-dev libxinerama-dev libxrandr-dev libxss-dev
-```
-
-Fedora
-
-``` console
-$ sudo dnf install \
-> git \
-> libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXScrnSaver-devel
-```
-
-Arch
-
-``` console
-$ sudo pacman -S \
-> git \
-> xorg-server xorg-apps xorg-xinit xorg-xmessage \
-> libx11 libxft libxinerama libxrandr libxss \
-> pkgconf
-```
-
 ## Installing
 
-This is a rewrite of the offical install Xmonad [guide][xmonadInstall].
+This guide is for Fedora, it should be pretty similar on other distros but check
+the offical [guide][xmonadInstall]
 
-First you'll need to install stack via your systems package manager.
-If your distrubtion does not package stack check the [guide][stackInstall] on XMonads github page.
+### Dependencies
 
 ``` console
-$ sudo apt install haskell-stack   # Debian, Ubuntu
-$ sudo dnf install stack           # Fedora
-$ sudo pacman -S stack             # Arch
+$ sudo dnf install git libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXScrnSaver-devel
+```
 
+Install stack and upgrade to latest version
+
+``` console
+$ sudo dnf install stack
 $ stack upgrade
 ```
 
@@ -70,7 +45,13 @@ Create symlink to the executable
 `sudo ln -s ~/.local/bin/xmonad /usr/bin/xmonad`
 
 See the guide to on how to [make XMonad your window manager][xmonadWMGuide]
+depending on your desktop manager.
 
-[stackInstall]: https://docs.haskellstack.org/en/stable/README/
+Probably just: 
+``` console
+sudo cp ./xmonad.desktop /usr/share/xsessions/
+chmod +x ./xmonad-session-rc
+```
+
 [xmonadInstall]: https://github.com/xmonad/xmonad/blob/master/INSTALL.md
 [xmonadWMGuide]: https://github.com/xmonad/xmonad/blob/master/INSTALL.md#make-xmonad-your-window-manager

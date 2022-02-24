@@ -44,7 +44,7 @@ $ sudo pacman -S \
 
 This is a rewrite of the offical install Xmonad [guide][xmonadInstall].
 
-First you'll need to install via your systems package manager.
+First you'll need to install stack via your systems package manager.
 If your distrubtion does not package stack check the [guide][stackInstall] on XMonads github page.
 
 ``` console
@@ -66,8 +66,6 @@ $ stack build
 ```
 
 Check that `where xmonad` returns `~/.local/bin` so that we use the latest version.
-
-Next we install `xmonad` and `xmonad-contrib`, follow the guide at [GitHub][xmonadInstall].
 
 See the guide to on how to [make XMonad your window manager][xmonadWMGuide]
 

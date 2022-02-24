@@ -28,7 +28,6 @@ myStartupHook = do
     spawn "killall trayer"  -- kill current trayer on each restart
     setWMName "LG3D"
 
-    spawnOnce "lxsession"
     spawnOnce "picom"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"

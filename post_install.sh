@@ -68,6 +68,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 
 # RPM Fusion 
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
 # RPM Sphere, for trayer
 sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm -y
@@ -110,9 +111,14 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 # Some packages i use
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
-                 nautilus dunst neovim playerctl -y
+                 nautilus dunst neovim playerctl \
+                 pulseaudio vlc -y
 
+sudo dnf install steam -y
 sudo dnf install trayer -y
+
+# Discord
+sudo dnf install discord -y
 
 # Google Chrome
 sudo dnf config-manager --set-enabled google-chrome
@@ -142,7 +148,6 @@ if ask "Install Nord VPN client?"; then
     sudo dnf install -y https://repo.nordvpn.com/yum/nordvpn/centos/noarch/Packages/n/nordvpn-release-1.0.0-1.noarch.rpm
     sudo dnf install -y nordvpn
 fi
-
 
 ####################################
 if ask "Install picom dependencies?"; then

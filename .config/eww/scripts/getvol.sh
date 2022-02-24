@@ -1,6 +1,3 @@
 #!/bin/bash
 
-pactl get-sink-volume @DEFAULT_SINK@ | \
-    grep 'Volume:' | \
-    awk '{ print $5 }' | \
-    sed -e 's/%//'
+pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1

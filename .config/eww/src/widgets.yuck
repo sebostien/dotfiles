@@ -17,8 +17,8 @@
          :space-evenly false
          :halign "end"
       (network)
-      (statContainer :label {volumeIcon}
-                     :value {volume + "%"})
+      (statContainer :label { volumeIcon }
+                     :value { volume })
       (statContainer :label ""
                      :value {round(EWW_CPU.avg, 0) + "%"})
       (statContainer :label ""
@@ -89,7 +89,7 @@
   (box :orientation "h"
        :space-evenly false
        :class "stat-container"
-    (label :text "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)}")
+    (label :text "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)} ")
     (label :class "green" :text "   ")
     (label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}")
   )

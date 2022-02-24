@@ -52,7 +52,22 @@ if [[ "$EUID" = 0 ]]; then
 fi
 
 mkdir ~/install_tmp
+mkdir -p ~/Apps
 cd ~/install_tmp
+
+####################################
+# Add repositories
+####################################
+
+# VS Code
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+# RPM Fusion 
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+# RPM Sphere, for trayer
+sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm
 
 ####################################
 next_part "System update"
@@ -89,9 +104,11 @@ sudo dnf install gh -y
 sudo dnf install -y network-manager-applet blueman
 
 # Some packages i use
-sudo dnf install -y neofetch flameshot fzf bat tldr \
-                    httpie alacritty exa rofi nitrogen \
-                    nautilus dunst trayer
+sudo dnf install neofetch flameshot fzf bat tldr \
+                 httpie alacritty exa rofi nitrogen \
+                 nautilus dunst neovim -y
+
+sudo dnf install trayer -y
 
 # Google Chrome
 sudo dnf config-manager --set-enabled google-chrome
@@ -114,21 +131,41 @@ nvm install node
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # VS Code
-wget -P ./vscode.rpm https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64
-sudo dnf install ./vscode.rpm
-
-# Picom dependencies
-sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel \
-                    libev-devel libX11-devel libX11-xcb libXext-devel \
-                    libxcb-devel mesa-libGL-devel meson pcre-devel \
-                    pixman-devel uthash-devel xcb-util-image-devel \
-                    xcb-util-renderutil-devel xorg-x11-proto-devel
-        
-# Eww Widgets dependencies
-sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
-                    cairo-devel cairo-gobject-devel glib2-devel
+sudo dnf install code
 
 ####################################
+if ask "Install picom?"; then
+    # Picom dependencies
+    sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel \
+                        libev-devel libX11-devel libX11-xcb libXext-devel \
+                        libxcb-devel mesa-libGL-devel meson pcre-devel \
+                        pixman-devel uthash-devel xcb-util-image-devel \
+                        xcb-util-renderutil-devel xorg-x11-proto-devel
+fi
+
+####################################
+if ask "Install Eww?"; then
+    
+    cd ~/Apps
+
+    # Eww Widgets dependencies
+    sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
+                        cairo-devel cairo-gobject-devel glib2-devel
+
+    git clone https://github.com/elkowar/eww
+    cd eww
+
+    cargo build --release
+    chmod +x ./target/release/eww
+    sudo ln -s ~/Apps/eww/target/release/eww /usr/bin/eww
+
+    cd ~/install_tmp
+fi
+
+####################################
+# Fonts
+####################################
+
 if ask "Install fonts?"; then
     next_part "Installing fonts"
     
@@ -138,14 +175,14 @@ if ask "Install fonts?"; then
     if [ "$(fc-list | grep -c 'Cascadia Code')" -lt 1 ]; then
         wget -P ./ $CASCADIA
         unzip ./CascadiaCode-2111.01.zip -d ./CascadiaCode-2111.01
-        mv ./CascadiaCode-2111.01/ttf/static/* /usr/share/fonts
+        sudo mv ./CascadiaCode-2111.01/ttf/static/* /usr/share/fonts
     fi
 
     MESLO="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
     if [ "$(fc-list | grep -c 'MesloLGS')" -lt 1 ]; then
         wget -P ./ $MESLO
         unzip ./Meslo.zip -d ./Meslo
-        mv ./Meslo/*.ttf /usr/share/fonts
+        sudo mv ./Meslo/*.ttf /usr/share/fonts
     fi
     
     fc-cache -f -v
@@ -156,7 +193,7 @@ fi
 sudo dnf autoremove -y
 
 # Change default shell
-sudo chsh -s /usr/bin/zsh
+chsh -s /usr/bin/zsh
 
 # Remove temporary used by the script files
 cd ~/
@@ -176,3 +213,4 @@ echo "Eww Widgets      --> https://elkowar.github.io/eww/eww.html"
 echo "Picom Compositor --> https://github.com/yshui/picom"
 echo
 echo "Reboot when done"
+

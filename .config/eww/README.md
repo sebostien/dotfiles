@@ -1,8 +1,9 @@
 # Eww Config
 
-Using the [Nord theme](https://www.nordtheme.com/docs/usage)
+Using some colors from [Nord theme](https://www.nordtheme.com/)
 
-`yarn install` to get all the colors
+Pretty much only works with my monitor setup:
+    Dual: 2560x1600, 1920x1200
 
 ## Acknowledgements
 

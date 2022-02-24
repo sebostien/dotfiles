@@ -66,6 +66,8 @@ $ stack build
 ```
 
 Check that `where xmonad` returns `~/.local/bin` so that we use the latest version.
+Create symlink to the executable
+`sudo ln -s ~/.local/bin/xmonad /usr/bin/xmonad`
 
 See the guide to on how to [make XMonad your window manager][xmonadWMGuide]
 

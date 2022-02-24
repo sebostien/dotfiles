@@ -119,7 +119,8 @@
                 },
                 "size": 100,
                 "newLine": false,
-                "newTab": false
+                "newTab": false,
+                "string": "index"
             },
             "order": [
                 "clock",
@@ -641,6 +642,88 @@
                         "tall": false
                     },
                     "timestamp": 1626298017175
+                },
+                {
+                    "url": "https://chalmers.instructure.com",
+                    "display": {
+                        "alignment": "center-center",
+                        "direction": "vertical",
+                        "order": "visual-name",
+                        "rotate": 0,
+                        "translate": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "gutter": 25,
+                        "name": {
+                            "show": true,
+                            "text": "Instructure",
+                            "size": 7
+                        },
+                        "visual": {
+                            "show": true,
+                            "type": "image",
+                            "size": 25,
+                            "letter": {
+                                "text": ""
+                            },
+                            "icon": {
+                                "name": "",
+                                "prefix": "",
+                                "label": ""
+                            },
+                            "image": {
+                                "url": "https://www.chalmers.se/SiteCollectionImages/Logotyper/Chalmers%20logotyp/AvancezChalmers_white_centered.png"
+                            },
+                            "shadow": {
+                                "size": 0
+                            }
+                        }
+                    },
+                    "accent": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        }
+                    },
+                    "color": {
+                        "by": "theme",
+                        "hsl": {
+                            "h": 0,
+                            "s": 0,
+                            "l": 0
+                        },
+                        "rgb": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0
+                        },
+                        "opacity": 0
+                    },
+                    "background": {
+                        "show": false,
+                        "type": "image",
+                        "opacity": 100,
+                        "image": {
+                            "url": ""
+                        },
+                        "video": {
+                            "url": ""
+                        }
+                    },
+                    "border": 1,
+                    "shape": {
+                        "wide": false,
+                        "tall": false
+                    },
+                    "timestamp": 1643375539632
                 }
             ]
         },

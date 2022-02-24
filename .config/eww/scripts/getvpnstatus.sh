@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 status=$(nordvpn status)
-connected=$(echo "$status" | grep Status | awk '{print $3}')
+connected=$(echo "$status" | grep Status | awk '{print $4}')
 
 case "$connected" in
     *"Connected"*)

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 a=$(pactl get-sink-mute @DEFAULT_SINK@)
 

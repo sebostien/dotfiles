@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 pactl get-sink-volume @DEFAULT_SINK@ | \
     grep 'Volume:' | \

@@ -26,12 +26,11 @@
       (statContainer :label ""
                      :value {round(EWW_DISK["/"].free / 1073741824, 0) + "G" })
     )
-  )
+  ) 
 )
 
 (defwidget rightBar []
   (centerbox :orientation "h"
-             :space-evenly false
     (box :orientation "h"
          :space-evenly false
       (time)

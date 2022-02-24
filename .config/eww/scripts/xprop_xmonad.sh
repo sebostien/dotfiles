@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Read the _XMONAD_LOG property on root window
 # xmonad sets the property to formatted yuck

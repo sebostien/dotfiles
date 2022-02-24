@@ -72,15 +72,16 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 # RPM Sphere, for trayer
 sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm -y
 
+# Add Fedora third party repository
+sudo dnf install fedora-workstation-repositories
+
 ####################################
 next_part "System update"
 ####################################
 
-# Add Fedora third party repository
-sudo dnf install fedora-workstation-repositories
 
 # Optimize dnf config
-echo "\nfastestmirror=True \nmax_parallel_downloads=10 \ndefaultyes=True " >> tee -a /etc/dnf/dnf.conf >> /dev/null
+echo "\nfastestmirror=True \nmax_parallel_downloads=10 \ndefaultyes=True " | tee -a /etc/dnf/dnf.conf > /dev/null
 sudo dnf upgrade --refresh -y
 sudo dnf check
 sudo dnf makecache
@@ -104,12 +105,12 @@ sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.re
 sudo dnf install gh -y
 
 # Applets
-sudo dnf install -y network-manager-applet blueman
+sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 
 # Some packages i use
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
-                 nautilus dunst neovim -y
+                 nautilus dunst neovim playerctl -y
 
 sudo dnf install trayer -y
 
@@ -137,7 +138,14 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 sudo dnf install code -Y
 
 ####################################
-if ask "Install picom?"; then
+if ask "Install Nord VPN client?"; then
+    sudo dnf install -y https://repo.nordvpn.com/yum/nordvpn/centos/noarch/Packages/n/nordvpn-release-1.0.0-1.noarch.rpm
+    sudo dnf install -y nordvpn
+fi
+
+
+####################################
+if ask "Install picom dependencies?"; then
     # Picom dependencies
     sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel \
                         libev-devel libX11-devel libX11-xcb libXext-devel \
@@ -212,7 +220,6 @@ echo "Setup your window manager"
 echo
 echo "Please install these packages manually:"
 echo 
-echo "Eww Widgets      --> https://elkowar.github.io/eww/eww.html"
 echo "Picom Compositor --> https://github.com/yshui/picom"
 echo
 echo "Reboot when done"

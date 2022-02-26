@@ -34,6 +34,29 @@ ask() {
     esac
 }
 
+optimize_dnf() {
+
+    printf %60s |tr " " "="
+    echo "\n Optimizing dnf"
+
+    defaultyes=`cat /etc/dnf/dnf.conf | grep defaultyes | awk -F '=' '{print $NF}'`
+    if [ -z "$defaultyes" ]; then
+        echo "defaultyes=True" | tee -a /etc/dnf/dnf.conf > /dev/null
+    elif [ "$defaultyes" != "True" ]; then
+        echo "Can't set defaultyes in dnf.conf, set manually"
+    fi
+
+    max_parallel_downloads=`cat /etc/dnf/dnf.conf | grep max_parallel_downloads | awk -F '=' '{print $NF}'`
+    if [ -z "$max_parallel_downloads" ]; then
+        echo "max_parallel_downloads=10" | tee -a /etc/dnf/dnf.conf > /dev/null
+    else
+        echo "Can't set max_parallel_downloads in dnf.conf, set manually"
+    fi
+
+    printf %60s |tr " " "="
+    echo
+}
+
 # Prints string so its visible clearly
 next_part() {
     output="------ $1 ------"
@@ -55,20 +78,21 @@ mkdir ~/install_tmp
 mkdir -p ~/Apps
 cd ~/install_tmp
 
-# Dark mode for gnome
-gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
+# Optimize dnf config
+optimize_dnf
 
 ####################################
-# Add repositories
+next_part "Adding third party repositories"
 ####################################
 
 # VS Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc -y
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
 # RPM Fusion 
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install -y rpmfusion-free-release-tainted
 
 # RPM Sphere, for trayer
 sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm -y
@@ -76,22 +100,27 @@ sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-rele
 # Add Fedora third party repository
 sudo dnf install fedora-workstation-repositories
 
+# Add core plugins
+sudo dnf install -y dnf-plugins-core
+
 ####################################
 next_part "System update"
 ####################################
 
-
-# Optimize dnf config
-echo "\nfastestmirror=True \nmax_parallel_downloads=10 \ndefaultyes=True " | tee -a /etc/dnf/dnf.conf > /dev/null
 sudo dnf upgrade --refresh -y
+sudo dnf groupupdate core -y
 sudo dnf check
 sudo dnf makecache
 
 # TODO check if UEFI
-#sudo fwupdmgr get-devices
-#sudo fwupdmgr refresh --force
-#sudo fwupdmgr get-updates
-#sudo fwupdmgr update -y
+sudo fwupdmgr get-devices
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates
+sudo fwupdmgr update -y
+
+# Update multimedia
+sudo dnf group upgrade -y --with-optional Multimedia
+sudo dnf groupupdate -y sound-and-video
 
 ####################################
 next_part "Installing packages"
@@ -112,10 +141,12 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
                  nautilus dunst neovim playerctl \
-                 pulseaudio vlc -y
+                 pulseaudio vlc ffmpeg -y
 
 sudo dnf install steam -y
 sudo dnf install trayer -y
+
+dnf install ffmpeg-libs compat-ffmpeg28 -y
 
 # Discord
 sudo dnf install discord -y
@@ -142,6 +173,15 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # VS Code
 sudo dnf install code -Y
+
+####################################
+next_part "Installing themes"
+###################################
+
+# TODO
+
+# Dark mode for gnome
+gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
 
 ####################################
 if ask "Install Nord VPN client?"; then
@@ -204,12 +244,14 @@ if ask "Install fonts?"; then
     fc-cache -f -v
 
 fi
+
 ####################################
 
 sudo dnf autoremove -y
 
 # Change default shell
-chsh -s /usr/bin/zsh
+echo "Change shell to zsh:"
+chsh -s "$(which zsh)"
 
 # Remove temporary used by the script files
 cd ~/

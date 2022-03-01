@@ -23,50 +23,21 @@ myEwwSpawnBar = "~/.config/eww/launch_bar.sh"
 myEwwCloseBar :: String
 myEwwCloseBar = "~/.config/eww/kill_bar.sh"
 
-type Yuck = String
-type EwwClass = String
-type Color = String
-
--- | class
-createBox :: EwwClass -> Color -> Yuck -> String
-createBox c color yuck = unwords
-    [ "(box"
-    , ":class \"" ++ c ++ "\""
-    , ":halign \"start\""
-    , ":valign \"center\""
-    , ":spacing 2"
-    , ":space-evenly false"
-    , yuck ++ ")"
-    ]
-
-createLabel :: Color -> String -> String -> String
-createLabel c font text = unwords
-    [ "(label"
-    , ":style \"color:" ++ c ++ "; font-weight: " ++ font ++ "\""
-    , ":text \"" ++ text ++ "\")"
-    ]
-
-yuckPPSep :: Yuck
-yuckPPSep = createLabel SNT.base00 "normal" "| "
+--  \xf111
+--  \xf10c
 
 myEwwPP :: PP
 myEwwPP = def
-    { ppCurrent = const (createLabel SNT.green "bold" "\xf111 ")
+    { ppCurrent = const ("<span foreground='" ++ SNT.green ++ "' font_weight='bold'>\xf111</span>")
     , ppExtras  = []
-    , ppVisible = const (createLabel "#ffffff" "bold" "\xf111 ")
-    , ppHidden = const (createLabel "#acacac" "bold" "\xf10c ")
-    , ppHiddenNoWindows = const (createLabel "#6c6c6c" "bold" "\xf10c ")
-    , ppUrgent = const (createLabel SNT.orange "bold" "\xf10c ")
+    , ppVisible = const ("<span foreground='#ffffff' font_weight='bold'>\xf111</span>")
+    , ppHidden = const ("<span foreground='#acacac' font_weight='bold'>\xf10c</span>")
+    , ppHiddenNoWindows = const ("<span foreground='#6c6c6c' font_weight='bold'>\xf10c</span>")
+    , ppUrgent = const ("<span foreground='" ++ SNT.orange ++ "' font_weight='bold'>\xf10c</span>")
     , ppTitle = shorten 120
     , ppSep = ""
-    , ppOrder  = \(ws:l:t:ex) -> [
-            createBox "workspaces" "" (concat
-                [ ws
-                -- , yuckPPSep
-                -- , createLabel "#ffffff" "normal" l
-                ])
-            ++ "|||" ++ t -- used by eww to seperate title
-            ]
+    -- used by eww to seperate title
+    , ppOrder  = \(ws:l:t:ex) -> [ ws ++ "|||" ++ t ]
     }
 
 myEwwConfig :: StatusBarConfig

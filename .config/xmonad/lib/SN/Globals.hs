@@ -1,9 +1,7 @@
 module SN.Globals where
 
-import SN.Theme as SNT
-
 import XMonad
-    ( mod4Mask, gets, KeyMask, Dimension, X, XState(windowset) )
+    ( mod4Mask, gets, KeyMask, X, XState(windowset) )
 
 myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
@@ -26,18 +24,6 @@ myFileManager = "nautilus "
 myEditor :: String
 myEditor = "code --wait "  -- Sets VS Code as editor
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
-
-myBorderWidth :: Dimension
-myBorderWidth = 2           -- Sets border width for windows
-
-myNormColor :: String
-myNormColor   = "#3b4252"   -- Border color of normal windows
-
-myFocusColor :: String
-myFocusColor  = SNT.green   -- Border color of focused windows
-
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
 
 mySysTray :: String
 mySysTray = unwords [ "killall trayer ; trayer"

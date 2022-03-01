@@ -17,7 +17,7 @@ import SN.Globals
 import SN.ScratchPad
 import SN.Keys
 import SN.Layouts
-import SN.Theme (myShowWNameTheme)
+import SN.Theme
 
 ------------------------------------------------------------------------
 -- | Startup| ----------------------------------------------------------
@@ -85,7 +85,7 @@ main = do
         , startupHook        = myStartupHook
         , layoutHook         = showWName' myShowWNameTheme myLayoutHook
         , borderWidth        = myBorderWidth
-        , normalBorderColor  = myNormColor
-        , focusedBorderColor = myFocusColor
+        , normalBorderColor  = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
         , focusFollowsMouse  = myFocusFollowsMouse
         } `additionalKeysP` myKeys

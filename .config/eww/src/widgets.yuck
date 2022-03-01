@@ -58,7 +58,11 @@
 
 (defwidget workspaces []
   (box :orientation "h" :class "workspace-bar"
-    (literal :content "${workspaces_listen}")  ; from xmonad as yuck
+    ;(literal :content "${workspaces_listen}")  ; from xmonad as yuck
+    (label :text ""
+           :class "workspaces"
+           :markup "${workspaces_listen}"
+    )
   )
 )
 

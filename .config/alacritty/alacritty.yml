@@ -128,7 +128,8 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors
+# Colors, using some from the nord color palette
+# https://www.nordtheme.com/
 colors:
   # Default colors
   primary:
@@ -145,25 +146,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#101116'
+    black:   '#0d1117'
+    white:   '#fafafa'
     red:     '#F44336'
-    green:   '#4CAF50'
-    yellow:  '#FFC107'
-    blue:    '#2196E3'
-    magenta: '#B645CA'
-    cyan:    '#00BCD4'
-    white:   '#DCDFE4'
+    green:   '#27ae60'
+    yellow:  '#Fa951a'
+    blue:    '#2880fe'
+    magenta: '#9C27B0'
+    cyan:    '#00c8d4'
 
   # Bright colors
   bright:
-    black:   '#757575'
+    black:   '#485460'
+    white:   '#ffffff'
     red:     '#FF5252'
-    green:   '#B2FF59'
+    green:   '#2ecc71'
     yellow:  '#FBC02D'
     blue:    '#03A9F4'
     magenta: '#EA80FC'
-    cyan:    '#00BCD4'
-    white:   '#ffffff'
+    cyan:    '#34e7e4'
 
 # Visual Bell
 #

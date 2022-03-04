@@ -1,68 +1,63 @@
 @import "shared/settings.rasi"
 
 * {
-    background-color: @bg;
-    font: "Plex Code Pro SemiBold 10";
-}
-
-mainbox {
-    background-color: @bg;
+    background-color:   transparent;
+    text-color:         @fg;
 }
 
 window {
-    width: 700px;
-    height: 520px;
-    border-radius: 6px;
+    background-color: @bg;
+    border-color:     @green;
+    text-color:       @fg;
+
+    width: 620px;
+    location:   center;
+    y-offset:   -200px;
+    border:     1px;
 }
 
 inputbar {
-    padding: 0px 0px 0px 0px;
-    background-color: transparent;
-    children: [entry];
-    padding: 50px 0px;
-    background-image: @header-image;
+    padding:    8px 12px;
+    spacing:    12px;
+    children:   [ entry ];
 }
 
-entry {
-    background-color: @bg-light;
-    padding: 5px;
-    margin: 0px 200px;
-    horizontal-align: 0.5;
-    color: @fg;
-    border-radius: 5px;
-    placeholder: "Search";
-    placeholder-color: #b3b7bd;
+prompt, entry, element-text, element-icon {
+    vertical-align: 0.5;
+}
+
+prompt {
+    text-color: @green;
 }
 
 listview {
-    background-color:  @bg;
-    columns:           1;
-    padding:           1px 0px 0px 0px;
-    spacing:           0;
-    cycle:             true;
-    dynamic:           true;
-    layout:            vertical;
+    lines:      8;
+    columns:    1;
+
+    fixed-height:   false;
 }
 
 element {
-    orientation: horizontal;
-    background-color: transparent;
-    border-radius: 5px;
-    cursor: inherit;
+    padding:    8px;
+    spacing:    8px;
 }
 
-element selected {
-    background-color: @bg-hover;
+element selected normal {
+    background-color:   @green;
 }
 
-element-text {
-    vertical-align: 0.5;
-    color: @fg;
-    background-color: transparent;
-    padding: 10px 5px;
-    cursor: inherit;
+element selected urgent {
+    background-color:   @bg-semilight;
+}
+
+element selected active {
+    background-color:   @bg-light;
+}
+
+element-icon {
+    size: 0.8em;
 }
 
 element-text selected {
-    color: @fg-hover;
+    text-color: @bg;
 }

@@ -1,1 +1,24 @@
-@import "ayu-dark.rasi"
+
+* {
+  font: "MesloLGM NF 11";
+
+  margin:     0px;
+  padding:    0px;
+  spacing:    0px;
+
+  bg: #0d1117;
+  bg-semilight: #0d1117;
+  bg-light: #485460;
+  bg-hover: @accent;
+
+  fg: #fafafa;
+  fg-hover: @bg;
+  fg-unhover: @accent;
+  
+  accent: #fafafa;
+  wifi-accent: #Fa951a;
+  
+  red: #F44336;
+  green: #27ae60;
+  blue: #2880fe;
+}

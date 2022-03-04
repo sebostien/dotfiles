@@ -14,66 +14,42 @@ import XMonad.Actions.GridSelect ( colorRangeFromClassName )
 -----------------------------------------------------------
 
 myBorderWidth :: Dimension
-myBorderWidth = 2
+myBorderWidth = 1
 
 myFont :: String
-myFont = "xft:MesloLGM NF:regular:size=11:antialias=true:hinting=true"
+myFont = "xft =MesloLGM NF =regular =size=11 =antialias=true =hinting=true"
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse  = False
+myFocusFollowsMouse  = True
 
 myClickJustFocuses :: Bool
 myClickJustFocuses   = True
 
-green, orange :: String
-green = "#4caf50"
-orange = "#cb4b16"
 
-nord0, nord1, nord2, nord3, nord4, nord5, nord6, nord7, nord8, nord9, nord10, nord11, nord12 :: String
-nord0 = "#2e3440"
+background = "#0d1117"
+foreground = "#fafafa"
+textColor = "#ffffff"
 
-nord1=     "#3b4252"
-nord2=     "#434c5e"
-nord3=     "#4c566a"
+normalBlack =   "#0d1117"
+normalWhite =   "#fafafa"
+normalRed =     "#F44336"
+normalGreen =   "#27ae60"
+normalYellow =  "#Fa951a"
+normalBlue =    "#2196E3"
+normalMagenta = "#9C27B0"
+normalCyan =    "#00c8d4"
 
-nord4=     "#d8dee9"
-nord5=     "#e5e9f0"
-nord6=     "#eceff4"
-
-nord7=     "#8fbcbb"
-nord8=     "#88c0d0"
-nord9=    "#81a1c1"
-nord10=    "#5e81ac"
-nord11=    "#bf616a"
-
-nord12=    "#d08770"
-nord13=    "#ebcb8b"
-nord14=    "#a3be8c"
-nord15=    "#b48ead"
-
-textColor, accentColor :: String
-textColor=         nord4;
-accentColor=       nord8;
+brightBlack =   "#485460"
+brightWhite =   "#ffffff"
+brightRed =     "#FF5252"
+brightGreen =   "#2ecc71"
+brightYellow =  "#FBC02D"
+brightBlue =    "#03A9F4"
+brightMagenta = "#EA80FC"
+brightCyan =    "#34e7e4"
 
 myNormalBorderColor :: String
-myNormalBorderColor     = nord0
+myNormalBorderColor = background
 
 myFocusedBorderColor :: String
-myFocusedBorderColor    = nord8
-
-active, activeWarn, inactive, focusColor, unfocusColor :: String
-active      = nord8
-activeWarn  = nord11
-inactive    = nord1
-focusColor  = nord8
-unfocusColor = nord1
-
-
--- Theme for showWName which prints current workspace when you change workspaces.
-myShowWNameTheme :: SWNConfig
-myShowWNameTheme = def
-    { swn_font              = myFont
-    , swn_fade              = 1.0
-    , swn_bgcolor           = nord0
-    , swn_color             = "#ffffff"
-    }
+myFocusedBorderColor = normalGreen

@@ -10,7 +10,6 @@ import XMonad.Hooks.EwmhDesktops ( ewmh )
 import XMonad.Layout.Gaps ( Direction2D(D, U), gaps ) 
 import XMonad.Layout.Spacing
     ( spacingRaw, Border(Border), Spacing )
-import XMonad.Layout.ShowWName ( showWName' ) 
 
 import XMonad.Layout.MultiToggle ( (??), mkToggle, EOT(EOT) )
 
@@ -20,8 +19,6 @@ import XMonad.Layout.WindowArranger ( windowArrange )
 import XMonad.Layout.MultiToggle.Instances
     ( StdTransformers(NOBORDERS, NBFULL) )
 import XMonad.Layout.Decoration ( def, ModifiedLayout )
-
-import SN.Theme ( myShowWNameTheme )
 
 -- TODO: GRID, TABS
 
@@ -42,13 +39,7 @@ mySpacing g = spacingRaw False a True a True
 
 -- addTopBar = noFrillsDeco shrinkText topBarTheme
 
--- myLayoutHook =  mkToggle (NBFULL ?? NOBORDERS ?? EOT)
---              $ tall ||| tall
-
 myLayoutHook = avoidStruts
              $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
              $ tall ||| tall
 
--- Just used to force the type of `myLayoutHook`
-forceLayoutType :: IO ()
-forceLayoutType = xmonad $ ewmh def { layoutHook = showWName' myShowWNameTheme myLayoutHook }

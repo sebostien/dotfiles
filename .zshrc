@@ -64,7 +64,7 @@ zstyle ':omz:update' frequency 7
 
 #####################################################################
 
-plugins=(git)
+plugins=(git zsh-autosuggestions gh history man rust k sudo)
 
 source $ZSH/oh-my-zsh.sh
 

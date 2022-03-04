@@ -130,6 +130,10 @@ next_part "Installing packages"
 sudo dnf install -y util-linux-user zsh
 curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
+# Install plugins for oh-my-zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/supercrabtree/k $ZSH_CUSTOM/plugins/k
+
 # Github CLI
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf install gh -y
@@ -141,7 +145,7 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
                  nautilus dunst neovim playerctl \
-                 pulseaudio vlc ffmpeg -y
+                 pulseaudio vlc ffmpeg qalculate-gtk -y
 
 sudo dnf install steam -y
 sudo dnf install trayer -y

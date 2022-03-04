@@ -33,9 +33,3 @@ alias rm='rm -i'
 alias df='df -h'      # human-readable sizes
 alias free='free -m'  # show sizes in MB
 
-# Bat
-alias bat='batcat'
-
-# Spicetify
-export SPICETIFY_INSTALL="/home/sn/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"

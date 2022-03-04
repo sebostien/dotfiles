@@ -231,6 +231,11 @@ if ask "Install fonts?"; then
     
     sudo dnf install unzip -y
 
+    
+    # Roboto
+    sudo dnf install google-roboto-fonts
+    
+    # Cascadia Code
     CASCADIA="https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip"
     if [ "$(fc-list | grep -c 'Cascadia Code')" -lt 1 ]; then
         wget -P ./ $CASCADIA
@@ -238,6 +243,7 @@ if ask "Install fonts?"; then
         sudo mv ./CascadiaCode-2111.01/ttf/static/* /usr/share/fonts
     fi
 
+    # Meslo Nerd Font
     MESLO="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
     if [ "$(fc-list | grep -c 'MesloLGS')" -lt 1 ]; then
         wget -P ./ $MESLO

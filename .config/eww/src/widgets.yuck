@@ -84,7 +84,7 @@
 
 (defwidget time []
   (box :class "time-text"
-       :orientation "h"
+          :orientation "h"
     time
   )
 )

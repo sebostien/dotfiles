@@ -33,3 +33,5 @@ alias rm='rm -i'
 alias df='df -h'      # human-readable sizes
 alias free='free -m'  # show sizes in MB
 
+# Calendar
+alias kal="cal -ymw"

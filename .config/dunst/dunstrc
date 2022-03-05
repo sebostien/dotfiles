@@ -49,19 +49,19 @@
 #   history = ctrl+alt+space
 
 [urgency_low]
-    background = "#434C5E"
+    background = "#0d1117"
     foreground = "#FFFFFF"
-    frame_color = "#61C766"
+    frame_color = "#27ae60"
     timeout = 10
 
 [urgency_normal]
-    background = "#434C5E"
+    background = "#0d1117"
     foreground = "#FFFFFF"
-    frame_color = "#B9C244"
+    frame_color = "#27ae60"
     timeout = 10
 
 [urgency_critical]
-    background = "#434C5E"
+    background = "#0d1117"
     foreground = "#FFFFFF"
-    frame_color = "#E57C46"
+    frame_color = "#F44336"
     timeout = 0

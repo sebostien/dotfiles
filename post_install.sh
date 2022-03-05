@@ -179,10 +179,24 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 sudo dnf install code -Y
 
 ####################################
+if ask "Install Flatpaks??"; then
+    
+    sudo dnf install -y flatpak
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    
+    # Spotify
+    sudo flatpak install flathub com.spotify.Client
+
+
+fi
+
+####################################
 next_part "Installing themes"
 ###################################
 
-# TODO
+wget -P ./ https://github.com/EliverLara/Nordic/releases/download/v2.1.0/Nordic-darker-v40.tar.xz
+tar xf ./Nordic-darker-v40.tar.xz
+mv ./Nordic-darker-v40 ~/.themes/Nordic-darker-v40
 
 # Dark mode for gnome
 gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark

@@ -41,14 +41,14 @@ optimize_dnf() {
 
     defaultyes=`cat /etc/dnf/dnf.conf | grep defaultyes | awk -F '=' '{print $NF}'`
     if [ -z "$defaultyes" ]; then
-        echo "defaultyes=True" | tee -a /etc/dnf/dnf.conf > /dev/null
+        echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
     elif [ "$defaultyes" != "True" ]; then
         echo "Can't set defaultyes in dnf.conf, set manually"
     fi
 
     max_parallel_downloads=`cat /etc/dnf/dnf.conf | grep max_parallel_downloads | awk -F '=' '{print $NF}'`
     if [ -z "$max_parallel_downloads" ]; then
-        echo "max_parallel_downloads=10" | tee -a /etc/dnf/dnf.conf > /dev/null
+        echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
     else
         echo "Can't set max_parallel_downloads in dnf.conf, set manually"
     fi

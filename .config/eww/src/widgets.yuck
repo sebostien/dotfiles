@@ -85,7 +85,11 @@
 (defwidget time []
   (box :class "time-text"
           :orientation "h"
-    time
+    (button :onclick "~/.config/eww/scripts/calendar.sh curr"
+            :onmiddleclick "~/.config/eww/scripts/calendar.sh prev"
+            :onrightclick "~/.config/eww/scripts/calendar.sh next"
+      time
+    )
   )
 )
 

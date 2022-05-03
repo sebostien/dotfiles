@@ -202,7 +202,12 @@ tar xf ./Nordic-darker-v40.tar.xz
 mv ./Nordic-darker-v40 ~/.themes/Nordic-darker-v40
 
 # Dark mode for gnome
-gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
+gsettings set org.gnome.desktop.interface gtk-theme Nordic-darker-v40
+gsettings set org.gnome.desktop.wm.preferences theme Nordic-darker-v40
+
+########################################
+next_part "Installing optional programs"
+########################################
 
 ####################################
 if ask "Install Nord VPN client?"; then

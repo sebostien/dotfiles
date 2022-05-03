@@ -32,6 +32,7 @@ myStartupHook = do
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
     spawnOnce "dunst"
+    spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
 
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore"   -- nitrogen last wallpaper

@@ -107,9 +107,9 @@ myNamedKeys =
         , ("<XF86AudioPlay>", "Play audio", spawn "/home/sn/.config/xmonad/scripts/play-music.sh")
         , ("<XF86AudioNext>", "Next audio", spawn "/home/sn/.config/xmonad/scripts/next-music.sh")
         , ("<XF86AudioPrev>", "Prev audio", spawn "/home/sn/.config/xmonad/scripts/prev-music.sh")
-        , ("<XF86AudioMute>", "Mute audio", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ("<XF86AudioRaiseVolume>", "Lower volume", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1000")
-        , ("<XF86AudioLowerVolume>", "Raise volume", spawn "pactl set-sink-volume @DEFAULT_SINK@ -1000")
+        , ("<XF86AudioMute>", "Mute audio", spawn "amixer -D pulse set Master toggle")
+        , ("<XF86AudioRaiseVolume>", "Raise volume", spawn "amixer -D pulse sset Master 2%+")
+        , ("<XF86AudioLowerVolume>", "Lower volume", spawn "amixer -D pulse sset Master 2%-")
         ]
     ] -- The following lines are needed for named scratchpads.
   where

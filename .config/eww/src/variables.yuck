@@ -6,12 +6,12 @@
 (deflisten workspaces_listen "scripts/xprop_xmonad.sh body")
 (deflisten windowTitle "scripts/xprop_xmonad.sh title")
 
-(defpoll music :interval "10s"
-  "./scripts/get_currently_playing.sh metadata"
+(deflisten music
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}'"
 )
 
 (defpoll music_icon :interval "10s"
-  "./scripts/get_currently_playing.sh icon"
+  "./scripts/get_music_app_icon.sh"
 )
 
 (defpoll volume :interval "5s"
@@ -25,8 +25,15 @@
   "date '+%a, %b %d'"
 )
 
-(defpoll vpn :interval "30m"
-"./scripts/getvpnstatus.sh")
+; Check if we got a local ip => Not connected
+; Hopefully updated from widget
+(defpoll vpn_connected :interval "1h"
+  "[[ $(./scripts/getvpnstatus.sh)]] = '192.168'* ]] && echo false || echo true"
+)
+
+(defpoll vpn :interval "5m"
+  "./scripts/getvpnstatus.sh"
+)
 
 (defpoll dnf :interval "30m"
   "./scripts/dnf_updates.sh"

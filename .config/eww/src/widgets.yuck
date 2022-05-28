@@ -63,7 +63,7 @@
     (statContainer
       :label-markup music_icon
       :text music
-      :visible {music != ""}
+      :visible {music_icon != ""}
     )
     (box :orientation "h"
       :space-evenly false
@@ -112,9 +112,9 @@
   (box :orientation "h"
     :space-evenly false
     :class "stat-container field"
-    (label :class "label" :text {replace(vpn, "192\.168\.[0-9|.]+", "") != "" ?  "嬨" : ""})
+    (label :class "label" :text {vpn_connected ?  "嬨" : ""})
     (button
-      :onclick 'nordvpn ${replace(vpn, '192\.168\.[0-9|.]+', '') == '' ? "connect" : "disconnect"}'
+      :onclick 'nordvpn ${vpn_connected ? 'disconnect' : 'connect'} & eww update vpn_connected="${!vpn_connected}"'
       vpn
     )
   )

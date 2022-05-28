@@ -29,6 +29,7 @@ myStartupHook = do
     spawnOnce "picom"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
+    spawnOnce "playerctld"
     spawnOnce "dunst"
     spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Read the _XMONAD_LOG property on root window
-# xmonad sets the property to formatted yuck
+# xmonad sets the property to formatted markup for workspaces
+#   and plain text for current window title.
+# They are seperated by "|||" so we can split them apart 
 
 # Remove property name
 # Remove last "

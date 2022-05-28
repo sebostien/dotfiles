@@ -8,97 +8,136 @@
 (defwidget leftBar []
   (centerbox :orientation "h"
     (box :orientation "h"
-         :space-evenly false
-      (time)
-      (windowTitle)
+      :space-evenly false
+      (date)
+      (statContainer :label-text ""
+        :text time
+      )
+      (statContainer
+        :markup workspaces_listen
+      )
     )
-    (workspaces)
+    (statContainer
+      :text windowTitle
+      :visible {windowTitle != ""}
+    )
     (box :orientation "h"
-         :space-evenly false
-         :halign "end"
-      (network)
-      (statContainer :label { volumeIcon }
-                     :value { volume })
-      (statContainer :label ""
-                     :value {round(EWW_CPU.avg, 0) + "%"})
-      (statContainer :label ""
-                     :value {round(EWW_RAM.used_mem_perc, 0) + "%"})
-      (statContainer :label ""
-                     :value {round(EWW_DISK["/"].free / 1073741824, 0) + "G" })
+      :space-evenly false
+      :halign "end"
+      (multiStatContainer
+        :v1 "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)} "
+        :label "   "
+        :v2 "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}"
+      )
+      (statContainer
+        :label-text { volume == "muted" ? "婢" : "" }
+        :text { volume == "muted" ? "0%" : volume }
+      )
+      (statContainer
+        :label-text ""
+        :text {round(EWW_CPU.avg, 0) + "%"}
+      )
+      (statContainer
+        :label-text ""
+        :text {round(EWW_RAM.used_mem_perc, 0) + "%"}
+      )
+      (statContainer
+        :label-text ""
+        :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
+      )
+      (power)
     )
-  ) 
+  )
 )
 
 (defwidget rightBar []
   (centerbox :orientation "h"
     (box :orientation "h"
-         :space-evenly false
-      (time)
-      (statContainer :label "嬨"
-                     :value vpn)
+      :space-evenly false
+      (date)
+      (statContainer :label-text "" :text time)
+      (statContainer
+        :markup workspaces_listen
+      )
     )
-    (workspaces)
-    (box :class "stats"
-         :orientation "h"
-         :space-evenly false
-         :halign "end"
-      (music)
+    (statContainer
+      :label-markup music_icon
+      :text music
+      :visible {music != ""}
     )
-  )
-)
-
-(defwidget statContainer [value label]
-  (box :orientation "h"
-       :space-evenly false
-       :class "stat-container"
-    (label :class "label" :text label)
-    (label :text value) 
-  )
-)
-
-(defwidget workspaces []
-  (box :orientation "h" :class "workspace-bar"
-    ;(literal :content "${workspaces_listen}")  ; from xmonad as yuck
-    (label :text ""
-           :class "workspaces"
-           :markup "${workspaces_listen}"
+    (box :orientation "h"
+      :space-evenly false
+      :halign "end"
+      (vpn)
+      (statContainer
+        :label-text ""
+        :text dnf
+      )
     )
   )
 )
 
-(defwidget windowTitle []
+(defwidget statContainer [?label-text ?label-markup ?text ?markup ?visible]
   (box :orientation "h"
-       :class "window-title"
-    (label :text windowTitle :limit-width 80 :wrap true)    
+    :visible {visible ?: true}
+    :space-evenly false
+    :class "stat-container field"
+    (label :class "label" :markup label-markup :visible {label-markup != ""})
+    (label :class "label" :text label-text :visible {label-text != ""})
+    (label :text text :markup markup :limit-width 80 :wrap true)
+    (children)
   )
 )
 
-(defwidget music []
+(defwidget multiStatContainer [v1 label v2]
   (box :orientation "h"
-       :space-evenly false
-       :class "stat-container"
-    (label :class "label" :text "")
-    (label :text music :wrap true :limit-width 80) 
+    :space-evenly false
+    :class "stat-container field"
+    (label :text v1)
+    (label :class "green" :text label)
+    (label :text v2)
   )
 )
 
-(defwidget time []
-  (box :class "time-text"
-          :orientation "h"
-    (button :onclick "~/.config/eww/scripts/calendar.sh curr"
-            :onmiddleclick "~/.config/eww/scripts/calendar.sh prev"
-            :onrightclick "~/.config/eww/scripts/calendar.sh next"
-      time
+(defwidget date []
+  (button
+    :onclick "./scripts/calendar.sh next"
+    :onmiddleclick "./scripts/calendar.sh curr"
+    :onrightclick "./scripts/calendar.sh prev"
+    (statContainer :label-text "" :text date)
+  )
+)
+
+(defwidget vpn []
+  (box :orientation "h"
+    :space-evenly false
+    :class "stat-container field"
+    (label :class "label" :text {replace(vpn, "192\.168\.[0-9|.]+", "") != "" ?  "嬨" : ""})
+    (button
+      :onclick 'nordvpn ${replace(vpn, '192\.168\.[0-9|.]+', '') == '' ? "connect" : "disconnect"}'
+      vpn
     )
   )
 )
 
-(defwidget network []
-  (box :orientation "h"
-       :space-evenly false
-       :class "stat-container"
-    (label :text "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)} ")
-    (label :class "green" :text "   ")
-    (label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}")
+(defvar show_power false)
+(defwidget power []
+  (eventbox
+    :onhover "eww update show_power=true"
+    :onhoverlost "eww update show_power=false"
+    (box
+      :space-evenly false
+      :class "stat-container field"
+      (revealer
+        :transition "slideleft"
+        :reveal show_power
+        :duration "200ms"
+        (box :space-evenly false
+          (button :class "large orange" :tooltip "Suspend" :onclick "systemctl suspend" "鈴")
+          (button :class "pl pr large yellow" :tooltip "Reboot" :onclick "reboot" "ﰇ")
+        )
+      )
+      (button :class "large green" :tooltip "Shutdown" :onclick "shutdown now" "")
+    )
   )
 )

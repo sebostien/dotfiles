@@ -145,7 +145,7 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
                  nautilus dunst neovim playerctl \
-                 pulseaduio vlc ffmpeg qalculate-gtk -y
+                 pulseaduio vlc ffmpeg qalculate-gtk btop -y
 
 sudo dnf install steam -y
 sudo dnf install trayer -y

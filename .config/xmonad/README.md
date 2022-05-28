@@ -2,8 +2,8 @@
 
 ## Developing
 
-Using ghci to typecheck makes developing a lot easier.
-Use the following to start it with my personal libraries:
+Using ghci to typecheck makes development a lot easier.
+To include the libraries:
 
 ``` console
 $ stack ghci xmonad.hs
@@ -15,7 +15,7 @@ Prelude> :r
 ## Installing
 
 This guide is for Fedora, it should be pretty similar on other distros but check
-the offical [guide][xmonadInstall]
+the offical [guide][xmonadInstall].
 
 ### Dependencies
 

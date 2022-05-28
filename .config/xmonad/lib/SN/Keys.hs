@@ -1,7 +1,6 @@
 module SN.Keys (myKeys, myNamedKeys, makeMyKeyFile) where
 
 import System.Exit (exitSuccess)
-import System.IO
 
 import XMonad (
     ChangeLayout (NextLayout),
@@ -14,7 +13,6 @@ import XMonad (
     withFocused,
  )
 import XMonad.Actions.CopyWindow (kill1)
-import XMonad.Actions.WithAll (killAll)
 
 import qualified XMonad.Layout.MultiToggle as MT
 import XMonad.Layout.MultiToggle.Instances (
@@ -22,17 +20,12 @@ import XMonad.Layout.MultiToggle.Instances (
  )
 
 import XMonad.Actions.CycleWS (
-    Direction1D (Next, Prev),
     WSType (WSIs),
-    moveTo,
     nextScreen,
     prevScreen,
-    shiftTo,
  )
-import XMonad.Actions.GridSelect (bringSelected, goToSelected)
-import XMonad.Actions.SpawnOn (spawnOn)
+
 import XMonad.Hooks.ManageDocks (ToggleStruts (ToggleStruts))
-import XMonad.Layout.Gaps (Direction2D (U), GapMessage (ToggleGap))
 import XMonad.Util.NamedScratchpad (namedScratchpadAction)
 
 import qualified XMonad.StackSet as W
@@ -42,6 +35,7 @@ import SN.ScratchPad (myScratchPads)
 
 import SN.EwwBar (myEwwCloseBar, myEwwSpawnBar)
 
+-- | Grouped into sections to get a formatted file with keybindings
 myNamedKeys :: [KeySection]
 myNamedKeys =
     [ KeySection
@@ -49,7 +43,6 @@ myNamedKeys =
         [ ("M-C-r", "Recompile XMonad", spawn "xmonad --recompile")
         , ("M-S-r", "Restart XMonad", spawn "xmonad --restart")
         , ("M-S-q", "Quit XMonad", io exitSuccess)
-        , ("M-S-k", "Show keybindings", spawn "~/.config/rofi/scripts/keybindings.sh")
         ]
     , KeySection
         "Run"
@@ -61,7 +54,6 @@ myNamedKeys =
     , KeySection
         "Window Management"
         [ ("M-S-c", "Kill focused window", kill1)
-        , ("M-S-a", "Kill all windows in current WS", killAll)
         , ("M-j", "Move focus to next window", windows W.focusDown)
         , ("M-k", "Move focus to prev window", windows W.focusUp)
         , ("M-h", "Shrink window", sendMessage Shrink)
@@ -76,15 +68,15 @@ myNamedKeys =
         , ("C-S-<Space>", "Pop one notification from history", spawn "dunstctl history-pop")
         ]
     , KeySection
-        "Widgets"
-        [ ("M-e o", "Open top bar", spawn myEwwSpawnBar)
-        , ("M-e c", "Close top bar", spawn myEwwCloseBar)
+        "Docks"
+        [ ("M-S-e o", "Open top bar", spawn myEwwSpawnBar)
+        , ("M-S-e c", "Close top bar", spawn myEwwCloseBar)
         , ("M-S-t o", "Open tray", spawn mySysTray)
         , ("M-S-t c", "Close tray", spawn killMySysTray)
         ]
     , KeySection
         "Scratchpad"
-        [ ("M-s t", "Toggle terminal scratchpad", namedScratchpadAction myScratchPads "terminal")
+        [ ("M-s k", "Show keybindings", spawn "~/.config/rofi/scripts/keybindings.sh")
         , ("M-s c", "Toggle calculator scratchpad", namedScratchpadAction myScratchPads "calculator")
         , ("M-s b", "Toggle blueman scratchpad", namedScratchpadAction myScratchPads "blueman")
         ]
@@ -92,8 +84,6 @@ myNamedKeys =
         "Workspaces"
         [ ("M-.", "Move focus to next monitor", nextScreen)
         , ("M-,", "Move focus to prev monitor", prevScreen)
-        , ("M-S-<KP_Add>", "Shift focused window to next WS", shiftTo Next nonNSP >> moveTo Next nonNSP)
-        , ("M-S-<KP_Subtract>", "Shift focused window to prev WS", shiftTo Prev nonNSP >> moveTo Prev nonNSP)
         , ("M-<Tab>", "Switch to next layout", sendMessage NextLayout)
         ]
     , KeySection
@@ -103,10 +93,14 @@ myNamedKeys =
         ]
     , KeySection
         "Media"
-        [ ("<XF86AudioStop>", "Pause audio", spawn "/home/sn/.config/xmonad/scripts/pause-music.sh")
-        , ("<XF86AudioPlay>", "Play audio", spawn "/home/sn/.config/xmonad/scripts/play-music.sh")
-        , ("<XF86AudioNext>", "Next audio", spawn "/home/sn/.config/xmonad/scripts/next-music.sh")
-        , ("<XF86AudioPrev>", "Prev audio", spawn "/home/sn/.config/xmonad/scripts/prev-music.sh")
+        [ ("<XF86AudioStop>", "Pause audio", spawn "playerctl --all-players pause")
+        , ("M-<D>", "Pause audio", spawn "playerctl --all-players pause")
+        , ("<XF86AudioPlay>", "Play audio", spawn "playerctl play")
+        , ("M-<U>", "Play audio", spawn "playerctl play")
+        , ("<XF86AudioNext>", "Next audio", spawn "playerctl next")
+        , ("M-<R>", "Next audio", spawn "playerctl next")
+        , ("<XF86AudioPrev>", "Prev audio", spawn "playerctl previous")
+        , ("M-<L>", "Prev audio", spawn "playerctl previous")
         , ("<XF86AudioMute>", "Mute audio", spawn "amixer -D pulse set Master toggle")
         , ("<XF86AudioRaiseVolume>", "Raise volume", spawn "amixer -D pulse sset Master 2%+")
         , ("<XF86AudioLowerVolume>", "Lower volume", spawn "amixer -D pulse sset Master 2%-")
@@ -128,7 +122,7 @@ instance Show KeySection where
         keys = unlines $ map (\(a, b, _) -> a ++ replicate (l - length a) ' ' ++ b) ks
         l = maximum (map (\(a, _, _) -> length a) ks) + 3
 
--- | Create a file which has all keybindings
+-- | Create a file with description of all keybindings
 makeMyKeyFile :: String
 makeMyKeyFile = "rm -f " ++ fileName ++ " && echo '" ++ myFileKeys ++ "' >> " ++ fileName
   where

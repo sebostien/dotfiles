@@ -35,3 +35,6 @@ alias free='free -m'  # show sizes in MB
 
 # Calendar
 alias kal="cal -ymw"
+
+# Weather
+alias weather="curl wttr.in"

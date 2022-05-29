@@ -22,19 +22,19 @@ mySysTray =
     unwords
         [ "killall trayer ; trayer"
         , "--edge top"
-        , "--align center"
+        , "--align right"
         , "--SetDockType true"
         , "--expand true"
-        , "--widthtype percent"
-        , "--width 10"
         , "--transparent true"
         , "--alpha 0"
-        , "--distancefrom left"
-        , "--distance 440"
-        , "--tint 0x282c34"
-        , "--monitor 0"
-        , "--padding 0"
-        , "--height 22 &"
+        , "--distancefrom right"
+        , "--distance 480"
+        , "--tint 0x242831"
+        , "--monitor 1"
+        , "--padding 10"
+        , "--widthtype pixels"
+        , "--width 128"
+        , "--height 24"
         ]
 
 killMySysTray :: String

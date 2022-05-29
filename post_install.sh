@@ -179,7 +179,7 @@ nvm install node
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # VS Code
-sudo dnf install code -Y
+sudo dnf install code -y
 
 ####################################
 if ask "Install Flatpaks??"; then
@@ -204,6 +204,12 @@ mv ./Nordic-darker-v40 ~/.themes/Nordic-darker-v40
 # Dark mode for gnome
 gsettings set org.gnome.desktop.interface gtk-theme Nordic-darker-v40
 gsettings set org.gnome.desktop.wm.preferences theme Nordic-darker-v40
+
+# Icons
+sudo dnf install -y papirus-icon-theme
+
+# Cursor
+wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | tar xfj - -C ~/.icons
 
 ########################################
 next_part "Installing optional programs"

@@ -142,7 +142,7 @@ colors:
 
   selection:
     text: '#0d1117'
-    background: '#fafafa'
+    background: '#a5a5a5'
 
   # Normal colors
   normal:

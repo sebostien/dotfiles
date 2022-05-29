@@ -2,6 +2,9 @@
 ### ALIASES ###
 ###############
 
+# Set shell variable
+SHELL=/bin/zsh
+
 # git
 alias add.='git add .'
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"

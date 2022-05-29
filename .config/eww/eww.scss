@@ -1,24 +1,10 @@
 $borderR: 32px;
-$bg0: #2e3440;
+$bg0: #0d1117;
 $bg1: #242831;
 
-$white: #FFFFFF;
-$black: #000000;
-$red: #EC7875;
-$pink: #EC407A;
-$purple: #BA68C8;
-$blue: #42A5F5;
-$cyan: #4DD0E1;
-$teal: #00B19F;
-$green: #4caf50;
-$lime: #B9C244;
-$yellow: #FDD835;
-$amber: #FBC02D;
-$orange: #E57C46;
-$brown: #AC8476;
-$indigo: #6C77BB;
-$gray: #9E9E9E;
-$blue-gray: #6D8895;
+$green: #27ae60;
+$yellow: #FBC02D;
+$orange: #Fa951a;
 
 
 * {
@@ -27,7 +13,7 @@ $blue-gray: #6D8895;
 }
 
 .field {
-  background-color: $bg1;
+  background-color: $bg0;
   padding: 0 10px 0 10px;
   border-radius: $borderR;
 }

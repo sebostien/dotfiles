@@ -158,6 +158,9 @@ udo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackc
 # Discord
 sudo dnf install discord -y
 
+# Spotify
+sudo dnf install lpf-spotify-client -y
+
 # Google Chrome
 sudo dnf config-manager --set-enabled google-chrome
 sudo dnf install google-chrome-stable -y
@@ -186,10 +189,6 @@ if ask "Install Flatpaks??"; then
     
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    
-    # Spotify
-    sudo flatpak install flathub com.spotify.Client
-
 
 fi
 
@@ -304,11 +303,15 @@ echo
 echo "Auth GitHub cli:"
 echo "    gh auth login"
 echo
-echo "Setup your window manager"
+echo
+echo "Complete spotify installation"
+echo "    lpf update"
 echo
 echo "Please install these packages manually:"
 echo 
-echo "Picom Compositor --> https://github.com/yshui/picom"
-echo
+echo "Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
+echo 
+echo "Setup your window manager"
+echo 
 echo "Reboot when done"
 

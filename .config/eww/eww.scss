@@ -21,7 +21,7 @@ $orange: #Fa951a;
 .stat-container {
   padding: 0 16px 0 16px;
   margin: 6px 6px 6px 6px;
-  
+
   .label {
     font-size: 28px;
     color: $green;
@@ -55,4 +55,39 @@ $orange: #Fa951a;
 
 .pr {
   padding-right: 12px;
+}
+
+.music-showcase {
+  background-color: $bg0;
+  padding: 10px;
+  border-radius: $borderR;
+
+  .music-cover {
+    border-radius: $borderR;
+    background-size: 128px;
+    min-width: 128px;
+    min-height: 128px;
+  }
+
+  .music-album {
+    color: $orange;
+  }
+
+  .music-artist {
+    color: $green;
+  }
+
+  trough {
+    margin: 0 8px;
+    background-color: $bg1;
+    border-radius: $borderR;
+    min-height: 16px;
+    min-width: 256px;
+
+    progress {
+      min-height: 16px;
+      background-color: $green;
+      border-radius: $borderR;
+    }
+  }
 }

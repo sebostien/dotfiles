@@ -7,7 +7,7 @@
 (deflisten windowTitle "scripts/xprop_xmonad.sh title")
 
 (deflisten music
-  "playerctl --follow metadata --format '{{ artist }} - {{ title }}'"
+  "playerctl --player=playerctld --follow metadata --format '{{ artist }} - {{ title }}'"
 )
 
 (defpoll music_icon :interval "10s"
@@ -31,11 +31,13 @@
   "[[ $(./scripts/getvpnstatus.sh)]] = '192.168'* ]] && echo false || echo true"
 )
 
-(defpoll vpn :interval "5m"
+; IP of vpn, TODO: move to :onclick
+;                  Some error with && in Eww bash
+(defpoll vpn :interval "15m"
   "./scripts/getvpnstatus.sh"
 )
 
-(defpoll dnf :interval "30m"
+(defpoll dnf :interval "2h"
   "./scripts/dnf_updates.sh"
 )
 

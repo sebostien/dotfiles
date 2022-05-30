@@ -1,0 +1,65 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;; Music Winow ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Hopefully only runs when the window is open
+; So we can poll everything and don't care about performance
+
+(defpoll cover_image :interval "2s"
+  "./scripts/music_data.sh cover"
+)
+
+(defpoll music_artist :interval "2s"
+  "./scripts/music_data.sh artist"
+)
+
+(defpoll music_album :interval "2s"
+  "./scripts/music_data.sh album"
+)
+
+(defpoll music_title :interval "2s"
+  "./scripts/music_data.sh title"
+)
+
+(defpoll music_percent :interval "1s"
+  "./scripts/music_data.sh percent"
+)
+
+(defwidget music_showcase []
+  (box
+    :orientation "h"
+    :space-evenly false
+    :vexpand false
+    :hexpand false
+    :class "music-showcase"
+    (box
+      :class "music-cover"
+      :style "background-image: url('${cover_image}');"
+    )
+    (box
+      :orientation "v"
+      (label
+        :class "music-title"
+        :xalign 0
+        :limit-width 128
+        :wrap true
+        :text music_title
+      )
+      (label
+        :class "music-artist"
+        :xalign 0
+        :limit-width 128
+        :wrap true
+        :text music_artist
+      )
+      (label
+        :class "music-album"
+        :xalign 0
+        :limit-width 128
+        :wrap true
+        :text music_album
+      )
+      (progress :value { music_percent * 100} :orientation "h")
+    )
+  )
+)

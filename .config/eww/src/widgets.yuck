@@ -60,11 +60,7 @@
         :markup workspaces_listen
       )
     )
-    (statContainer
-      :label-markup music_icon
-      :text music
-      :visible {music_icon != ""}
-    )
+    (music_current)
     (box :orientation "h"
       :space-evenly false
       :halign "end"
@@ -77,7 +73,7 @@
   )
 )
 
-(defwidget statContainer [?label-text ?label-markup ?text ?markup ?visible]
+(defwidget statContainer [?label-text ?label-markup ?text ?markup ?visible ?onhover ?onhoverexit]
   (box :orientation "h"
     :visible {visible ?: true}
     :space-evenly false
@@ -116,6 +112,18 @@
     (button
       :onclick 'nordvpn ${vpn_connected ? 'disconnect' : 'connect'} & eww update vpn_connected="${!vpn_connected}"'
       vpn
+    )
+  )
+)
+
+(defwidget music_current []
+  (eventbox
+    :onhover "eww open musicShowcase"
+    :onhoverlost "eww close musicShowcase"
+    :visible {music_icon != ""}
+    (statContainer
+      :label-markup music_icon
+      :text music
     )
   )
 )

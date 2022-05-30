@@ -26,7 +26,7 @@ import SN.Theme
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "picom"
+    spawnOnce "picom --experimental-backend"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
     spawnOnce "playerctld"

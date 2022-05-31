@@ -15,8 +15,9 @@ get_cover() {
         echo "defaultCover.png"
         exit
     fi
-
-    file="/tmp/$(basename $url).png"
+    
+    # set to /tmp/ to remove after restart
+    file="/home/sn/.config/eww/album_covers/$(basename $url).png"
 
     # Keep local cache
     if [[ ! -f $file ]]; then

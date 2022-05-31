@@ -60,10 +60,10 @@ $orange: #Fa951a;
 .music-showcase {
   background-color: $bg0;
   padding: 10px;
-  border-radius: $borderR;
+  border-radius: 12px; // Should match ~/.config/picom/picom.conf border radius
 
   .music-cover {
-    border-radius: $borderR;
+    border-radius: 12px;
     background-size: 128px;
     min-width: 128px;
     min-height: 128px;
@@ -80,14 +80,14 @@ $orange: #Fa951a;
   trough {
     margin: 0 8px;
     background-color: $bg1;
-    border-radius: $borderR;
+    border-radius: 12px;
     min-height: 16px;
     min-width: 256px;
 
     progress {
       min-height: 16px;
       background-color: $green;
-      border-radius: $borderR;
+      border-radius: 12px;
     }
   }
 }

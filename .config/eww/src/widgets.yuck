@@ -66,6 +66,10 @@
       :halign "end"
       (vpn)
       (statContainer
+        :label-text ""
+        :text {github}
+      )
+      (statContainer
         :label-text ""
         :text dnf
       )

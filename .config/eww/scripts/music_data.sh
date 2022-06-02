@@ -12,7 +12,7 @@ get_cover() {
     url=$(playerctl -p playerctld metadata --format "{{ mpris:artUrl }}")
 
     if [[ -z $url ]]; then
-        echo "defaultCover.png"
+        echo false
         exit
     fi
     

@@ -33,6 +33,7 @@
     :hexpand false
     :class "music-showcase"
     (box
+      :visible {cover_image != false}
       :class "music-cover"
       :style "background-image: url('${cover_image}');"
     )
@@ -40,21 +41,18 @@
       :orientation "v"
       (label
         :class "music-title"
-        :xalign 0
         :limit-width 128
         :wrap true
         :text music_title
       )
       (label
         :class "music-artist"
-        :xalign 0
         :limit-width 128
         :wrap true
         :text music_artist
       )
       (label
         :class "music-album"
-        :xalign 0
         :limit-width 128
         :wrap true
         :text music_album

@@ -66,10 +66,13 @@
     background = "#0d1117"
     foreground = "#FFFFFF"
     frame_color = "#27ae60"
-    timeout = 10
+    timeout = 0
 
 [urgency_critical]
     background = "#0d1117"
     foreground = "#FFFFFF"
     frame_color = "#F44336"
     timeout = 0
+
+[log_notifs]
+    script = ~/scripts/dunst_logger.sh

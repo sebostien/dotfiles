@@ -1,6 +1,6 @@
 [user]
 	name = sebostien
-	email = info@nielsen.run
+	email = sebostien@proton.me
 [ui "color"]
 	ui = always
 [color]
@@ -10,7 +10,6 @@
 [core]
 	editor = nvim
 	autocrlf = input
-	safecrlf = true
 [alias]
 	c = commit
 	s = status

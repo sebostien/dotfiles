@@ -27,6 +27,7 @@ Some applications I use
 | **[HTTPie][HTTPie]**       | curl alternative / HTTP testing tool              |
 | **[tldr][tldr]**           | Simplified man pages                              |
 | **[LiteCLI][LiteCLI]**     | SQLite client with Auto-Completion                |
+| **ncdu**                   | Disk usage                                        |
 
 [xmonad]: https://github.com/sebostien/dotfiles/blob/master/.xmonad/README.md
 [dribbblish]: https://github.com/morpheusthewhite/spicetify-themes/tree/master/Dribbblish

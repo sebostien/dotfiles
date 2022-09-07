@@ -36,24 +36,24 @@ ask() {
 
 optimize_dnf() {
 
-    printf %60s |tr " " "="
-    echo "\n Optimizing dnf"
+    printf %60s | tr " " "="
+    printf "\n Optimizing dnf"
 
-    defaultyes=`cat /etc/dnf/dnf.conf | grep defaultyes | awk -F '=' '{print $NF}'`
+    defaultyes=$(grep defaultyes < /etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
     if [ -z "$defaultyes" ]; then
         echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
     elif [ "$defaultyes" != "True" ]; then
-        echo "Can't set defaultyes in dnf.conf, set manually"
+        echo "Can't set defaultyes to True in dnf.conf, set manually"
     fi
 
-    max_parallel_downloads=`cat /etc/dnf/dnf.conf | grep max_parallel_downloads | awk -F '=' '{print $NF}'`
+    max_parallel_downloads=$(grep max_parallel_downloads < cat /etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
     if [ -z "$max_parallel_downloads" ]; then
         echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
     else
         echo "Can't set max_parallel_downloads in dnf.conf, set manually"
     fi
 
-    printf %60s |tr " " "="
+    printf %60s | tr " " "="
     echo
 }
 
@@ -76,7 +76,7 @@ fi
 
 mkdir ~/install_tmp
 mkdir -p ~/Apps
-cd ~/install_tmp
+cd ~/install_tmp || exit 1
 
 # Optimize dnf config
 optimize_dnf
@@ -90,8 +90,8 @@ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
 # RPM Fusion 
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-sudo dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" -y
+sudo dnf install "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm" -y
 sudo dnf install -y rpmfusion-free-release-tainted
 
 # RPM Sphere, for trayer
@@ -131,8 +131,8 @@ sudo dnf install -y util-linux-user zsh
 curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 # Install plugins for oh-my-zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/supercrabtree/k $ZSH_CUSTOM/plugins/k
+git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+git clone https://github.com/supercrabtree/k "$ZSH_CUSTOM/plugins/k"
 
 # Github CLI
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
@@ -154,7 +154,7 @@ sudo dnf install trayer -y
 dnf install ffmpeg-libs compat-ffmpeg28 -y
 
 # Pipewire
-udo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
+sudo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
 
 # Discord
 sudo dnf install discord -y
@@ -234,20 +234,20 @@ fi
 ####################################
 if ask "Install Eww?"; then
     
-    cd ~/Apps
+    cd ~/Apps || exit 1
 
     # Eww Widgets dependencies
     sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
                         cairo-devel cairo-gobject-devel glib2-devel
 
     git clone https://github.com/elkowar/eww
-    cd eww
+    cd eww || exit 1
 
     cargo build --release
     chmod +x ./target/release/eww
     sudo ln -s ~/Apps/eww/target/release/eww /usr/bin/eww
 
-    cd ~/install_tmp
+    cd ~/install_tmp || exit 1
 fi
 
 ####################################
@@ -295,7 +295,7 @@ echo "Change shell to zsh:"
 chsh -s "$(which zsh)"
 
 # Remove temporary used by the script files
-cd ~/
+cd ~ || exit 1
 rm -rf ~/install_tmp
 
 next_part "Done"

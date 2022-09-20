@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Hopefully only runs when the window is open
-; So we can poll everything and don't care about performance
+; That way we can poll everything and don't care about performance
 
 (defpoll cover_image :interval "2s"
   "./scripts/music_data.sh cover"
@@ -39,6 +39,7 @@
     )
     (box
       :orientation "v"
+      :space-evenly true
       (label
         :class "music-title"
         :limit-width 128

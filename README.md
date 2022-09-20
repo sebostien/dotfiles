@@ -51,7 +51,7 @@ Some applications I use
 
 ## Fonts
 
-- [MesloLGM NF](https://github.com/ryanoasis/nerd-fonts/releases/)
+- [MesloLGM Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/)
 - [Cascadia Code](https://github.com/microsoft/cascadia-code/releases)
 
 

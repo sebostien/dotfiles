@@ -9,7 +9,7 @@ $orange: #Fa951a;
 
 * {
   all: unset;
-  font-family: MesloLGM NF;
+  font-family: "MesloLGM Nerd Font", "MesloLGS Nerd Font", "Source Code Pro", Roboto;
 }
 
 .field {
@@ -23,7 +23,7 @@ $orange: #Fa951a;
   margin: 6px 6px 6px 6px;
 
   .label {
-    font-size: 28px;
+    font-size: 24px;
     color: $green;
     padding-right: 8px;
   }
@@ -33,8 +33,12 @@ $orange: #Fa951a;
   }
 }
 
+.normal {
+  font-size: 14px;
+}
+
 .large {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .green {

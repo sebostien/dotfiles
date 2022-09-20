@@ -217,12 +217,12 @@
             },
             "font": {
                 "display": {
-                    "name": "MesloLGM NF",
+                    "name": "MesloLGM Nerd Font",
                     "weight": 400,
                     "style": "normal"
                 },
                 "ui": {
-                    "name": "MesloLGM NF",
+                    "name": "MesloLGM Nerd Font",
                     "weight": 400,
                     "style": "italic"
                 }

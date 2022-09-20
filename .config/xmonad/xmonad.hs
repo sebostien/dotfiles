@@ -32,7 +32,7 @@ myStartupHook = do
     spawnOnce "playerctld"
     spawnOnce "dunst"
     spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
-
+    
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
     spawnOnce myEwwStartupHook

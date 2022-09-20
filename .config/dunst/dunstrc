@@ -27,7 +27,7 @@
 
   sort = yes
   idle_threshold = 60
-  font = MesloLGLDZ Nerd Font Mono 12
+  font = MesloLGM Nerd Font 12
   markup = full
   show_age_threshold = 60
   word_wrap = yes

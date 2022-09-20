@@ -4,13 +4,13 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 # env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  # TERM: xterm-256color
+# TERM variable
+#
+# This value is used to set the `$TERM` environment variable for
+# each instance of Alacritty. If it is not present, alacritty will
+# check the local terminfo database and use `alacritty` if it is
+# available, otherwise `xterm-256color` is used.
+# TERM: xterm-256color
 
 window:
   opacity: 1
@@ -94,23 +94,23 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: MesloLGM NF
+    family: MesloLGM Nerd Font
     style: Regular
 
   bold:
-    family: MesloLGM NF
+    family: MesloLGM Nerd Font
     style: Bold
 
   italic:
-    family: MesloLGM NF
+    family: MesloLGM Nerd Font
     style: Italic
 
   bold_italic:
-    family: MesloLGM NF
+    family: MesloLGM Nerd Font
     style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 12
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -133,38 +133,38 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '#0d1117'
-    foreground: '#fafafa'
+    background: "#0d1117"
+    foreground: "#fafafa"
 
   cursor:
-    text: '#ffffff'
-    cursor: '#ffffff'
+    text: "#ffffff"
+    cursor: "#ffffff"
 
   selection:
-    text: '#0d1117'
-    background: '#a5a5a5'
+    text: "#0d1117"
+    background: "#a5a5a5"
 
   # Normal colors
   normal:
-    black:   '#0d1117'
-    white:   '#fafafa'
-    red:     '#F44336'
-    green:   '#27ae60'
-    yellow:  '#Fa951a'
-    blue:    '#2880fe'
-    magenta: '#9C27B0'
-    cyan:    '#00c8d4'
+    black: "#0d1117"
+    white: "#fafafa"
+    red: "#F44336"
+    green: "#27ae60"
+    yellow: "#Fa951a"
+    blue: "#2880fe"
+    magenta: "#9C27B0"
+    cyan: "#00c8d4"
 
   # Bright colors
   bright:
-    black:   '#485460'
-    white:   '#ffffff'
-    red:     '#FF5252'
-    green:   '#2ecc71'
-    yellow:  '#FBC02D'
-    blue:    '#03A9F4'
-    magenta: '#EA80FC'
-    cyan:    '#34e7e4'
+    black: "#485460"
+    white: "#ffffff"
+    red: "#FF5252"
+    green: "#2ecc71"
+    yellow: "#FBC02D"
+    blue: "#03A9F4"
+    magenta: "#EA80FC"
+    cyan: "#34e7e4"
 
 # Visual Bell
 #
@@ -190,7 +190,7 @@ colors:
 bell:
   animation: EaseOutExpo
   duration: 100
-  color: '#333333'
+  color: "#333333"
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -396,14 +396,14 @@ mouse_bindings:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
 key_bindings:
-  # (Windows, Linux, and BSD only)  
-  - { key: V,         mods: Control|Shift, action: Paste                       }
-  - { key: C,         mods: Control|Shift, action: Copy                        }
-  - { key: Insert,    mods: Shift,         action: PasteSelection              }
-  - { key: Key0,      mods: Control,       action: ResetFontSize               }
-  - { key: Equals,    mods: Control,       action: IncreaseFontSize            }
-  - { key: Plus,      mods: Control,       action: IncreaseFontSize            }
-  - { key: Minus,     mods: Control,       action: DecreaseFontSize            }
-  - { key: L,         mods: Control,       action: ClearLogNotice              }
-  - { key: Home,      mods: Shift,         action: ScrollToTop,    mode: ~Alt  }
-  - { key: End,       mods: Shift,         action: ScrollToBottom, mode: ~Alt  }
+  # (Windows, Linux, and BSD only)
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: L, mods: Control, action: ClearLogNotice }
+  - { key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt }
+  - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }

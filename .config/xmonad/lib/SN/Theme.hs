@@ -9,9 +9,6 @@ import XMonad (Dimension)
 myBorderWidth :: Dimension
 myBorderWidth = 1
 
-myFont :: String
-myFont = "xft =MesloLGM NF =regular =size=11 =antialias=true =hinting=true"
-
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 

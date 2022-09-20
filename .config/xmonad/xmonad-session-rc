@@ -1,5 +1,7 @@
 #!/bin/bash
-
 # Intended to be used by xmonad.desktop
+
+
+xrdb -merge ~/.Xresources
 
 exec xmonad "$@"

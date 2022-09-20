@@ -26,7 +26,7 @@
       :halign "end"
       (multiStatContainer
         :v1 "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)} "
-        :label "   "
+        :label ""
         :v2 "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}"
       )
       (statContainer
@@ -84,7 +84,7 @@
     :class "stat-container field"
     (label :class "label" :markup label-markup :visible {label-markup != ""})
     (label :class "label" :text label-text :visible {label-text != ""})
-    (label :text text :markup markup :limit-width 80 :wrap true)
+    (label :class "normal" :text text :markup markup :limit-width 80 :wrap true)
     (children)
   )
 )
@@ -94,7 +94,7 @@
     :space-evenly false
     :class "stat-container field"
     (label :text v1)
-    (label :class "green" :text label)
+    (label :class "green large" :text label)
     (label :text v2)
   )
 )

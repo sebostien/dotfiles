@@ -26,7 +26,7 @@
       :halign "end"
       (multiStatContainer
         :v1 "${round(EWW_NET[interfaceId].NET_UP / 1000000, 2)} "
-        :label ""
+        :label ""
         :v2 "${round(EWW_NET[interfaceId].NET_DOWN / 1000000, 2)}"
       )
       (statContainer
@@ -42,7 +42,7 @@
         :text {round(EWW_RAM.used_mem_perc, 0) + "%"}
       )
       (statContainer
-        :label-text ""
+        :label-text ""
         :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
       )
       (power)
@@ -77,14 +77,18 @@
   )
 )
 
-(defwidget statContainer [?label-text ?label-markup ?text ?markup ?visible ?onhover ?onhoverexit]
+(defwidget statContainer [?label-text ?text ?markup ?visible]
   (box :orientation "h"
     :visible {visible ?: true}
     :space-evenly false
     :class "stat-container field"
-    (label :class "label" :markup label-markup :visible {label-markup != ""})
-    (label :class "label" :text label-text :visible {label-text != ""})
-    (label :class "normal" :text text :markup markup :limit-width 80 :wrap true)
+    (transform :translate-y "-2px"  :visible {label-text != ""}
+      (label :class "label" :text label-text)
+    )
+    (label :class "normal" :text text :visible {text != ""})
+    (transform :translate-y "-1px"
+      (label :class "smaller" :markup markup :visible {markup != ""})
+    )
     (children)
   )
 )
@@ -92,20 +96,15 @@
 (defwidget multiStatContainer [v1 label v2]
   (box :orientation "h"
     :space-evenly false
-    :class "stat-container field"
-    (label :text v1)
-    (label :class "green large" :text label)
-    (label :text v2)
+    :class "multi-stat-container field"
+    (label :class "normal" :text v1)
+    (label :class "label" :text label)
+    (label :class "normal" :text v2)
   )
 )
 
 (defwidget date []
-  (button
-    :onclick "./scripts/calendar.sh next"
-    :onmiddleclick "./scripts/calendar.sh curr"
-    :onrightclick "./scripts/calendar.sh prev"
-    (statContainer :label-text "" :text date)
-  )
+  (statContainer :label-text "" :text date)
 )
 
 (defwidget vpn []
@@ -144,12 +143,17 @@
         :transition "slideleft"
         :reveal show_power
         :duration "200ms"
-        (box :space-evenly false
-          (button :class "large orange" :tooltip "Suspend" :onclick "systemctl suspend" "鈴")
-          (button :class "pl pr large yellow" :tooltip "Reboot" :onclick "reboot" "ﰇ")
+        (transform :translate-y "-2px"
+          (box :space-evenly false
+            (button :class "large orange" :tooltip "Suspend" :onclick "systemctl suspend" "鈴")
+            (button :class "pl pr large yellow" :tooltip "Reboot" :onclick "reboot" "ﰇ")
+          )
         )
       )
-      (button :class "large green" :tooltip "Shutdown" :onclick "shutdown now" "")
+      (transform
+        :translate-y "-2px"
+        (button :class "large green" :tooltip "Shutdown" :onclick "shutdown now" "")
+      )
     )
   )
 )

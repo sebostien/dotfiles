@@ -64,13 +64,26 @@ zstyle ':omz:update' frequency 7
 
 #####################################################################
 
-plugins=(git zsh-autosuggestions gh history man rust k sudo)
+plugins=(
+  git
+  zsh-autosuggestions
+  gh
+  history
+  man
+  rust
+  k
+  sudo
+  aliases
+  nvm
+  web-search
+  copyfile
+  dirhistory
+)
 
-source $ZSH/oh-my-zsh.sh
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 
 export LANG=en_US.UTF-8
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source $ZSH/oh-my-zsh.sh
+
 export PATH=$PATH:/home/sn/.spicetify

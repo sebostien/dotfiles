@@ -259,29 +259,36 @@ if ask "Install fonts?"; then
     
     sudo dnf install unzip -y
 
-    # Microsoft fonts
-    sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-    sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-    
-    # Roboto
-    sudo dnf install google-roboto-fonts
-    
-    # Cascadia Code
-    CASCADIA="https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip"
-    if [ "$(fc-list | grep -c 'Cascadia Code')" -lt 1 ]; then
-        wget -P ./ $CASCADIA
-        unzip ./CascadiaCode-2111.01.zip -d ./CascadiaCode-2111.01
-        sudo mv ./CascadiaCode-2111.01/ttf/static/* /usr/share/fonts
-    fi
+    # Anonymous Pro
+    # https://www.marksimonson.com/fonts/view/anonymous-pro
+    sudo dnf install msimonson-anonymouspro-fonts -y
+   
+    sudo dnf install rsms-inter-fonts -y
 
     # Meslo Nerd Font
-    MESLO="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
-    if [ "$(fc-list | grep -c 'MesloLGS')" -lt 1 ]; then
+    MESLO="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Meslo.zip"
+    if [ "$(fc-list | grep -c 'Meslo')" -lt 1 ]; then
         wget -P ./ $MESLO
         unzip ./Meslo.zip -d ./Meslo
         sudo mv ./Meslo/*.ttf /usr/share/fonts
     fi
-    
+
+    # Hasklig Hasklug Nerd Font
+    HASKLIG="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hasklig.zip"
+    if [ "$(fc-list | grep -c 'Hasklug')" -lt 1 ]; then
+        wget -P ./ $HASKLIG
+        unzip ./Hasklig.zip -d ./Hasklig
+        sudo mv ./Hasklig/*.otf /usr/share/fonts
+    fi
+
+    # Fira Code Nerd Font
+    FIRACODE="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip"
+    if [ "$(fc-list | grep -c 'Fira')" -lt 1 ]; then
+        wget -P ./ $FIRACODE
+        unzip ./FiraCode.zip -d ./FiraCode
+        sudo mv ./FiraCode/*.ttf /usr/share/fonts
+    fi
+
     fc-cache -f -v
 
 fi

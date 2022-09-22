@@ -80,7 +80,7 @@ plugins=(
   dirhistory
 )
 
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 export LANG=en_US.UTF-8
 

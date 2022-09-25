@@ -14,9 +14,6 @@ myTerminal = "alacritty"
 myBrowser :: String
 myBrowser = "google-chrome " -- Sets chrome as browser
 
-myEditor :: String
-myEditor = "code --wait " -- Sets VS Code as editor
-
 mySysTray :: String
 mySysTray =
     unwords

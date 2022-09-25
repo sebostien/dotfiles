@@ -105,9 +105,7 @@ myNamedKeys =
         , ("<XF86AudioRaiseVolume>", "Raise volume", spawn "amixer -D pulse sset Master 2%+")
         , ("<XF86AudioLowerVolume>", "Lower volume", spawn "amixer -D pulse sset Master 2%-")
         ]
-    ] -- The following lines are needed for named scratchpads.
-  where
-    nonNSP = WSIs (return (\ws -> W.tag ws /= "NSP"))
+    ]
 
 myKeys :: [(String, X ())]
 myKeys = map (\(a, _, c) -> (a, c)) ys

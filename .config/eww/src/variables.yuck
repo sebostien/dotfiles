@@ -29,18 +29,6 @@
   "date '+%a, %b %d'"
 )
 
-; Check if we got a local ip => Not connected
-; Hopefully updated from widget
-(defpoll vpn_connected :interval "1h"
-  "[[ $(./scripts/getvpnstatus.sh)]] = '192.168'* ]] && echo false || echo true"
-)
-
-; IP of vpn, TODO: move to :onclick
-;                  Some error with && in Eww bash
-(defpoll vpn :interval "15m"
-  "./scripts/getvpnstatus.sh"
-)
-
 (defpoll dnf :interval "2h"
   "./scripts/dnf_updates.sh"
 )

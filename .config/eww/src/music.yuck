@@ -26,39 +26,48 @@
 )
 
 (defwidget music_showcase []
-  (box
-    :orientation "h"
+  (box :orientation "v"
     :space-evenly false
-    :vexpand false
-    :hexpand false
     :class "music-showcase"
     (box
-      :visible {cover_image != false}
-      :class "music-cover"
-      :style "background-image: url('${cover_image}');"
+      :orientation "h"
+      :space-evenly false
+      :vexpand false
+      :hexpand false
+      (box
+        :visible {cover_image != false}
+        :hexpand false
+        :vexpand false
+        :class "music-cover"
+        :style "background-image: url('${cover_image}');"
+      )
+      (box
+        :orientation "v"
+        :space-evenly true
+        :class "music-info"
+        (label
+          :class "music-title"
+          :xalign 0.5
+          :limit-width 128
+          :wrap true
+          :text music_title
+        )
+        (label
+          :class "music-artist"
+          :xalign 0.5
+          :limit-width 128
+          :wrap true
+          :text music_artist
+        )
+        (label
+          :class "music-album"
+          :xalign 0.5
+          :limit-width 128
+          :wrap true
+          :text music_album
+        )
+      )
     )
-    (box
-      :orientation "v"
-      :space-evenly true
-      (label
-        :class "music-title"
-        :limit-width 128
-        :wrap true
-        :text music_title
-      )
-      (label
-        :class "music-artist"
-        :limit-width 128
-        :wrap true
-        :text music_artist
-      )
-      (label
-        :class "music-album"
-        :limit-width 128
-        :wrap true
-        :text music_album
-      )
-      (progress :value { music_percent * 100} :orientation "h")
-    )
+    (progress :value { music_percent * 100} :orientation "h")
   )
 )

@@ -64,7 +64,6 @@
     (box :orientation "h"
       :space-evenly false
       :halign "end"
-      (vpn)
       (statContainer
         :label-text ""
         :text {github}
@@ -85,7 +84,7 @@
     (transform :translate-y "-2px"  :visible {label-text != ""}
       (label :class "label" :text label-text)
     )
-    (label :class "normal" :text text :visible {text != ""})
+    (label :class "normal" :text text :visible {text != ""} :limit-width 60)
     (transform :translate-y "-1px"
       (label :class "smaller" :markup markup :visible {markup != ""})
     )
@@ -107,25 +106,13 @@
   (statContainer :label-text "" :text date)
 )
 
-(defwidget vpn []
-  (box :orientation "h"
-    :space-evenly false
-    :class "stat-container field"
-    (label :class "label" :text {vpn_connected ?  "嬨" : ""})
-    (button
-      :onclick 'nordvpn ${vpn_connected ? 'disconnect' : 'connect'} & eww update vpn_connected="${!vpn_connected}"'
-      vpn
-    )
-  )
-)
-
 (defwidget music_current []
   (eventbox
     :onhover "eww open musicShowcase"
     :onhoverlost "eww close musicShowcase"
     :visible {music_icon != ""}
     (statContainer
-      :label-markup music_icon
+      :label-text music_icon
       :text music
     )
   )

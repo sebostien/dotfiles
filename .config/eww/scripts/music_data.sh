@@ -21,6 +21,7 @@ get_cover() {
 
     # Keep local cache
     if [[ ! -f $file ]]; then
+        $(playerctl -p playerctld metadata --format "{{ mpris:artUrl }};|;{{ artist }};|;{{ album }};|;{{title}}" | sed 's:.*/::' >> /home/sn/.config/eww/album_covers/list.txt)
         notify-send "Download cover"
         wget --output-document $file $url
     fi

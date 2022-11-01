@@ -6,9 +6,7 @@ get_percent() {
 
 # Download cover to /tmp/
 get_cover() {
-
-
-    # TODO: Only works with png :/
+ 
     url=$(playerctl -p playerctld metadata --format "{{ mpris:artUrl }}")
 
     if [[ -z $url ]]; then
@@ -16,14 +14,19 @@ get_cover() {
         exit
     fi
     
-    # set to /tmp/ to remove after restart
-    file="/home/sn/.config/eww/album_covers/$(basename $url).png"
-
-    # Keep local cache
-    if [[ ! -f $file ]]; then
-        $(playerctl -p playerctld metadata --format "{{ mpris:artUrl }};|;{{ artist }};|;{{ album }};|;{{title}}" | sed 's:.*/::' >> /home/sn/.config/eww/album_covers/list.txt)
-        notify-send "Download cover"
-        wget --output-document $file $url
+    # File schema
+    if [[ "$url" == "file:///"* ]] then
+        file=$url
+    else
+        # TODO: Only works with png (I'm only using spotify so this works)
+        file="/home/sn/.config/eww/album_covers/$(basename $url).png"
+        # Keep local cache
+        if [[ ! -f $file ]]; then
+            # Add song to CSV
+            $(playerctl -p playerctld metadata --format "{{ mpris:artUrl }};|;{{ artist }};|;{{ album }};|;{{title}}" | sed 's:.*/::' >> /home/sn/.config/eww/album_covers/list.txt)
+            notify-send "Download cover"
+            wget --output-document $file $url
+        fi
     fi
 
     echo $file

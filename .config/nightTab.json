@@ -20,7 +20,7 @@
             "width": 80,
             "padding": 40,
             "gutter": 20,
-            "breakpoint": "xl",
+            "breakpoint": "xxl",
             "scrollbar": "auto",
             "title": "",
             "favicon": "",

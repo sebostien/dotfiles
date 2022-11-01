@@ -65,6 +65,10 @@
       :space-evenly false
       :halign "end"
       (statContainer
+        :label-text "嬨"
+        :text {ip_addr}
+      )
+      (statContainer
         :label-text ""
         :text {github}
       )

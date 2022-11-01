@@ -19,7 +19,8 @@
 )
 
 (defpoll volume :interval "5s"
-"scripts/getvol.sh")
+  "scripts/getvol.sh"
+)
 
 (defpoll time :interval "10s"
   "date '+%R'"
@@ -27,6 +28,10 @@
 
 (defpoll date :interval "30m"
   "date '+%a, %b %d'"
+)
+
+(defpoll ip_addr :interval "2h"
+  "scripts/ip_addr.sh"
 )
 
 (defpoll dnf :interval "2h"

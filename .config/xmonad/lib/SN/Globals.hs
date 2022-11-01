@@ -12,7 +12,7 @@ myTerminal :: String
 myTerminal = "alacritty"
 
 myBrowser :: String
-myBrowser = "google-chrome " -- Sets chrome as browser
+myBrowser = "firefox "
 
 mySysTray :: String
 mySysTray =

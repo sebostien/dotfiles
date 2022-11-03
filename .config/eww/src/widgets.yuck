@@ -84,7 +84,7 @@
   (centerbox :orientation "h"
     (box :orientation "h"
       :space-evenly false
-      (date)
+      (date :desktop false)
       (statContainer
         :desktop false
         :label-text ""
@@ -168,8 +168,8 @@
   )
 )
 
-(defwidget date []
-  (statContainer :label-text "" :text date)
+(defwidget date [?desktop]
+  (statContainer :desktop desktop :label-text "" :text date)
 )
 
 (defwidget music_current []

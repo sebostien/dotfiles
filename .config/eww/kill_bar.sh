@@ -2,4 +2,5 @@
 
 eww close \
     leftBar \
-	rightBar
+	rightBar \
+    laptopBar

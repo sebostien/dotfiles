@@ -10,6 +10,14 @@
   "playerctl --player=playerctld --follow metadata --format '{{ artist }} - {{ title }}'"
 )
 
+(defpoll battery_icon :interval "1m"
+  "./scripts/battery.sh"
+)
+
+(defpoll brightness :interval "5s"
+  "light" ; TODO: listen
+)
+
 (defpoll music_icon :interval "10s"
   "./scripts/get_music_app_icon.sh"
 )

@@ -45,7 +45,7 @@
         :label-text ""
         :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
       )
-      (power)
+      (power :desktop true)
     )
   )
 )
@@ -80,11 +80,73 @@
   )
 )
 
-(defwidget statContainer [?label-text ?text ?markup ?visible]
+(defwidget laptopBar []
+  (centerbox :orientation "h"
+    (box :orientation "h"
+      :space-evenly false
+      (date)
+      (statContainer
+        :desktop false
+        :label-text ""
+        :text time
+      )
+      (statContainer
+        :desktop false
+        :markup workspaces_listen
+      )
+    )
+    (statContainer
+      :desktop false
+      :text windowTitle
+      :visible {windowTitle != ""}
+    )
+    (box :orientation "h"
+      :space-evenly false
+      :halign "end"
+      (statContainer
+        :desktop false
+        :label-text ""
+        :text "${round(brightness, 0)}%" 
+      )
+      (statContainer
+        :desktop false
+        :label-text "${
+          EWW_BATTERY['BAT0'].status == 'Charging'
+            ? ''
+            : battery_icon
+          }"
+        :text "${EWW_BATTERY['BAT0'].capacity}%"
+      )
+      (statContainer
+        :desktop false
+        :label-text { volume == "muted" ? "婢" : "" }
+        :text { volume == "muted" ? "0%" : volume }
+      )
+      (statContainer
+        :desktop false
+        :label-text ""
+        :text {round(EWW_CPU.avg, 0) + "%"}
+      )
+      (statContainer
+        :desktop false
+        :label-text ""
+        :text {round(EWW_RAM.used_mem_perc, 0) + "%"}
+      )
+      (statContainer
+        :desktop false
+        :label-text ""
+        :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
+      )
+      (power :desktop false)
+    )
+  )
+)
+
+(defwidget statContainer [?label-text ?text ?markup ?visible ?desktop]
   (box :orientation "h"
     :visible {visible ?: true}
     :space-evenly false
-    :class "stat-container field"
+    :class "stat-container-${desktop == false ? 'lt' : 'dt'} field"
     (transform :translate-y "-2px"  :visible {label-text != ""}
       (label :class "label" :text label-text)
     )
@@ -96,10 +158,10 @@
   )
 )
 
-(defwidget multiStatContainer [v1 label v2]
+(defwidget multiStatContainer [v1 label v2 ?desktop]
   (box :orientation "h"
     :space-evenly false
-    :class "multi-stat-container field"
+    :class "multi-stat-container-${desktop == false ? 'lt' : 'dt'} field"
     (label :class "normal" :text v1)
     (label :class "label" :text label)
     (label :class "normal" :text v2)
@@ -123,13 +185,13 @@
 )
 
 (defvar show_power false)
-(defwidget power []
+(defwidget power [desktop]
   (eventbox
     :onhover "eww update show_power=true"
     :onhoverlost "eww update show_power=false"
     (box
       :space-evenly false
-      :class "stat-container field"
+      :class "stat-container-${desktop ? 'dt' : 'lt'} field"
       (revealer
         :transition "slideleft"
         :reveal show_power

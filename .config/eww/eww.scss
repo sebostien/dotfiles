@@ -18,20 +18,22 @@ $orange: #Fa951a;
   border-radius: $borderR;
 }
 
-.stat-container {
+// Desktop
+
+.stat-container-dt {
   padding: 6px 16px 6px 14px;
-  margin: 6px 6px 6px 6px;
+  margin: 10px 6px 6px 6px;
 
   .label {
     font-size: 20px;
     color: $green;
-    padding-right: 8px;
+    padding-right: 6px;
   }
 }
 
-.multi-stat-container {
+.multi-stat-container-dt {
   padding: 0 16px 0px 16px;
-  margin: 6px 6px 6px 6px;
+  margin: 10px 6px 6px 6px;
 
   .label {
     font-size: 20px;
@@ -39,6 +41,33 @@ $orange: #Fa951a;
     padding-right: 10px;
   }
 }
+
+// Laptop
+
+.stat-container-lt {
+  padding: 4px 16px 4px 14px;
+  margin: 10px 6px 6px 6px;
+
+  .label {
+    font-size: 20px;
+    color: $green;
+    padding-right: 12px;
+    padding-top: 4px;
+  }
+}
+
+.multi-stat-container-lt {
+  padding: 0 16px 0px 16px;
+  margin: 10px 6px 6px 6px;
+
+  .label {
+    font-size: 20px;
+    color: $green;
+    padding-right: 10px;
+  }
+}
+
+// Other
 
 .smaller {
   font-size: 14px;
@@ -88,9 +117,6 @@ $orange: #Fa951a;
   .music-info {
     padding-left: 10px;
     min-width: 200px;
-    * {
-      
-    }
   }
 
   .music-album {

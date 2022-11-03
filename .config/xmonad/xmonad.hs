@@ -1,16 +1,16 @@
 import Data.Monoid (Endo)
+import System.Directory (doesFileExist)
 
 import XMonad
 
 import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageDocks (docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isDialog, isFullscreen)
+import XMonad.Hooks.StatusBar (withSB)
 
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad (namedScratchpadManageHook)
 import XMonad.Util.SpawnOnce (spawnOnce)
-
-import XMonad.Hooks.StatusBar (withSB)
 
 -- Personal libraries
 import SN.EwwBar
@@ -32,7 +32,7 @@ myStartupHook = do
     spawnOnce "playerctld"
     spawnOnce "dunst"
     spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
-    spawnOnce "systemctl enable --now logid"
+    -- spawnOnce "systemctl enable --now logid"
 
     spawnOnce mySysTray
     spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
@@ -71,7 +71,8 @@ myManageHook =
 
 main :: IO ()
 main = do
-    spawn makeMyKeyFile
+    isDesktop <- doesFileExist "/home/sn/.is_desktop"
+    spawn (makeMyKeyFile isDesktop)
     xmonad . withSB myStatusBar . docks $
         ewmh
             def
@@ -85,4 +86,4 @@ main = do
                 , focusedBorderColor = myFocusedBorderColor
                 , focusFollowsMouse = myFocusFollowsMouse
                 }
-            `additionalKeysP` myKeys
+            `additionalKeysP` (myKeys isDesktop)

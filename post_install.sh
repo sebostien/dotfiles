@@ -145,10 +145,9 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 sudo dnf install neofetch flameshot fzf bat tldr \
                  httpie alacritty exa rofi nitrogen \
                  nautilus dunst neovim playerctl \
-                 pulseaduio vlc ffmpeg qalculate-gtk btop \
-		 ripgrep fd-find -y
+                 vlc ffmpeg qalculate-gtk btop \
+		         ripgrep fd-find -y
 
-sudo dnf install steam -y
 sudo dnf install trayer -y
 
 dnf install ffmpeg-libs compat-ffmpeg28 -y
@@ -162,10 +161,6 @@ sudo dnf install discord -y
 # Spotify
 sudo dnf install lpf-spotify-client -y
 
-# Google Chrome
-sudo dnf config-manager --set-enabled google-chrome
-sudo dnf install google-chrome-stable -y
-
 # Pip
 sudo dnf install python3-pip -y
 
@@ -173,17 +168,23 @@ sudo dnf install python3-pip -y
 sudo dnf copr enable varlad/onefetch -y
 sudo dnf install onefetch -y
 
-# Rustup, rustc, cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ask "Install Rust toolchain?"; then
+    # Rustup, rustc, cargo
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
-# nvm, node, npm, yarn
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-. ~/.nvm/nvm.sh # Load nvm
-nvm install node
-curl -o- -L https://yarnpkg.com/install.sh | bash
+if ask "Install Node and Node toolchain?"; then
+    # nvm, node, npm, yarn
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    . ~/.nvm/nvm.sh # Load nvm
+    nvm install node
+    curl -o- -L https://yarnpkg.com/install.sh | bash
+fi
 
-# VS Code
-sudo dnf install code -y
+if ask "Install VS Code?"; then
+    # VS Code
+    sudo dnf install code -y
+if
 
 ####################################
 if ask "Install Flatpaks??"; then

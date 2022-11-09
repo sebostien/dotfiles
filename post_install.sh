@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-#  ________  ________      
+#  ________  ________
 # |\   ____\|\   ___  \      Sebastian Nielsen (sebostien)
 # \ \  \___|\ \  \\ \  \     http://www.github.com/sebostien/
-#  \ \_____  \ \  \\ \  \  
-#   \|____|\  \ \  \\ \  \ 
+#  \ \_____  \ \  \\ \  \
+#   \|____|\  \ \  \\ \  \
 #     ____\_\  \ \__\\ \__\
 #    |\_________\|__| \|__|
-#    \|_________|          
-#    
+#    \|_________|
+#
 
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -29,8 +29,8 @@ ask() {
     fi
 
     case "$reply" in
-        Y*|y*) return 0 ;;
-        *) return 1 ;;
+    Y* | y*) return 0 ;;
+    *) return 1 ;;
     esac
 }
 
@@ -39,16 +39,16 @@ optimize_dnf() {
     printf %60s | tr " " "="
     printf "\n Optimizing dnf"
 
-    defaultyes=$(grep defaultyes < /etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
+    defaultyes=$(grep defaultyes </etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
     if [ -z "$defaultyes" ]; then
-        echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+        echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
     elif [ "$defaultyes" != "True" ]; then
         echo "Can't set defaultyes to True in dnf.conf, set manually"
     fi
 
-    max_parallel_downloads=$(grep max_parallel_downloads < cat /etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
+    max_parallel_downloads=$(grep max_parallel_downloads /etc/dnf/dnf.conf <cat | awk -F '=' '{print $NF}')
     if [ -z "$max_parallel_downloads" ]; then
-        echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf > /dev/null
+        echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
     else
         echo "Can't set max_parallel_downloads in dnf.conf, set manually"
     fi
@@ -61,10 +61,10 @@ optimize_dnf() {
 next_part() {
     output="------ $1 ------"
     len=${#output}
-    printf %"$len"s |tr " " "="
+    printf %"$len"s | tr " " "="
     echo
     echo "$output"
-    printf %"$len"s |tr " " "="
+    printf %"$len"s | tr " " "="
     echo
 }
 
@@ -89,7 +89,7 @@ next_part "Adding third party repositories"
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-# RPM Fusion 
+# RPM Fusion
 sudo dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" -y
 sudo dnf install "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm" -y
 sudo dnf install -y rpmfusion-free-release-tainted
@@ -143,10 +143,10 @@ sudo dnf install -y network-manager-applet blueman pulseaudio-utils
 
 # Some packages i use
 sudo dnf install neofetch flameshot fzf bat tldr \
-                 httpie alacritty exa rofi nitrogen \
-                 nautilus dunst neovim playerctl \
-                 vlc ffmpeg qalculate-gtk btop \
-		         ripgrep fd-find -y
+    httpie alacritty exa rofi nitrogen \
+    nautilus dunst neovim playerctl \
+    vlc ffmpeg qalculate-gtk btop \
+    ripgrep fd-find -y
 
 sudo dnf install trayer -y
 
@@ -184,11 +184,11 @@ fi
 if ask "Install VS Code?"; then
     # VS Code
     sudo dnf install code -y
-if
+fi
 
 ####################################
 if ask "Install Flatpaks??"; then
-    
+
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -226,20 +226,20 @@ fi
 if ask "Install picom dependencies?"; then
     # Picom dependencies
     sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel \
-                        libev-devel libX11-devel libX11-xcb libXext-devel \
-                        libxcb-devel mesa-libGL-devel meson pcre-devel \
-                        pixman-devel uthash-devel xcb-util-image-devel \
-                        xcb-util-renderutil-devel xorg-x11-proto-devel
+        libev-devel libX11-devel libX11-xcb libXext-devel \
+        libxcb-devel mesa-libGL-devel meson pcre-devel \
+        pixman-devel uthash-devel xcb-util-image-devel \
+        xcb-util-renderutil-devel xorg-x11-proto-devel
 fi
 
 ####################################
 if ask "Install Eww?"; then
-    
+
     cd ~/Apps || exit 1
 
     # Eww Widgets dependencies
     sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
-                        cairo-devel cairo-gobject-devel glib2-devel
+        cairo-devel cairo-gobject-devel glib2-devel
 
     git clone https://github.com/elkowar/eww
     cd eww || exit 1
@@ -257,13 +257,13 @@ fi
 
 if ask "Install fonts?"; then
     next_part "Installing fonts"
-    
+
     sudo dnf install unzip -y
 
     # Anonymous Pro
     # https://www.marksimonson.com/fonts/view/anonymous-pro
     sudo dnf install msimonson-anonymouspro-fonts -y
-   
+
     sudo dnf install rsms-inter-fonts -y
 
     # Meslo Nerd Font
@@ -308,7 +308,7 @@ rm -rf ~/install_tmp
 
 next_part "Done"
 
-echo 
+echo
 echo "Auth GitHub cli:"
 echo "    gh auth login"
 echo
@@ -317,10 +317,9 @@ echo "Complete spotify installation"
 echo "    lpf update"
 echo
 echo "Please install these packages manually:"
-echo 
+echo
 echo "Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
-echo 
+echo
 echo "Setup your window manager"
-echo 
+echo
 echo "Reboot when done"
-

@@ -58,6 +58,7 @@ myManageHook =
             , className =? "dialog" --> doFloat
             , className =? "download" --> doFloat
             , className =? "error" --> doFloat
+            , className =? "zoom" --> doFloat
             , isRole =? "pop-up" --> doCenterFloat
             , title =? "Bluetooth Devices" --> doCenterFloat
             , isDialog --> doCenterFloat

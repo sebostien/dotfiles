@@ -1,6 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;; Includes ;;;;;;;;;;;;;;;;;;;
 (include "src/widgets.yuck")
 (include "src/music.yuck")
+(include "src/notifications.yuck")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;; Left bar ;;;;;;;;;;;;;;;;;;;;
@@ -42,6 +43,20 @@
   :reserve (struts :distance "32px" :side "top")
   :windowtype "dock"
   (laptopBar)
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;; Notification Center ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defwindow notifications
+  :monitor 1
+  :hexpand false
+  :vexpand false
+  :geometry (geometry :x {1920 - 400} :y {(1200 - 720) / 2} :width 400)
+  :anchor "top right"
+  :reserve (struts :distance "32px" :side "top")
+  :windowtype "dock"
+  (notifications)
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

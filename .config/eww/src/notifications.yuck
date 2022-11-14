@@ -1,0 +1,32 @@
+
+(defpoll noti_history :interval "1m"
+  "./scripts/noti.js"
+)
+
+(defwidget notifications []
+  (box :orientation "v"
+    :space-evenly false
+    :class "noti-box"
+    (label :class "noti-title" :text "Notifications")
+    (scroll
+      :height 720
+      :hscroll false
+      :vscroll true
+      (box ; TODO: Group by app name and put same into a Expander! 
+        :space-evenly false
+        :orientation "v"
+        (for entry in {noti_history.data.discord.data}
+          (box :class "noti-child-cont"
+            :orientation "v"
+            :space-evenly false
+            :vexpand false
+            :hexpand false
+            :valign "start"
+            (label :class "noti-child-title" :xalign 0 :text {entry.summary.data} :wrap true)
+            (label :xalign 0 :markup {entry.message.data} :wrap true)
+          )
+        )
+      )
+    )
+  )
+)

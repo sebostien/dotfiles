@@ -36,8 +36,8 @@ ask() {
 
 optimize_dnf() {
 
-    printf %60s | tr " " "="
-    printf "\n Optimizing dnf"
+    printf "%0.s=" {1..60}
+    printf "\n Optimizing dnf\n\n"
 
     defaultyes=$(grep defaultyes </etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
     if [ -z "$defaultyes" ]; then
@@ -46,14 +46,14 @@ optimize_dnf() {
         echo "Can't set defaultyes to True in dnf.conf, set manually"
     fi
 
-    max_parallel_downloads=$(grep max_parallel_downloads /etc/dnf/dnf.conf <cat | awk -F '=' '{print $NF}')
+    max_parallel_downloads=$(grep max_parallel_downloads </etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
     if [ -z "$max_parallel_downloads" ]; then
         echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    else
+    elif [ "$max_parallel_downloads" != "10" ]; then
         echo "Can't set max_parallel_downloads in dnf.conf, set manually"
     fi
 
-    printf %60s | tr " " "="
+    printf "%0.s=" {1..60}
     echo
 }
 
@@ -61,10 +61,11 @@ optimize_dnf() {
 next_part() {
     output="------ $1 ------"
     len=${#output}
-    printf %"$len"s | tr " " "="
+    printf %"$len"s " " | tr " " "="
     echo
     echo "$output"
-    printf %"$len"s | tr " " "="
+    printf %"$len"s " " | tr " " "="
+    echo
     echo
 }
 
@@ -95,7 +96,7 @@ sudo dnf install "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree
 sudo dnf install -y rpmfusion-free-release-tainted
 
 # RPM Sphere, for trayer
-sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-34-2.noarch.rpm -y
+sudo dnf install "https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-$(rpm -E %fedora)-1.noarch.rpm" -y
 
 # Add Fedora third party repository
 sudo dnf install fedora-workstation-repositories
@@ -112,7 +113,6 @@ sudo dnf groupupdate core -y
 sudo dnf check
 sudo dnf makecache
 
-# TODO check if UEFI
 sudo fwupdmgr get-devices
 sudo fwupdmgr refresh --force
 sudo fwupdmgr get-updates
@@ -139,16 +139,14 @@ sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.re
 sudo dnf install gh -y
 
 # Applets
-sudo dnf install -y network-manager-applet blueman pulseaudio-utils
+sudo dnf install -y network-manager-applet blueman
 
 # Some packages i use
 sudo dnf install neofetch flameshot fzf bat tldr \
     httpie alacritty exa rofi nitrogen \
     nautilus dunst neovim playerctl \
     vlc ffmpeg qalculate-gtk btop \
-    ripgrep fd-find -y
-
-sudo dnf install trayer -y
+    ripgrep fd-find trayer -y -q
 
 dnf install ffmpeg-libs compat-ffmpeg28 -y
 
@@ -163,6 +161,9 @@ sudo dnf install lpf-spotify-client -y
 
 # Pip
 sudo dnf install python3-pip -y
+
+# VS Code
+sudo dnf install code -y
 
 # onefetch: git info tool
 sudo dnf copr enable varlad/onefetch -y
@@ -181,13 +182,8 @@ if ask "Install Node and Node toolchain?"; then
     curl -o- -L https://yarnpkg.com/install.sh | bash
 fi
 
-if ask "Install VS Code?"; then
-    # VS Code
-    sudo dnf install code -y
-fi
-
 ####################################
-if ask "Install Flatpaks??"; then
+if ask "Add Flathub?"; then
 
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -217,12 +213,6 @@ next_part "Installing optional programs"
 ########################################
 
 ####################################
-if ask "Install Nord VPN client?"; then
-    sudo dnf install -y https://repo.nordvpn.com/yum/nordvpn/centos/noarch/Packages/n/nordvpn-release-1.0.0-1.noarch.rpm
-    sudo dnf install -y nordvpn
-fi
-
-####################################
 if ask "Install picom dependencies?"; then
     # Picom dependencies
     sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel \
@@ -233,7 +223,7 @@ if ask "Install picom dependencies?"; then
 fi
 
 ####################################
-if ask "Install Eww?"; then
+if ask "Download Eww?"; then
 
     cd ~/Apps || exit 1
 
@@ -242,11 +232,6 @@ if ask "Install Eww?"; then
         cairo-devel cairo-gobject-devel glib2-devel
 
     git clone https://github.com/elkowar/eww
-    cd eww || exit 1
-
-    cargo build --release
-    chmod +x ./target/release/eww
-    sudo ln -s ~/Apps/eww/target/release/eww /usr/bin/eww
 
     cd ~/install_tmp || exit 1
 fi
@@ -302,7 +287,7 @@ sudo dnf autoremove -y
 echo "Change shell to zsh:"
 chsh -s "$(which zsh)"
 
-# Remove temporary used by the script files
+# Remove temporary files used by the script
 cd ~ || exit 1
 rm -rf ~/install_tmp
 
@@ -315,6 +300,8 @@ echo
 echo
 echo "Complete spotify installation"
 echo "    lpf update"
+echo
+echo "Finish setup of apps in ~/Apps/"
 echo
 echo "Please install these packages manually:"
 echo

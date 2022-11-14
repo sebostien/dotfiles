@@ -1,36 +1,71 @@
-local keymap = vim.keymap
+local keymap = vim.api.nvim_set_keymap
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+local opts = { silent = true, noremap = true }
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- disable keys
-keymap.set('n', '<Left>', '<Nop>')
-keymap.set('n', '<Right>', '<Nop>')
-keymap.set('n', '<Up>', '<Nop>')
-keymap.set('n', '<Down>', '<Nop>')
-keymap.set('n', '<C-z>', '<Nop>')
+keymap("n", "<Left>", "<Nop>", opts)
+keymap("n", "<Right>", "<Nop>", opts)
+keymap("n", "<Up>", "<Nop>", opts)
+keymap("n", "<Down>", "<Nop>", opts)
+keymap("n", "<C-z>", "<Nop>", opts)
 
 -- Jump between windows
-keymap.set('n', '<C-k>', '<CMD>wincmd k<CR>')
-keymap.set('n', '<C-j>', '<CMD>wincmd j<CR>')
-keymap.set('n', '<C-h>', '<CMD>wincmd h<CR>')
-keymap.set('n', '<C-l>', '<CMD>wincmd l<CR>')
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- resize window
-keymap.set('n', '<C-Left>', '<CMD>vertical resize -5<CR>')
-keymap.set('n', '<C-Up>', '<CMD>resize -5<CR>')
-keymap.set('n', '<C-Right>', '<CMD>vertical resize +5<CR>')
-keymap.set('n', '<C-Down>', '<CMD>resize +5<CR>')
+keymap("n", "<C-Up>", "<CMD>resize -5<CR>", opts)
+keymap("n", "<C-Down>", "<CMD>resize +5<CR>", opts)
+keymap("n", "<C-Left>", "<CMD>vertical resize -5<CR>", opts)
+keymap("n", "<C-Right>", "<CMD>vertical resize +5<CR>", opts)
 
--- split window
-keymap.set('n', '<C-A-k>', '<C-w>t<C-w>K')
-keymap.set('n', '<C-A-h>', '<C-w>t<C-w>H')
+-- Move between tabs
 
--- Agda
-keymap.set('n', '<LocalLeader>l', '<CMD>call agda#load()<CR>')
-keymap.set('n', '<LocalLeader>n', '<CMD>call agda#next()<CR>')
-keymap.set('n', '<LocalLeader>p', '<CMD>call agda#previous()<CR>')
-keymap.set('n', '<LocalLeader>i', '<CMD>call agda#infer()<CR>')
-keymap.set('n', '<LocalLeader>g', '<CMD>call agda#give()<CR>')
-keymap.set('n', '<LocalLeader>c', '<CMD>call agda#context()<CR>')
-keymap.set('n', '<LocalLeader>r', '<CMD>call agda#refine()<CR>')
+-- Toggle code outline
+keymap("n", "<localleader>o", ":AerialToggle<CR>", opts)
+
+-- Clear highlights
+keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opts)
+
+-- Completion
+keymap("n", "<leader>l", "<CMD>COQnow --shut-up<CR>", { noremap = true, silent = true, desc = "Start COQ" })
+
+-- Neotree
+keymap(
+	"n",
+	"<localleader>fd",
+	"<CMD>Neotree filesystem<CR>",
+	{ noremap = true, silent = true, desc = "Open filesystem" }
+)
+keymap(
+	"n",
+	"<localleader>gs",
+	"<CMD>Neotree float git_status<CR>",
+	{ noremap = true, silent = true, desc = "Show git status" }
+)
+vim.cmd([[nnoremap \ :Neotree reveal<cr>]]) -- Makes Neotree hijack netrw
+
+-- Telescope
+keymap("n", "<localleader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<localleader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<localleader>fb", ":Telescope buffers<CR>", opts)
+
+-- Move current line
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+
+-------------------
+-- Visual ---------
+-------------------
+
+keymap("x", "<A-j>", ":m '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":m '<-2<CR>gv-gv", opts)
+
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)

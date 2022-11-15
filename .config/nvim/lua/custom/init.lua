@@ -3,4 +3,7 @@ require("custom.feline")
 require("custom.treesitter")
 require("custom.lsp")
 require("custom.whichkey")
-require("custom.coq_conf")
+require("custom.resession")
+require("custom.overseer")
+require("custom.cmp")
+

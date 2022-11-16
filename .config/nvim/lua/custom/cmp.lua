@@ -5,6 +5,11 @@ local lspkind = require("lspkind")
 WIDE_HEIGHT = 80
 
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end,
+  },
   mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -35,12 +40,13 @@ cmp.setup({
       group_index = 3,
     },
     {
-      name = "spell",
-      priority = 50,
+      name = "ultisnips",
+      priority = 70,
+      autocomplete = false,
       group_index = 3,
     },
     {
-      name = "calc",
+      name = "spell",
       priority = 50,
       group_index = 3,
     },
@@ -49,6 +55,7 @@ cmp.setup({
     default_behavior = types.cmp.ConfirmBehavior.Replace,
   },
   window = {
+    completion = cmp.config.window.bordered(),
     documentation = {
       border = {
         "╭",

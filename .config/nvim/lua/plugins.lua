@@ -160,6 +160,8 @@ return packer.startup(function(use)
       "f3fora/cmp-spell",
       -- Formatting
       "onsails/lspkind.nvim",
+      -- Snippets
+      "SirVer/ultisnips",
     },
   })
 

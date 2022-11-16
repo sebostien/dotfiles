@@ -51,6 +51,7 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.implementation,
     bufopts(bufnr, "Go to implementations")
   )
+
   vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, bufopts(bufnr, "Hover"))
   vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, bufopts(bufnr, "Signature help"))
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts(bufnr, "Type definition"))
@@ -62,6 +63,7 @@ end
 require("lspconfig")["eslint"].setup({
   on_attach = on_attach,
   -- Server-specific settings...
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {
     packageManager = "yarn",
   },
@@ -73,12 +75,14 @@ require("lspconfig")["tsserver"].setup({
     on_attach(client, bufnr)
   end,
   -- Server-specific settings...
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {},
 })
 
 require("lspconfig")["rust_analyzer"].setup({
   on_attach = on_attach,
   -- Server-specific settings...
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {},
 })
 
@@ -88,6 +92,7 @@ require("lspconfig")["sumneko_lua"].setup({
     client.server_capabilities.documentFormattingProvider = false
     on_attach(client, bufnr)
   end,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
   -- Server-specific settings...
   settings = {
     Lua = {
@@ -115,4 +120,10 @@ require("lspconfig")["jsonls"].setup({
 
 require("lspconfig")["marksman"].setup({
   on_attach = on_attach,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+})
+
+require("lspconfig")["hls"].setup({
+  on_attach = on_attach,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
 })

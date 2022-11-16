@@ -32,9 +32,6 @@ keymap("n", "<localleader>o", ":AerialToggle left<CR>", opts)
 -- Clear highlights
 keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opts)
 
--- Completion
-keymap("n", "<leader>l", "<CMD>COQnow --shut-up<CR>", opts)
-
 -- Marks
 keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>", opts)
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opts)

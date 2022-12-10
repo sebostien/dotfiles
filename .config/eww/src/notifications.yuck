@@ -12,20 +12,27 @@
       :height 720
       :hscroll false
       :vscroll true
-      (box ; TODO: Group by app name and put same into a Expander! 
+      (box ; TODO: Nested for-loops does not work
         :space-evenly false
         :orientation "v"
-        (for entry in {noti_history.data.discord.data}
-          (box :class "noti-child-cont"
-            :orientation "v"
-            :space-evenly false
-            :vexpand false
-            :hexpand false
-            :valign "start"
-            (label :class "noti-child-title" :xalign 0 :text {entry.summary.data} :wrap true)
-            (label :xalign 0 :markup {entry.message.data} :wrap true)
+        (for app in {noti_history.apps}
+          (box
+            (for entry in {noti_history.apps}
+              (label :text {entry.icon}) 
+            )
           )
         )
+        ; (for entry in {noti_history.data.discord.data}
+        ;   (box :class "noti-child-cont"
+        ;     :orientation "v"
+        ;     :space-evenly false
+        ;     :vexpand false
+        ;     :hexpand false
+        ;     :valign "start"
+        ;     (label :class "noti-child-title" :xalign 0 :text {entry.summary.data} :wrap true)
+        ;     (label :xalign 0 :markup {entry.message.data} :wrap true)
+        ;   )
+        ; )
       )
     )
   )

@@ -89,7 +89,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 export LANG=en_US.UTF-8
 
-export PATH=$PATH:/home/sn/.spicetify
+export PATH=$PATH:/home/sn/go/bin
 
 source $ZSH/oh-my-zsh.sh
 

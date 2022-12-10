@@ -50,8 +50,29 @@ return packer.startup(function(use)
   use("elkowar/yuck.vim") -- Eww widgets
   use("feline-nvim/feline.nvim")
   use("folke/which-key.nvim")
+  use({
+    -- Render Markdown
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  })
 
-  -- Breadcrumbs
+  -- Git
+  use("tpope/vim-fugitive")
+
+  -- Cheatsheet
+  use({
+    "sudormrfbin/cheatsheet.nvim",
+
+    requires = {
+      { "nvim-telescope/telescope.nvim" },
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+  })
 
   -- Indentation Guides
   use({
@@ -161,11 +182,12 @@ return packer.startup(function(use)
       -- Formatting
       "onsails/lspkind.nvim",
       -- Snippets
+      "quangnguyen30192/cmp-nvim-ultisnips",
       "SirVer/ultisnips",
     },
   })
 
-  -- TODO highlight TODO! This not working :()
+  -- TODO highlight
   use({
     "folke/todo-comments.nvim",
     requires = { "nvim-lua/plenary.nvim" },

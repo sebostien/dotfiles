@@ -24,8 +24,6 @@ keymap("n", "<C-Down>", "<CMD>resize +5<CR>", opts)
 keymap("n", "<C-Left>", "<CMD>vertical resize -5<CR>", opts)
 keymap("n", "<C-Right>", "<CMD>vertical resize +5<CR>", opts)
 
--- Move between tabs
-
 -- Toggle code outline
 keymap("n", "<localleader>o", ":AerialToggle left<CR>", opts)
 
@@ -35,7 +33,7 @@ keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opts)
 -- Marks
 keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>", opts)
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opts)
-keymap("n", "<localleader>fm", "<CMD>Telescope harpoon marks<CR>", opts)
+keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opts)
 
 -- Save
 keymap("n", "<C-s>", "<CMD>:w<CR><ESC>", opts)
@@ -84,3 +82,8 @@ keymap("x", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 -- Stay in indent mode when indenting
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+-- Clipboard
+keymap("v", "<leader>y", '"+y', opts)
+keymap("x", "<leader>y", '"+y', opts)
+keymap("n", "<leader>p", '"+p', opts)

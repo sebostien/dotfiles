@@ -73,8 +73,6 @@ colors.syntax = {
   },
 }
 
-colors.Syntax = {}
-
 local WC = colors.window
 local SC = colors.syntax
 

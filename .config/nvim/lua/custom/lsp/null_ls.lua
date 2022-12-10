@@ -7,6 +7,8 @@ null_ls.setup({
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettier.with({ extra_args = {} }),
     null_ls.builtins.formatting.rustfmt,
+    null_ls.builtins.formatting.stylish_haskell,
+
     -- Code actions
     null_ls.builtins.code_actions.eslint,
   },

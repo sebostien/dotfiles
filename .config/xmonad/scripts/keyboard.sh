@@ -4,13 +4,15 @@
 current=$(localectl | grep X11 | awk '{print $3}')
 
 if [ "$current" != se ]; then
-  gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'se')]"
   localectl set-x11-keymap se
   localectl set-keymap se
+  setxkbmap se
   notify-send "Changed keymap to 'se'" 
+  echo "se" > ~/.config/xmonad/scripts/locale
 else
-  gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us')]"
   localectl set-x11-keymap us
   localectl set-keymap us
+  setxkbmap us
   notify-send "Changed keymap to 'us'"
+  echo "us" > ~/.config/xmonad/scripts/locale
 fi

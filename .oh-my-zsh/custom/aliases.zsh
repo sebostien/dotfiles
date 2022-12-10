@@ -40,3 +40,6 @@ alias kal="cal -ymw"
 
 # Weather
 alias weather="curl wttr.in"
+
+# LazyGit
+alias lg="lazygit"

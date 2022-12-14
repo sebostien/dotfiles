@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rofi -no-lazy-grab -show run -i -sort -theme themes/appsmenu.rasi
+rofi -no-lazy-grab -show drun -i -sort -theme themes/appsmenu.rasi

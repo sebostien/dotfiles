@@ -26,17 +26,15 @@ import SN.Theme
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "picom --experimental-backend"
     spawnOnce "nm-applet"
+    spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
     spawnOnce "blueman-applet"
     spawnOnce "playerctld"
     spawnOnce "dunst"
     spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
-    -- spawnOnce "systemctl enable --now logid"
-
-    spawnOnce mySysTray
-    spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
+    spawnOnce "picom --experimental-backend"
     spawnOnce myEwwStartupHook
+    spawnOnce mySysTray
 
 ------------------------------------------------------------------------
 -- | Window rules | ----------------------------------------------------
@@ -61,6 +59,7 @@ myManageHook =
             , className =? "zoom" --> doFloat
             , isRole =? "pop-up" --> doCenterFloat
             , title =? "Bluetooth Devices" --> doCenterFloat
+            , title =? "Ulauncher Preferences" --> doCenterFloat
             , isDialog --> doCenterFloat
             , isFullscreen --> doFullFloat
             ]

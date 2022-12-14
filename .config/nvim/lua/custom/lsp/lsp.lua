@@ -127,3 +127,9 @@ require("lspconfig")["hls"].setup({
   on_attach = on_attach,
   capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
+
+require("lspconfig")["cssls"].setup({
+  on_attach = on_attach,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  settings = {}
+})

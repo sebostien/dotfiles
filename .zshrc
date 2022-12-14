@@ -87,6 +87,7 @@ plugins=(
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+export EDITOR=nvim
 export LANG=en_US.UTF-8
 
 export PATH=$PATH:/home/sn/go/bin

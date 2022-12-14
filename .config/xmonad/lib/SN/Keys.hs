@@ -45,9 +45,9 @@ myNamedKeys isDesktop
           ],
         KeySection
           "Run"
-          [ ("M-S-<Return>", "Run Prompt", spawn "~/.config/rofi/scripts/appsmenu.sh"),
+          [ ("M-S-<Return>", "Run Prompt", spawn "~/.config/rofi/scripts/runmenu.sh"),
+            ("M-S-p", "Appsmenu Prompt", spawn "~/.config/rofi/scripts/appsmenu.sh"),
             ("M-<Return>", "Open Terminal", spawn myTerminal),
-            ("M-p s", "Open Spotify", spawn "spotify"),
             ("M-p b", "Open Browser", spawn myBrowser)
           ],
         KeySection

@@ -40,6 +40,11 @@ cmp.setup({
       group_index = 3,
     },
     {
+      name = "crates",
+      priority = 70,
+      group_index = 3,
+    },
+    {
       name = "ultisnips",
       priority = 70,
       autocomplete = false,

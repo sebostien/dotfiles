@@ -37,9 +37,6 @@ vim.keymap.set(
 
 -- https://github.com/neovim/nvim-lspconfig
 local on_attach = function(_, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, bufopts(bufnr, "Go to declaration"))
@@ -61,7 +58,9 @@ local on_attach = function(_, bufnr)
 end
 
 require("lspconfig")["eslint"].setup({
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+  end,
   -- Server-specific settings...
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {
@@ -80,7 +79,9 @@ require("lspconfig")["tsserver"].setup({
 })
 
 require("lspconfig")["rust_analyzer"].setup({
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+  end,
   -- Server-specific settings...
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {},
@@ -124,12 +125,39 @@ require("lspconfig")["marksman"].setup({
 })
 
 require("lspconfig")["hls"].setup({
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    require("virtualtypes").on_attach(client, bufnr)
+  end,
   capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
 
 require("lspconfig")["cssls"].setup({
   on_attach = on_attach,
   capabilities = vim.lsp.protocol.make_client_capabilities(),
-  settings = {}
+  settings = {},
+})
+
+require("lspconfig")["texlab"].setup({
+  on_attach = function(client, bufnr)
+    vim.o.wrap = true -- Wrap lines
+
+    -- Save and build
+    vim.keymap.set(
+      "n",
+      "<leader>b",
+      "<CMD>write<CR><CMD>TexlabBuild<CR>",
+      bufopts(bufnr, "Build Latex")
+    )
+
+    -- Open pdf in zathura
+    vim.keymap.set("n", "<localleader><enter>", function()
+      local file = vim.fn.expand("%:r") .. ".pdf"
+      vim.fn.execute("!zathura '" .. file .. "' &", true)
+    end, bufopts(bufnr, "Open pdf in Zathura"))
+
+    on_attach(client, bufnr)
+  end,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  settings = {},
 })

@@ -35,9 +35,8 @@ keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opts)
 keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opts)
 
--- Save
-keymap("n", "<C-s>", "<CMD>:w<CR><ESC>", opts)
-keymap("n", "<C-s>", "<CMD>:w<CR><ESC>", opts)
+-- Color highlight
+keymap("n", "<localleader>c", ":CccHighlighterToggle <CR>", opts)
 
 -- Sessions
 keymap("n", "<leader>ss", "<CMD>lua require('resession').save() <CR>", opts)

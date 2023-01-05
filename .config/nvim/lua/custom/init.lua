@@ -5,5 +5,6 @@ require("custom.lsp")
 require("custom.whichkey")
 require("custom.resession")
 require("custom.overseer")
+require("custom.latex")
 require("custom.cmp")
 

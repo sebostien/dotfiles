@@ -1,16 +1,3 @@
-import Data.Monoid (Endo)
-import System.Directory (doesFileExist)
-
-import XMonad
-
-import XMonad.Hooks.EwmhDesktops (ewmh)
-import XMonad.Hooks.ManageDocks (docks, manageDocks)
-import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isDialog, isFullscreen)
-import XMonad.Hooks.StatusBar (withSB)
-
-import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.NamedScratchpad (namedScratchpadManageHook)
-import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Personal libraries
 import SN.EwwBar
@@ -20,21 +7,33 @@ import SN.Layouts
 import SN.ScratchPad
 import SN.Theme
 
+import System.Directory (doesFileExist)
+import Data.Monoid (Endo)
+
+import XMonad
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import XMonad.Hooks.ManageDocks (docks, manageDocks)
+import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isDialog, isFullscreen)
+import XMonad.Hooks.StatusBar (withSB)
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.NamedScratchpad (namedScratchpadManageHook)
+import XMonad.Util.SpawnOnce (spawnOnce)
+
 ------------------------------------------------------------------------
 -- | Startup| ----------------------------------------------------------
 ------------------------------------------------------------------------
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "nm-applet"
-    spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
-    spawnOnce "blueman-applet"
-    spawnOnce "playerctld"
-    spawnOnce "dunst"
-    spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
-    spawnOnce "picom --experimental-backend"
-    spawnOnce myEwwStartupHook
-    spawnOnce mySysTray
+  spawnOnce "nm-applet"
+  spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
+  spawnOnce "blueman-applet"
+  spawnOnce "playerctld"
+  spawnOnce "dunst"
+  spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
+  spawnOnce "picom --experimental-backend"
+  spawnOnce myEwwStartupHook
+  spawnOnce mySysTray
 
 ------------------------------------------------------------------------
 -- | Window rules | ----------------------------------------------------
@@ -45,24 +44,22 @@ myStartupHook = do
 -- and click on the client you're interested in.
 --
 myManageHook :: XMonad.Query (Endo WindowSet)
-myManageHook =
-    manageSpecific
-        <+> namedScratchpadManageHook myScratchPads
+myManageHook = manageSpecific <+> namedScratchpadManageHook myScratchPads
   where
     manageSpecific =
-        composeAll
-            [ className =? "confirm" --> doCenterFloat
-            , className =? "file_progress" --> doFloat
-            , className =? "dialog" --> doFloat
-            , className =? "download" --> doFloat
-            , className =? "error" --> doFloat
-            , className =? "zoom" --> doFloat
-            , isRole =? "pop-up" --> doCenterFloat
-            , title =? "Bluetooth Devices" --> doCenterFloat
-            , title =? "Ulauncher Preferences" --> doCenterFloat
-            , isDialog --> doCenterFloat
-            , isFullscreen --> doFullFloat
-            ]
+      composeAll
+        [ className =? "confirm" --> doCenterFloat,
+          className =? "file_progress" --> doFloat,
+          className =? "dialog" --> doFloat,
+          className =? "download" --> doFloat,
+          className =? "error" --> doFloat,
+          className =? "zoom" --> doFloat,
+          isRole =? "pop-up" --> doCenterFloat,
+          title =? "Bluetooth Devices" --> doCenterFloat,
+          title =? "Ulauncher Preferences" --> doCenterFloat,
+          isDialog --> doCenterFloat,
+          isFullscreen --> doFullFloat
+        ]
     isRole = stringProperty "WM_WINDOW_ROLE"
 
 -----------------------------------------------------------
@@ -71,19 +68,20 @@ myManageHook =
 
 main :: IO ()
 main = do
-    isDesktop <- doesFileExist "/home/sn/.is_desktop"
-    spawn (makeMyKeyFile isDesktop)
-    xmonad . withSB myStatusBar . docks $
-        ewmh
-            def
-                { manageHook = myManageHook <+> manageDocks
-                , modMask = myModMask
-                , terminal = myTerminal
-                , startupHook = myStartupHook
-                , layoutHook = myLayoutHook
-                , borderWidth = myBorderWidth
-                , normalBorderColor = myNormalBorderColor
-                , focusedBorderColor = myFocusedBorderColor
-                , focusFollowsMouse = myFocusFollowsMouse
-                }
-            `additionalKeysP` (myKeys isDesktop)
+  isDesktop <- doesFileExist "/home/sn/.is_desktop"
+  when isDesktop $ spawn "xmodmap -e 'keycode 117=' && xmodmap -e 'keycode 112='" -- Disable page-(up/down) cause they suck on laptop keyboard
+  spawn (makeMyKeyFile isDesktop)
+  xmonad . withSB myStatusBar . docks $
+    ewmh
+      def
+        { manageHook = myManageHook <+> manageDocks,
+          modMask = myModMask,
+          terminal = myTerminal,
+          startupHook = myStartupHook,
+          layoutHook = myLayoutHook,
+          borderWidth = myBorderWidth,
+          normalBorderColor = myNormalBorderColor,
+          focusedBorderColor = myFocusedBorderColor,
+          focusFollowsMouse = myFocusFollowsMouse
+        }
+      `additionalKeysP` (myKeys isDesktop)

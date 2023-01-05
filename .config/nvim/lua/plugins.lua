@@ -74,6 +74,9 @@ return packer.startup(function(use)
     },
   })
 
+  -- Latex
+  use("jakewvincent/texmagic.nvim")
+
   -- Indentation Guides
   use({
     "lukas-reineke/indent-blankline.nvim",
@@ -140,12 +143,32 @@ return packer.startup(function(use)
   })
   use("JoosepAlviste/nvim-ts-context-commentstring") -- Detect embedded language and comment correctly
 
+  -- Color picker/preview
+  use({
+    "uga-rosa/ccc.nvim",
+    config = function()
+      -- Enable true color
+      vim.opt.termguicolors = true
+    end,
+  })
+
   -- LSP
   use({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "jose-elias-alvarez/null-ls.nvim", -- Formatters and Linters
+    "jubnzv/virtual-types.nvim", -- Virtual type annotations
+  })
+
+  -- Rust crates helper
+  use({
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    requires = { { "nvim-lua/plenary.nvim" } },
+    config = function()
+      require("crates").setup()
+    end,
   })
 
   -- Autopairs
@@ -214,6 +237,9 @@ return packer.startup(function(use)
       })
     end,
   })
+
+  -- Debugging startup
+  use("dstein64/vim-startuptime")
 
   -- Sync after packer update/install
   -- Keep last

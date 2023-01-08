@@ -24,9 +24,6 @@ keymap("n", "<C-Down>", "<CMD>resize +5<CR>", opts)
 keymap("n", "<C-Left>", "<CMD>vertical resize -5<CR>", opts)
 keymap("n", "<C-Right>", "<CMD>vertical resize +5<CR>", opts)
 
--- Toggle code outline
-keymap("n", "<localleader>o", ":AerialToggle left<CR>", opts)
-
 -- Clear highlights
 keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opts)
 
@@ -34,6 +31,9 @@ keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opts)
 keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>", opts)
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opts)
 keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opts)
+
+-- Undotree
+keymap("n", "<localleader>u", "<CMD>UndotreeToggle<CR>", opts)
 
 -- Color highlight
 keymap("n", "<localleader>c", ":CccHighlighterToggle <CR>", opts)
@@ -44,8 +44,8 @@ keymap("n", "<leader>sl", "<CMD>lua require('resession').load()<CR>", opts)
 keymap("n", "<leader>sd", "<CMD>lua require('resession').delete()<CR>", opts)
 
 -- Overseer
-keymap("n", "<leader>tt", "<CMD>OverseerToggle<CR>", opts)
-keymap("n", "<leader>tr", "<CMD>OverseerRun<CR>", opts)
+keymap("n", "<localleader>tt", "<CMD>OverseerToggle<CR>", opts)
+keymap("n", "<localleader>tr", "<CMD>OverseerRun<CR>", opts)
 
 -- Neotree
 keymap(
@@ -54,15 +54,18 @@ keymap(
   "<CMD>Neotree toggle filesystem position=left <CR>",
   { noremap = true, silent = true, desc = "Open filesystem" }
 )
+
+-- Git
 keymap(
   "n",
   "<localleader>gs",
-  "<CMD>Neotree float git_status<CR>",
-  { noremap = true, silent = true, desc = "Show git status" }
+  "<CMD>Git<CR>",
+  { noremap = true, silent = true, desc = "Fugitive git status" }
 )
 
 -- Telescope
 keymap("n", "<localleader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<localleader>fg", ":Telescope git_files<CR>", opts)
 keymap("n", "<localleader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<localleader>fb", ":Telescope buffers<CR>", opts)
 

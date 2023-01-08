@@ -1,6 +1,16 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "rust", "javascript", "typescript", "lua", "css", "scss", "markdown" },
+  ensure_installed = {
+    "rust",
+    "javascript",
+    "typescript",
+    "c",
+    "lua",
+    "css",
+    "scss",
+    "markdown",
+    "help", -- Vim help
+  },
 
   autopairs = {
     enable = true,

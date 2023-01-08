@@ -10,7 +10,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     "git",
     "clone",
     "--depth",
-    "1",
     "https://github.com/wbthomason/packer.nvim",
     install_path,
   })
@@ -120,19 +119,14 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Code outline
-  use({
-    "stevearc/aerial.nvim",
-    config = function()
-      require("aerial").setup()
-    end,
-  })
-
   -- Treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   })
+
+  -- Undotree
+  use("mbbill/undotree")
 
   -- Comments
   use({
@@ -222,7 +216,9 @@ return packer.startup(function(use)
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("trouble").setup({})
+      require("trouble").setup({
+        auto_preview = false,
+      })
     end,
   })
 

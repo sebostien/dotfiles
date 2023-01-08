@@ -31,9 +31,10 @@ vim.keymap.set(
 vim.keymap.set(
   "n",
   "<space>q",
-  vim.diagnostic.setloclist,
+  "<CMD>Trouble document_diagnostics<CR>",
   { noremap = true, silent = true, desc = "Show all diagnostics" }
 )
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts(bufnr, "Format file"))
 
 -- https://github.com/neovim/nvim-lspconfig
 local on_attach = function(_, bufnr)
@@ -54,12 +55,12 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts(bufnr, "Type definition"))
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts(bufnr, "Rename"))
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts(bufnr, "Code actions"))
-  vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts(bufnr, "Format file"))
 end
 
 require("lspconfig")["eslint"].setup({
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
+    require("virtualtypes").on_attach(client, bufnr)
   end,
   -- Server-specific settings...
   capabilities = vim.lsp.protocol.make_client_capabilities(),
@@ -81,6 +82,7 @@ require("lspconfig")["tsserver"].setup({
 require("lspconfig")["rust_analyzer"].setup({
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
+    require("virtualtypes").on_attach(client, bufnr)
   end,
   -- Server-specific settings...
   capabilities = vim.lsp.protocol.make_client_capabilities(),

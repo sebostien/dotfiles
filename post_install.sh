@@ -18,6 +18,12 @@ if [ -f /etc/os-release ]; then
     fi
 fi
 
+# Check if sudo
+if [[ "$EUID" = 0 ]]; then
+    echo "Don't run with sudo"
+    exit 1
+fi
+
 ask() {
     local reply
     echo -n "$1 [Y/n] "
@@ -69,12 +75,6 @@ next_part() {
     echo
 }
 
-# Check if sudo
-if [[ "$EUID" = 0 ]]; then
-    echo "Don't run with sudo"
-    exit 1
-fi
-
 mkdir ~/install_tmp
 mkdir -p ~/Apps
 cd ~/install_tmp || exit 1
@@ -86,9 +86,7 @@ optimize_dnf
 next_part "Adding third party repositories"
 ####################################
 
-# VS Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+sudo dnf install 'dnf-command(config-manager)'
 
 # RPM Fusion
 sudo dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" -y
@@ -118,9 +116,9 @@ sudo fwupdmgr refresh --force
 sudo fwupdmgr get-updates
 sudo fwupdmgr update -y
 
-# Update multimedia
-sudo dnf group upgrade -y --with-optional Multimedia
-sudo dnf groupupdate -y sound-and-video
+# Multimedia
+sudo dnf group install -y Multimedia
+sudo dnf group install -y sound-and-video
 
 ####################################
 next_part "Installing packages"
@@ -128,11 +126,10 @@ next_part "Installing packages"
 
 # Switch to zsh with oh-my-zsh
 sudo dnf install -y util-linux-user zsh
-curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 # Install plugins for oh-my-zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-git clone https://github.com/supercrabtree/k "$ZSH_CUSTOM/plugins/k"
 
 # Github CLI
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
@@ -145,19 +142,13 @@ sudo dnf install -y network-manager-applet blueman
 sudo dnf install neofetch flameshot fzf bat tldr \
     httpie alacritty exa rofi nitrogen \
     nautilus dunst neovim playerctl \
-    vlc ffmpeg qalculate-gtk btop \
+    vlc qalculate-gtk btop \
     ripgrep fd-find trayer -y -q
 
-dnf install ffmpeg-libs compat-ffmpeg28 -y
+dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
 
 # Pipewire
 sudo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
-
-# Discord
-sudo dnf install discord -y
-
-# Spotify
-sudo dnf install lpf-spotify-client -y
 
 # Pip
 sudo dnf install python3-pip -y
@@ -183,11 +174,16 @@ if ask "Install Node and Node toolchain?"; then
 fi
 
 ####################################
-if ask "Add Flathub?"; then
-
+if ask "Install Discord via Flatpak?"; then
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install app/com.discordapp.Discord/x86_64/stable -y
+fi
 
+if ask "Install Spotify via Flatpak?"; then
+    sudo dnf install -y flatpak
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install com.spotify.Client/x86_64/stable -y
 fi
 
 ####################################

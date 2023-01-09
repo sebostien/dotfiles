@@ -71,6 +71,22 @@ return packer.startup(function(use)
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
+
+    config = function()
+      require("cheatsheet").setup({
+        bundled_cheatsheets = {
+          disabled = {
+            "nerd-fonts",
+            "markdown",
+            "unicode",
+          },
+        },
+        telescope_mappings = {
+          ["<CR>"] = require("cheatsheet.telescope.actions").select_or_fill_commandline,
+          ["<C-E>"] = require("cheatsheet.telescope.actions").edit_user_cheatsheet,
+        },
+      })
+    end,
   })
 
   -- Latex
@@ -151,8 +167,9 @@ return packer.startup(function(use)
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    "jose-elias-alvarez/null-ls.nvim", -- Formatters and Linters
-    "jubnzv/virtual-types.nvim", -- Virtual type annotations
+    "jose-elias-alvarez/null-ls.nvim", -- LSP config helper
+    "simrat39/rust-tools.nvim", -- Rust-analyzer
+    "MrcJkb/haskell-tools.nvim", -- Haskell
   })
 
   -- Rust crates helper
@@ -219,6 +236,19 @@ return packer.startup(function(use)
       require("trouble").setup({
         auto_preview = false,
       })
+    end,
+  })
+
+  -- Highlight word under cursor
+  use({
+    "RRethy/vim-illuminate",
+    config = function()
+      local il = require("illuminate")
+      il.configure({
+        under_cursor = false,
+        min_count_to_highlight = 2,
+      })
+      il.pause()
     end,
   })
 

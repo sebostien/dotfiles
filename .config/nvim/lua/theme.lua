@@ -109,8 +109,11 @@ require("nightfox").setup({
   },
 })
 
-
-
 vim.cmd("colorscheme nordfox")
+
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = WC.bg1 })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = WC.bg1 })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = WC.bg1 })
+vim.api.nvim_set_hl(0, "LspInfoBorder", { bg = WC.bg1, fg = WC.white.base })
 
 return colors

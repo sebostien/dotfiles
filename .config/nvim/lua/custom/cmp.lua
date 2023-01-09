@@ -13,7 +13,6 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete({}),
     ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
@@ -29,14 +28,19 @@ cmp.setup({
       group_index = 1,
     },
     {
+      name = "path",
+      priority = 80,
+      group_index = 2,
+    },
+    {
+      name = "calc",
+      priority = 80,
+      group_index = 2,
+    },
+    {
       name = "buffer",
       priority = 80,
       autocomplete = false,
-      group_index = 3,
-    },
-    {
-      name = "path",
-      priority = 80,
       group_index = 3,
     },
     {
@@ -46,7 +50,7 @@ cmp.setup({
     },
     {
       name = "ultisnips",
-      priority = 70,
+      priority = 60,
       autocomplete = false,
       group_index = 3,
     },
@@ -62,17 +66,7 @@ cmp.setup({
   window = {
     completion = cmp.config.window.bordered(),
     documentation = {
-      border = {
-        "╭",
-        "─",
-        "╮",
-        "│",
-        "╯",
-        "─",
-        "╰",
-        "│",
-      },
-      winhighlight = "NormalFloat:NormalFloat,FloatBorder:NormalFloat",
+      border = "rounded",
       maxwidth = math.floor(WIDE_HEIGHT * (vim.o.columns / 100)),
       maxheight = math.floor(WIDE_HEIGHT * (vim.o.lines / 100)),
     },

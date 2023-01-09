@@ -5,10 +5,13 @@ require("nvim-treesitter.configs").setup({
     "javascript",
     "typescript",
     "c",
+    "cmake",
+    "python",
     "lua",
     "css",
     "scss",
     "markdown",
+    "markdown_inline",
     "help", -- Vim help
   },
 

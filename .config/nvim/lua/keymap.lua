@@ -1,4 +1,4 @@
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 local opts = { silent = true, noremap = true }
 
@@ -32,11 +32,21 @@ keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opts)
 keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opts)
 
+-- Lsp Windows
+keymap("n", "<localleader>ll", "<CMD>LspInfo<CR>", opts)
+keymap("n", "<localleader>lm", "<CMD>Mason<CR>", opts)
+keymap("n", "<localleader>ln", "<CMD>NullLsInfo<CR>", opts)
+
+-- Packer
+keymap("n", "<localleader>ps", "<CMD>PackerSync<CR>", opts)
+keymap("n", "<localleader>pc", "<CMD>PackerCompile<CR>", opts)
+
 -- Undotree
 keymap("n", "<localleader>u", "<CMD>UndotreeToggle<CR>", opts)
 
--- Color highlight
-keymap("n", "<localleader>c", ":CccHighlighterToggle <CR>", opts)
+-- Syntax toggles
+keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opts)
+keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opts)
 
 -- Sessions
 keymap("n", "<leader>ss", "<CMD>lua require('resession').save() <CR>", opts)
@@ -56,18 +66,20 @@ keymap(
 )
 
 -- Git
-keymap(
-  "n",
-  "<localleader>gs",
-  "<CMD>Git<CR>",
-  { noremap = true, silent = true, desc = "Fugitive git status" }
-)
+keymap("n", "<localleader>gs", "<CMD>Git<CR>", { noremap = true, silent = true, desc = "Fugitive git status" })
 
 -- Telescope
 keymap("n", "<localleader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<localleader>fg", ":Telescope git_files<CR>", opts)
 keymap("n", "<localleader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<localleader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<localleader>fh", ":Telescope command_history<CR>", opts)
+
+-- Help
+keymap("n", "<localleader>hh", ":Telescope help<CR>", opts)
+keymap("n", "<localleader>hm", ":Telescope man_pages<CR>", opts)
+keymap("n", "<localleader>hk", ":Telescope keymaps<CR>", opts)
+keymap("n", "<localleader>hc", ":Cheatsheet<CR>", opts)
 
 -- Move current line
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)

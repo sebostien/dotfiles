@@ -2,6 +2,8 @@
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
 
+local K = require("custom.lsp.lsp_keymap")
+
 null_ls.setup({
   border = "rounded",
   sources = {
@@ -21,6 +23,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.cspell, -- Spellchecker, https://github.com/streetsidesoftware/cspell
     null_ls.builtins.diagnostics.proselint, -- Writing helper, https://github.com/amperser/proselint
   },
+  on_attach = K.on_attach, -- Setup keymaps for client
 })
 
 local markdownlint = {

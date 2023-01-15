@@ -77,7 +77,6 @@ plugins=(
   man
   rust
   k
-  sudo
   aliases
   nvm
   web-search
@@ -96,6 +95,8 @@ export PATH=$PATH:/home/sn/scripts
 export PATH=$PATH:/home/sn/go/bin
 
 source $ZSH/oh-my-zsh.sh
+
+export DISABLE_AUTO_TITLE='true' # tmuxp
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh

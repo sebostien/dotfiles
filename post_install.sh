@@ -160,6 +160,13 @@ sudo dnf install code -y
 sudo dnf copr enable varlad/onefetch -y
 sudo dnf install onefetch -y
 
+####################################
+next_part "Installing tmux"
+####################################
+sudo dnf install tmux python3-tmuxp
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+####################################
 if ask "Install Rust toolchain?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

@@ -10,7 +10,7 @@
 # each instance of Alacritty. If it is not present, alacritty will
 # check the local terminfo database and use `alacritty` if it is
 # available, otherwise `xterm-256color` is used.
-# TERM: xterm-256color
+# TERM: screen-256color
 
 window:
   opacity: 1
@@ -395,7 +395,6 @@ mouse_bindings:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
 key_bindings:
-  # (Windows, Linux, and BSD only)
   - { key: V, mods: Control|Shift, action: Paste }
   - { key: C, mods: Control|Shift, action: Copy }
   - { key: Insert, mods: Shift, action: PasteSelection }
@@ -403,6 +402,4 @@ key_bindings:
   - { key: Equals, mods: Control, action: IncreaseFontSize }
   - { key: Plus, mods: Control, action: IncreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
-  - { key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt }
-  - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
 

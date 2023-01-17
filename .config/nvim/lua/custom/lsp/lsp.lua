@@ -15,6 +15,7 @@ require("mason-lspconfig").setup({
     "ruff_lsp",
   },
 })
+require("fidget").setup({}) -- Load status
 
 local K = require("custom.lsp.lsp_keymap")
 
@@ -64,20 +65,47 @@ require("mason-lspconfig").setup_handlers({
           completion = {
             callSnippet = "Replace",
           },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
         },
       },
     })
   end,
 
   ["rust_analyzer"] = function()
+    -- https://github.com/LunarVim/LunarVim/issues/2894
+    local path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
+    local codelldb_path = path .. "adapter/codelldb"
+    local liblldb_path = path .. "lldb/lib/liblldb.so"
+
+    if not vim.fn.filereadable(codelldb_path) or not vim.fn.filereadable(liblldb_path) then
+      local msg = "Either codelldb or liblldb is not readable."
+        .. "\n codelldb: "
+        .. codelldb_path
+        .. "\n liblldb: "
+        .. liblldb_path
+      vim.notify(msg, vim.log.levels.ERROR)
+    end
+
     local rt = require("rust-tools")
+
     rt.setup({
+      tools = {
+        executor = require("rust-tools.executors").termopen,
+      },
       server = {
         on_attach = function(client, bufnr)
           K.on_attach(client, bufnr)
           -- Popup list from rt
           vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, K.bufopts(bufnr, "Code actions"))
         end,
+      },
+      dap = {
+        adapter = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
       },
     })
   end,
@@ -131,7 +159,16 @@ require("mason-lspconfig").setup_handlers({
         K.on_attach(client, bufnr)
       end,
       capabilities = vim.lsp.protocol.make_client_capabilities(),
-      settings = {},
+      settings = {
+        texlab = {
+          rootDirectory = "./",
+          auxDirectory = "./out/",
+          build = {
+            executable = "latexmk",
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-auxdir=./out/", "%f" },
+          },
+        },
+      },
     })
   end,
 })

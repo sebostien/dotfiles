@@ -1,4 +1,3 @@
-
 -- Personal libraries
 import SN.EwwBar
 import SN.Globals
@@ -7,6 +6,7 @@ import SN.Layouts
 import SN.ScratchPad
 import SN.Theme
 
+-- Other
 import System.Directory (doesFileExist)
 import Data.Monoid (Endo)
 

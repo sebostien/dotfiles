@@ -102,8 +102,17 @@ return packer.startup(function(use)
 
   -- Telescope
   use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  })
+  use({
     "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/plenary.nvim" } },
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("telescope").setup({})
+
+      require("telescope").load_extension("fzf")
+    end,
   })
 
   -- Marks
@@ -116,8 +125,6 @@ return packer.startup(function(use)
           "^neo.tree$",
         },
       })
-
-      require("telescope").load_extension("harpoon")
     end,
   })
 
@@ -170,13 +177,16 @@ return packer.startup(function(use)
     "jose-elias-alvarez/null-ls.nvim", -- LSP config helper
     "simrat39/rust-tools.nvim", -- Rust-analyzer
     "MrcJkb/haskell-tools.nvim", -- Haskell
+    "mfussenegger/nvim-dap", -- Debugger
+    "j-hui/fidget.nvim", -- Show load status
   })
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
   -- Rust crates helper
   use({
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
-    requires = { { "nvim-lua/plenary.nvim" } },
+    requires = { "nvim-lua/plenary.nvim" },
     config = function()
       require("crates").setup()
     end,

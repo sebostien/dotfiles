@@ -61,11 +61,11 @@ null_ls.register(markdownlint)
 -- Spelling tools
 
 null_ls.disable("cspell")
-vim.keymap.set("n", "<localleader>sc", function()
+vim.keymap.set("n", "<localleader>cc", function()
   require("null-ls").toggle("cspell")
 end, { desc = "Toggle cspell" })
 
 null_ls.disable("proselint")
-vim.keymap.set("n", "<localleader>sp", function()
+vim.keymap.set("n", "<localleader>cp", function()
   require("null-ls").toggle("proselint")
 end, { desc = "Toggle proselint" })

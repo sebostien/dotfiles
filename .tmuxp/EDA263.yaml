@@ -1,0 +1,6 @@
+session_name: EDA263
+start_directory: ~/Documents/Chalmers/kurser/EDA263/
+windows:
+  - window_name: main
+    panes:
+      -

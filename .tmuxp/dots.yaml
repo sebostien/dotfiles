@@ -1,0 +1,19 @@
+session_name: dots
+start_directory: ~/.config/
+windows:
+  - window_name: \~
+    start_directory: ~/
+    panes:
+      -
+  - window_name: .config
+    start_directory: ~/.config/
+    panes:
+      -
+  - window_name: nvim
+    start_directory: ~/.config/nvim/
+    panes:
+      - vim init.lua
+  - window_name: xmonad
+    start_directory: ~/.config/xmonad/
+    panes:
+      - vim xmonad.hs

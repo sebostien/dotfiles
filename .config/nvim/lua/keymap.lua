@@ -39,10 +39,8 @@ keymap("n", "<localleader>ln", "<CMD>NullLsInfo<CR>", opt_sn)
 keymap("n", "<localleader>ps", "<CMD>PackerSync<CR>", opt_sn)
 keymap("n", "<localleader>pc", "<CMD>PackerCompile<CR>", opt_sn)
 
--- Undotree
+-- Toggles
 keymap("n", "<leader>tu", "<CMD>UndotreeToggle<CR>", opt_sn)
-
--- Syntax toggles
 keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
 keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
 

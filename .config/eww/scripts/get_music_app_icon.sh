@@ -15,4 +15,4 @@ status=$(
   | grep Playing | awk '{print $1}'
   )
 
-echo ${icons[$status]}
+echo "${icons[$status]}"

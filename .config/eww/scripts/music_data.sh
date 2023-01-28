@@ -1,47 +1,45 @@
 #!/bin/bash
 
 get_percent() {
-    echo $(playerctl -p playerctld metadata --format "{{ (position-0) / (mpris:length-0) }}")
+    playerctl -p playerctld metadata --format "{{ (position-0) / (mpris:length-0) }}"
 }
 
 # Download cover to /tmp/
 get_cover() {
- 
-    url=$(playerctl -p playerctld metadata --format "{{ mpris:artUrl }}")
+  url=$(playerctl -p playerctld metadata --format "{{ mpris:artUrl }}")
 
-    if [[ -z $url ]]; then
-        echo false
-        exit
+  if [[ -z $url ]]; then
+    echo false
+    exit
+  fi
+  
+  # File schema
+  if [[ "$url" == "file:///"* ]]; then
+    file=$url
+  else
+    # TODO: Only works with png (I'm only using spotify so this works)
+    file="/home/sn/.config/eww/album_covers/$(basename "$url").png"
+    # Keep local cache
+    if [[ ! -f $file ]]; then
+        # Add song to CSV
+        playerctl -p playerctld metadata --format "{{ mpris:artUrl }};|;{{ artist }};|;{{ album }};|;{{title}}" | sed 's:.*/::' >> /home/sn/.config/eww/album_covers/list.txt
+        wget --output-document "$file" "$url"
     fi
-    
-    # File schema
-    if [[ "$url" == "file:///"* ]] then
-        file=$url
-    else
-        # TODO: Only works with png (I'm only using spotify so this works)
-        file="/home/sn/.config/eww/album_covers/$(basename $url).png"
-        # Keep local cache
-        if [[ ! -f $file ]]; then
-            # Add song to CSV
-            $(playerctl -p playerctld metadata --format "{{ mpris:artUrl }};|;{{ artist }};|;{{ album }};|;{{title}}" | sed 's:.*/::' >> /home/sn/.config/eww/album_covers/list.txt)
-            notify-send "Download cover"
-            wget --output-document $file $url
-        fi
-    fi
+  fi
 
-    echo $file
+  echo "$file"
 }
 
 get_artist() {
-    echo $(playerctl -p playerctld metadata --format "{{ artist }}")
+  playerctl -p playerctld metadata --format "{{ artist }}"
 }
 
 get_title() {
-    echo $(playerctl -p playerctld metadata --format "{{ title }}")
+  playerctl -p playerctld metadata --format "{{ title }}"
 }
 
 get_album() {
-    echo $(playerctl -p playerctld metadata --format "{{ album }}")
+  playerctl -p playerctld metadata --format "{{ album }}"
 }
 
 if [[ "$1" == "percent" ]]; then

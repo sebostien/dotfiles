@@ -1,6 +1,6 @@
 #!/bin/bash
 
-eww close \
-    leftBar \
-	rightBar \
+eww close    \
+    leftBar  \
+    rightBar \
     laptopBar

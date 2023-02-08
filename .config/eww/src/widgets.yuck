@@ -49,7 +49,7 @@
         :label-text ""
         :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
       )
-      (power :desktop true)
+      (power)
     )
   )
 )
@@ -88,19 +88,19 @@
   (centerbox :orientation "h"
     (box :orientation "h"
       :space-evenly false
-      (date :desktop false)
+      (date :laptop true)
       (statContainer
-        :desktop false
+        :laptop true
         :label-text ""
         :text time
       )
       (statContainer
-        :desktop false
+        :laptop true
         :markup workspaces_listen
       )
     )
     (statContainer
-      :desktop false
+      :laptop true
       :text windowTitle
       :visible {windowTitle != ""}
     )
@@ -108,12 +108,17 @@
       :space-evenly false
       :halign "end"
       (statContainer
-        :desktop false
-        :label-text ""
-        :text "${round(brightness, 0)}%" 
+        :laptop true 
+        :label-text ""
+        :text locale
       )
       (statContainer
-        :desktop false
+        :laptop true
+        :label-text ""
+        :text "${round(brightness + 0, 0)}%" 
+      )
+      (statContainer
+        :laptop true
         :label-text "${
           EWW_BATTERY['BAT0'].status == 'Charging'
             ? ''
@@ -122,58 +127,58 @@
         :text "${EWW_BATTERY['BAT0'].capacity}%"
       )
       (statContainer
-        :desktop false
+        :laptop true
         :label-text { volume == "muted" ? "婢" : "" }
         :text { volume == "muted" ? "0%" : volume }
       )
       (statContainer
-        :desktop false
+        :laptop true
         :label-text ""
         :text {round(EWW_CPU.avg, 0) + "%"}
       )
       (statContainer
-        :desktop false
+        :laptop true
         :label-text ""
         :text {round(EWW_RAM.used_mem_perc, 0) + "%"}
       )
       (statContainer
-        :desktop false
+        :laptop true
         :label-text ""
         :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
       )
-      (power :desktop false)
+      (power :laptop true)
     )
   )
 )
 
-(defwidget statContainer [?label-text ?text ?markup ?visible ?desktop]
+(defwidget statContainer [?label-text ?text ?markup ?visible ?laptop]
   (box :orientation "h"
     :visible {visible ?: true}
     :space-evenly false
-    :class "stat-container-${desktop == false ? 'lt' : 'dt'} field"
+    :class "stat-container-${laptop == true ? 'lt' : 'dt'} field"
     (transform :translate-y "-2px"  :visible {label-text != ""}
       (label :class "label" :text label-text)
     )
     (label :class "normal" :text text :visible {text != ""} :limit-width 60)
-    (transform :translate-y "-1px"
+    (transform :translate-y "${laptop == true ? '0' : '-1'}px"
       (label :class "smaller" :markup markup :visible {markup != ""})
     )
     (children)
   )
 )
 
-(defwidget multiStatContainer [v1 label v2 ?desktop]
+(defwidget multiStatContainer [v1 label v2 ?laptop]
   (box :orientation "h"
     :space-evenly false
-    :class "multi-stat-container-${desktop == false ? 'lt' : 'dt'} field"
+    :class "multi-stat-container-${laptop == true ? 'lt' : 'dt'} field"
     (label :class "normal" :text v1)
     (label :class "label" :text label)
     (label :class "normal" :text v2)
   )
 )
 
-(defwidget date [?desktop]
-  (statContainer :desktop desktop :label-text "" :text date)
+(defwidget date [?laptop]
+  (statContainer :laptop laptop :label-text "" :text date)
 )
 
 (defwidget music_current []
@@ -189,13 +194,13 @@
 )
 
 (defvar show_power false)
-(defwidget power [desktop]
+(defwidget power [?laptop]
   (eventbox
     :onhover "eww update show_power=true"
     :onhoverlost "eww update show_power=false"
     (box
       :space-evenly false
-      :class "stat-container-${desktop ? 'dt' : 'lt'} field"
+      :class "stat-container-${laptop == true ? 'lt' : 'dt'} field"
       (revealer
         :transition "slideleft"
         :reveal show_power
@@ -208,7 +213,7 @@
         )
       )
       (transform
-        :translate-y "-2px"
+        :translate-y "${laptop == true ? '-1px' : '-2px'}"
         (button :class "large green" :tooltip "Shutdown" :onclick "shutdown now" "")
       )
     )

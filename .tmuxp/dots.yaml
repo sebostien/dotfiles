@@ -12,8 +12,8 @@ windows:
   - window_name: nvim
     start_directory: ~/.config/nvim/
     panes:
-      - vim init.lua
+      -
   - window_name: xmonad
     start_directory: ~/.config/xmonad/
     panes:
-      - vim xmonad.hs
+      -

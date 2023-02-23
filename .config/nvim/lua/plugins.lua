@@ -62,33 +62,6 @@ return packer.startup(function(use)
   -- Git
   use("tpope/vim-fugitive")
 
-  -- Cheatsheet
-  use({
-    "sudormrfbin/cheatsheet.nvim",
-
-    requires = {
-      { "nvim-telescope/telescope.nvim" },
-      { "nvim-lua/popup.nvim" },
-      { "nvim-lua/plenary.nvim" },
-    },
-
-    config = function()
-      require("cheatsheet").setup({
-        bundled_cheatsheets = {
-          disabled = {
-            "nerd-fonts",
-            "markdown",
-            "unicode",
-          },
-        },
-        telescope_mappings = {
-          ["<CR>"] = require("cheatsheet.telescope.actions").select_or_fill_commandline,
-          ["<C-E>"] = require("cheatsheet.telescope.actions").edit_user_cheatsheet,
-        },
-      })
-    end,
-  })
-
   -- Latex
   use("jakewvincent/texmagic.nvim")
 
@@ -202,9 +175,6 @@ return packer.startup(function(use)
 
   -- Task Runner
   use("stevearc/overseer.nvim")
-
-  -- Sessions
-  use("stevearc/resession.nvim")
 
   -- JSON SchemaStore
   use("b0o/schemastore.nvim")

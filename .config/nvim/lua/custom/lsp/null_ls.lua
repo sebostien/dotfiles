@@ -10,7 +10,6 @@ null_ls.setup({
     -- Formatting
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettier.with({ extra_args = {} }),
-    null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.ruff,
 
     -- Code actions
@@ -20,7 +19,9 @@ null_ls.setup({
 
     -- Diagnostics
     null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.cspell, -- Spellchecker, https://github.com/streetsidesoftware/cspell
+    null_ls.builtins.diagnostics.cspell.with({
+      extra_args = { "--config", "/home/sn/.config/nvim/cspell.json" },
+    }), -- Spellchecker, https://github.com/streetsidesoftware/cspell
     null_ls.builtins.diagnostics.proselint, -- Writing helper, https://github.com/amperser/proselint
   },
   on_attach = K.on_attach, -- Setup keymaps for client

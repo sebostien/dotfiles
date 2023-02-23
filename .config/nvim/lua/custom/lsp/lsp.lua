@@ -5,7 +5,7 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "sumneko_lua",
+    "lua_ls",
     "tsserver",
     "jsonls",
     "rust_analyzer",
@@ -51,9 +51,9 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
 
-  ["sumneko_lua"] = function()
+  ["lua_ls"] = function()
     require("neodev").setup()
-    require("lspconfig")["sumneko_lua"].setup({
+    require("lspconfig")["lua_ls"].setup({
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         K.on_attach(client, bufnr)
@@ -75,22 +75,7 @@ require("mason-lspconfig").setup_handlers({
   end,
 
   ["rust_analyzer"] = function()
-    -- https://github.com/LunarVim/LunarVim/issues/2894
-    local path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
-    local codelldb_path = path .. "adapter/codelldb"
-    local liblldb_path = path .. "lldb/lib/liblldb.so"
-
-    if not vim.fn.filereadable(codelldb_path) or not vim.fn.filereadable(liblldb_path) then
-      local msg = "Either codelldb or liblldb is not readable."
-        .. "\n codelldb: "
-        .. codelldb_path
-        .. "\n liblldb: "
-        .. liblldb_path
-      vim.notify(msg, vim.log.levels.ERROR)
-    end
-
     local rt = require("rust-tools")
-
     rt.setup({
       tools = {
         executor = require("rust-tools.executors").termopen,
@@ -101,11 +86,6 @@ require("mason-lspconfig").setup_handlers({
           -- Popup list from rt
           vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, K.bufopts(bufnr, "Code actions"))
         end,
-      },
-      dap = {
-        adapter = {
-          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
       },
     })
   end,
@@ -171,4 +151,26 @@ require("mason-lspconfig").setup_handlers({
       },
     })
   end,
+  ["ltex"] = function() end, -- Do not remove or the server starts twice. Se below
+})
+
+require("lspconfig")["ltex"].setup({
+  on_attach = K.on_attach,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  autostart = false,
+  settings = {
+    ltex = {
+      enabled = { "rust", "tex", "markdown", "md" },
+      ["ltex-ls"] = {
+        logLevel = "warning",
+      },
+      checkFrequency = "save",
+      language = "en-US",
+      additionalRules = {
+        languageModel = "/home/sn/LanguageTool/",
+        enablePickyRules = true,
+        motherTongue = "en",
+      },
+    },
+  },
 })

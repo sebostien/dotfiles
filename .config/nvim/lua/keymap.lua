@@ -65,10 +65,9 @@ keymap("n", "<localleader>fh", ":Telescope command_history<CR>", opt_sn)
 keymap("n", "<localleader>fcd", util.telescope_cd, opt_sn_desc("Change directory"))
 
 -- Help
-keymap("n", "<localleader>hh", ":Telescope help<CR>", opt_sn)
+keymap("n", "<localleader>hh", ":Telescope help_tags<CR>", opt_sn)
 keymap("n", "<localleader>hm", ":Telescope man_pages<CR>", opt_sn)
 keymap("n", "<localleader>hk", ":Telescope keymaps<CR>", opt_sn)
-keymap("n", "<localleader>hc", ":Cheatsheet<CR>", opt_sn)
 
 -- Move current line
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opt_sn)
@@ -106,8 +105,6 @@ keymap("n", "N", "Nzz", opt_sn)
 
 keymap("n", "Q", "<nop>", opt_sn)
 
--- TODO: Tmux sessionizer
--- keymap("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")
 local tmux = require("tmux-util")
 keymap("n", "<localleader>tn", tmux.new_session, opt_sn_desc("New tmux session"))
 

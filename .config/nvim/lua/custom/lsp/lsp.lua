@@ -158,9 +158,10 @@ require("lspconfig")["ltex"].setup({
   on_attach = K.on_attach,
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   autostart = false,
+  filetypes = { "rust", "tex", "markdown" },
   settings = {
     ltex = {
-      enabled = { "rust", "tex", "markdown", "md" },
+      enabled = { "rust", "tex", "markdown" },
       ["ltex-ls"] = {
         logLevel = "warning",
       },

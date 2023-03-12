@@ -22,6 +22,7 @@ local K = require("custom.lsp.lsp_keymap")
 -- Mapping from Mason name => lspconfig name
 -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 require("mason-lspconfig").setup_handlers({
+
   -- Default handler
   function(server_name)
     require("lspconfig")[server_name].setup({

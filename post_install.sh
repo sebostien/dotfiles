@@ -282,6 +282,12 @@ if ask "Install fonts?"; then
 
 fi
 
+########################################
+next_part "Setting default applications"
+########################################
+
+xdg-mime default org.pwmt.zathura.desktop application/pdf
+
 ####################################
 
 sudo dnf autoremove -y

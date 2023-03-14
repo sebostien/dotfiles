@@ -69,7 +69,8 @@ myManageHook = manageSpecific <+> namedScratchpadManageHook myScratchPads
 main :: IO ()
 main = do
   isDesktop <- doesFileExist "/home/sn/.is_desktop"
-  when isDesktop $ spawn "xmodmap -e 'keycode 117=' && xmodmap -e 'keycode 112='" -- Disable page-(up/down) cause they suck on laptop keyboard
+  when (not isDesktop) $ spawnOnce "xmodmap -e 'keycode 117='" -- Disable page-(up/down) on laptop
+  when (not isDesktop) $ spawnOnce "xmoadmap -e 'keycode 112='"
   spawn (makeMyKeyFile isDesktop)
   xmonad . withSB myStatusBar . docks $
     ewmh

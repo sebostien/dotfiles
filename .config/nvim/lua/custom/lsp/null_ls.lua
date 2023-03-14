@@ -10,18 +10,13 @@ null_ls.setup({
     -- Formatting
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettier.with({ extra_args = {} }),
-    null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.ruff,
 
     -- Code actions
     null_ls.builtins.code_actions.shellcheck,
-    null_ls.builtins.code_actions.cspell, -- Spellchecker, https://github.com/streetsidesoftware/cspell
-    null_ls.builtins.code_actions.proselint, -- Writing helper, https://github.com/amperser/proselint
 
     -- Diagnostics
     null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.cspell, -- Spellchecker, https://github.com/streetsidesoftware/cspell
-    null_ls.builtins.diagnostics.proselint, -- Writing helper, https://github.com/amperser/proselint
   },
   on_attach = K.on_attach, -- Setup keymaps for client
 })
@@ -57,15 +52,3 @@ local markdownlint = {
 }
 
 null_ls.register(markdownlint)
-
--- Spelling tools
-
-null_ls.disable("cspell")
-vim.keymap.set("n", "<localleader>cc", function()
-  require("null-ls").toggle("cspell")
-end, { desc = "Toggle cspell" })
-
-null_ls.disable("proselint")
-vim.keymap.set("n", "<localleader>cp", function()
-  require("null-ls").toggle("proselint")
-end, { desc = "Toggle proselint" })

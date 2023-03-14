@@ -12,7 +12,7 @@
       :height 720
       :hscroll false
       :vscroll true
-      (box ; TODO: Nested for-loops does not work
+      (box ; TODO: Nested for-loops not supported by yuck yet?
         :space-evenly false
         :orientation "v"
         (for app in {noti_history.apps}

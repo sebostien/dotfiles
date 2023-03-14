@@ -1,4 +1,5 @@
-set recolor true
+# Copy to clipboard
+set selection-clipboard clipboard
 
 set notification-error-bg       "#FC2929" 
 set notification-error-fg       "#18191E" 
@@ -36,5 +37,6 @@ set render-loading-bg           "#18191E"
 
 # Recolor mode settings
 
+set recolor true
 set recolor-lightcolor          "#0d1117" 
 set recolor-darkcolor           "#FAFAFA" 

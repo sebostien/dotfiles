@@ -25,41 +25,38 @@ keymap("n", "<C-Right>", "<CMD>vertical resize +5<CR>", opt_sn)
 -- Clear highlights
 keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opt_sn)
 
+-- Lsp Stuff
+keymap("n", "<leader>lr", "<CMD>LspRestart<CR><CMD>e<CR>", opt_sn_desc("Restart lsp servers"))
+keymap("n", "<leader>ls", "<CMD>LspStop<CR><CMD>lua vim.diagnostic.reset()<CR>", opt_sn_desc("Stop lsp servers"))
+keymap("n", "<localleader>ll", "<CMD>LspInfo<CR>", opt_sn)
+keymap("n", "<localleader>lm", "<CMD>Mason<CR>", opt_sn)
+keymap("n", "<localleader>ln", "<CMD>NullLsInfo<CR>", opt_sn)
+
 -- Marks
 keymap("n", "<localleader>ma", "<CMD>lua require('harpoon.mark').add_file() <CR>", opt_sn)
 keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu() <CR>", opt_sn)
 keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opt_sn)
 
--- Lsp Windows
-keymap("n", "<localleader>ll", "<CMD>LspInfo<CR>", opt_sn)
-keymap("n", "<localleader>lm", "<CMD>Mason<CR>", opt_sn)
-keymap("n", "<localleader>ln", "<CMD>NullLsInfo<CR>", opt_sn)
+-- Current buffer toggles
+keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
+keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
+
+-- UndoTree
+keymap("n", "<localleader>u", "<CMD>UndotreeToggle<CR>", opt_sn)
+
+-- Overseer
+keymap("n", "<localleader>ot", "<CMD>OverseerToggle<CR>", opt_sn)
+keymap("n", "<localleader>or", "<CMD>OverseerRun<CR>", opt_sn)
 
 -- Packer
 keymap("n", "<localleader>ps", "<CMD>PackerSync<CR>", opt_sn)
 keymap("n", "<localleader>pc", "<CMD>PackerCompile<CR>", opt_sn)
 
--- Toggles
-keymap("n", "<leader>tu", "<CMD>UndotreeToggle<CR>", opt_sn)
-keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
-keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
-
--- Sessions
-keymap("n", "<localleader>ss", "<CMD>lua require('resession').save() <CR>", opt_sn)
-keymap("n", "<localleader>sl", "<CMD>lua require('resession').load()<CR>", opt_sn)
-keymap("n", "<localleader>sd", "<CMD>lua require('resession').delete()<CR>", opt_sn)
-
--- Overseer
-keymap("n", "<localleader>rt", "<CMD>OverseerToggle<CR>", opt_sn)
-keymap("n", "<localleader>rr", "<CMD>OverseerRun<CR>", opt_sn)
-
--- Neotree
-keymap("n", "<localleader>fd", "<CMD>Neotree toggle filesystem position=left <CR>", opt_sn_desc("Open filesystem"))
-
 -- Git
 keymap("n", "<localleader>gs", "<CMD>Git<CR>", opt_sn_desc("Fugitive git status"))
 
--- Telescope
+-- Files and folders
+keymap("n", "<localleader>fd", "<CMD>Neotree toggle filesystem position=left <CR>", opt_sn_desc("Open filesystem"))
 keymap("n", "<localleader>ff", ":Telescope find_files<CR>", opt_sn)
 keymap("n", "<localleader>fg", ":Telescope git_files<CR>", opt_sn)
 keymap("n", "<localleader>ft", ":Telescope live_grep<CR>", opt_sn)
@@ -68,10 +65,9 @@ keymap("n", "<localleader>fh", ":Telescope command_history<CR>", opt_sn)
 keymap("n", "<localleader>fcd", util.telescope_cd, opt_sn_desc("Change directory"))
 
 -- Help
-keymap("n", "<localleader>hh", ":Telescope help<CR>", opt_sn)
+keymap("n", "<localleader>hh", ":Telescope help_tags<CR>", opt_sn)
 keymap("n", "<localleader>hm", ":Telescope man_pages<CR>", opt_sn)
 keymap("n", "<localleader>hk", ":Telescope keymaps<CR>", opt_sn)
-keymap("n", "<localleader>hc", ":Cheatsheet<CR>", opt_sn)
 
 -- Move current line
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opt_sn)
@@ -109,8 +105,6 @@ keymap("n", "N", "Nzz", opt_sn)
 
 keymap("n", "Q", "<nop>", opt_sn)
 
--- TODO: Tmux sessionizer
--- keymap("n", "<C-f>", "<CMD>silent !tmux neww tmux-sessionizer<CR>")
 local tmux = require("tmux-util")
 keymap("n", "<localleader>tn", tmux.new_session, opt_sn_desc("New tmux session"))
 

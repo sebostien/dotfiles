@@ -307,9 +307,6 @@ echo "Auth GitHub cli:"
 echo "    gh auth login"
 echo
 echo
-echo "Complete spotify installation"
-echo "    lpf update"
-echo
 echo "Finish setup of apps in ~/Apps/"
 echo
 echo "Please install these packages manually:"

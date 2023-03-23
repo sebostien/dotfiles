@@ -143,7 +143,8 @@ sudo dnf install neofetch flameshot fzf bat tldr \
     httpie alacritty exa rofi nitrogen \
     nautilus dunst neovim playerctl \
     vlc qalculate-gtk btop \
-    ripgrep fd-find trayer -y -q
+    ripgrep fd-find trayer aria2 \
+    -y -q
 
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
 

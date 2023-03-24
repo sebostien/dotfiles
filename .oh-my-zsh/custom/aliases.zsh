@@ -17,11 +17,19 @@ alias docs="cd ~/Documents"
 alias vim="nvim"
 
 # Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
+if hash exa 2>/dev/null; then
+  alias ls='exa -al --color=always --group-directories-first'
+  alias lg='exa -al --group-directories-first --git' # Git status
+  alias lgi='exa -al --group-directories-first --gitignore --git' # Obey gitignore
+  alias l.='exa -a | egrep "^\."' # dotfiles
+
+  alias lt='exa -aT --color=always --level=2 --group-directories-first' # tree listing
+  alias llt='exa -aT --color=always --level=4 --group-directories-first' # more depth tree listing
+else
+  alias l='ls -lah'
+  alias ll='ls -alF'
+  alias la='ls -A'
+fi
 
 # Colorize grep output
 alias grep='grep --color=auto'
@@ -40,6 +48,3 @@ alias kal="cal -ymw"
 
 # Weather
 alias weather="curl wttr.in"
-
-# LazyGit
-alias lg="lazygit"

@@ -10,9 +10,7 @@
   "playerctl --player=playerctld --follow metadata --format '{{ artist }} - {{ title }}'"
 )
 
-(defpoll locale :interval "3s"
-  "localectl status | grep Keymap | awk '{print $3}'"
-)
+(defvar locale "us")
 
 (defpoll battery_icon :interval "1m"
   "./scripts/battery.sh"

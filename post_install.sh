@@ -163,6 +163,8 @@ sudo dnf install \
   trayer     \ # System tray
   aria2      \ # Downloader, FTP, BitTorrent, etc,.
   hyperfine  \ # Command-line benchmarks
+  docker     \ # Docker
+  docker-compose \ # Compose support
 
 # ffmpeg stuff
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
@@ -184,9 +186,10 @@ if ask "Install Rust toolchain and Rust tools?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-    cargo install fclones # Duplicate file finder
-    cargo install fselect # Find with SQL syntax
-    cargo install kalker  # CLI Calculator
+    cargo install fclones    # Duplicate file finder
+    cargo install fselect    # Find with SQL syntax
+    cargo install kalker     # CLI Calculator
+    cargo install flamegraph # Flamegraph generator
 fi
 
 if ask "Install Node toolchain?"; then

@@ -138,13 +138,35 @@ sudo dnf install gh -y
 # Applets
 sudo dnf install -y network-manager-applet blueman
 
-# Some packages i use
-sudo dnf install neofetch flameshot fzf bat tldr \
-    httpie alacritty exa rofi nitrogen \
-    nautilus dunst neovim playerctl \
-    vlc qalculate-gtk btop \
-    ripgrep fd-find trayer -y -q
+# Some packages i use, some mor installed with cargo below
+sudo dnf install \
+  -y -q      \
+  neofetch   \ # CL system information
+  flameshot  \ # Screenshot tool
+  fzf        \ # Fuzzy finder
+  bat        \ # cat with colors
+  tealdeer   \ # TLDR client
+  httpie     \ # HTTP client
+  alacritty  \ # Terminal emulator
+  exa        \ # Faster ls
+  rofi       \ # App launcher
+  nitrogen   \ # Wallpaper
+  nautilus   \ # File manager
+  ranger     \ # CLI File manager
+  dunst      \ # Notification-daemon
+  neovim     \ # Editor
+  playerctl  \ # Control players with MPRIS D-Bus
+  vlc        \ # Media player
+  btop       \ # Better htop
+  ripgrep    \ # Faster grep
+  fd-find    \ # Faster find
+  trayer     \ # System tray
+  aria2      \ # Downloader, FTP, BitTorrent, etc,.
+  hyperfine  \ # Command-line benchmarks
+  docker     \ # Docker
+  docker-compose \ # Compose support
 
+# ffmpeg stuff
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
 
 # Pipewire
@@ -153,13 +175,6 @@ sudo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjack
 # Pip
 sudo dnf install python3-pip -y
 
-# VS Code
-sudo dnf install code -y
-
-# onefetch: git info tool
-sudo dnf copr enable varlad/onefetch -y
-sudo dnf install onefetch -y
-
 ####################################
 next_part "Installing tmux"
 ####################################
@@ -167,12 +182,17 @@ sudo dnf install tmux python3-tmuxp
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ####################################
-if ask "Install Rust toolchain?"; then
+if ask "Install Rust toolchain and Rust tools?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+    cargo install fclones    # Duplicate file finder
+    cargo install fselect    # Find with SQL syntax
+    cargo install kalker     # CLI Calculator
+    cargo install flamegraph # Flamegraph generator
 fi
 
-if ask "Install Node and Node toolchain?"; then
+if ask "Install Node toolchain?"; then
     # nvm, node, npm, yarn
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     . ~/.nvm/nvm.sh # Load nvm
@@ -226,7 +246,7 @@ if ask "Install picom dependencies?"; then
 fi
 
 ####################################
-if ask "Download Eww?"; then
+if ask "Install Eww?"; then
 
     cd ~/Apps || exit 1
 
@@ -235,6 +255,11 @@ if ask "Download Eww?"; then
         cairo-devel cairo-gobject-devel glib2-devel
 
     git clone https://github.com/elkowar/eww
+    cd ~/Apps/eww/ || exit 1
+    cargo build --release
+    cd ~/Apps/eww/target/release/ || exit 1
+    chmod +x ~/Apps/eww/target/release/eww
+    sudo ln -s /home/sn/Apps/eww/target/release/eww /usr/bin/eww
 
     cd ~/install_tmp || exit 1
 fi
@@ -311,7 +336,7 @@ echo "Finish setup of apps in ~/Apps/"
 echo
 echo "Please install these packages manually:"
 echo
-echo "Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
+echo "    Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
 echo
 echo "Setup your window manager"
 echo

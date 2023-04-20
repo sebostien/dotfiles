@@ -10,7 +10,7 @@ null_ls.setup({
     -- Formatting
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettier.with({ extra_args = {} }),
-    null_ls.builtins.formatting.ruff,
+    null_ls.builtins.formatting.black,
 
     -- Code actions
     null_ls.builtins.code_actions.shellcheck,

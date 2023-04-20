@@ -12,7 +12,7 @@ require("mason-lspconfig").setup({
     "eslint",
     "marksman",
     "texlab",
-    "ruff_lsp",
+    "pyright",
   },
 })
 require("fidget").setup({}) -- Load status

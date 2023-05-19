@@ -147,7 +147,6 @@ sudo dnf install \
   bat        \ # cat with colors
   tealdeer   \ # TLDR client
   httpie     \ # HTTP client
-  alacritty  \ # Terminal emulator
   exa        \ # Faster ls
   rofi       \ # App launcher
   nitrogen   \ # Wallpaper
@@ -252,7 +251,7 @@ if ask "Install Eww?"; then
 
     # Eww Widgets dependencies
     sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
-        cairo-devel cairo-gobject-devel glib2-devel
+        cairo-devel cairo-gobject-devel glib2-devel gtk-layer-shell-devel
 
     git clone https://github.com/elkowar/eww
     cd ~/Apps/eww/ || exit 1
@@ -331,6 +330,7 @@ echo
 echo "Please install these packages manually:"
 echo
 echo "    Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
+echo "    Wez's term       --> https://wezfurlong.org/wezterm/install/source.html#installing-from-source"
 echo
 echo "Setup your window manager"
 echo

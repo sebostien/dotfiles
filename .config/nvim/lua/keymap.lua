@@ -38,8 +38,9 @@ keymap("n", "<localleader>ms", "<CMD>lua require('harpoon.ui').toggle_quick_menu
 keymap("n", "<localleader>mf", "<CMD>Telescope harpoon marks<CR>", opt_sn)
 
 -- Current buffer toggles
-keymap("n", "<localleader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
-keymap("n", "<localleader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
+keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
+keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
+keymap("n", "<leader>tl", require("lsp_lines").toggle, opt_sn_desc("Toggle lsp lines"))
 
 -- UndoTree
 keymap("n", "<localleader>u", "<CMD>UndotreeToggle<CR>", opt_sn)
@@ -53,22 +54,22 @@ keymap("n", "<localleader>gs", "<CMD>Git<CR>", opt_sn_desc("Fugitive git status"
 
 -- Files and folders
 keymap("n", "<localleader>fd", "<CMD>Neotree toggle filesystem position=left <CR>", opt_sn_desc("Open filesystem"))
-keymap("n", "<localleader>ff", ":Telescope find_files<CR>", opt_sn)
-keymap("n", "<localleader>fg", ":Telescope git_files<CR>", opt_sn)
-keymap("n", "<localleader>ft", ":Telescope live_grep<CR>", opt_sn)
-keymap("n", "<localleader>fb", ":Telescope buffers<CR>", opt_sn)
-keymap("n", "<localleader>fh", ":Telescope command_history<CR>", opt_sn)
+keymap("n", "<localleader>ff", "<CMD>Telescope find_files<CR>", opt_sn)
+keymap("n", "<localleader>fg", "<CMD>Telescope git_files<CR>", opt_sn)
+keymap("n", "<localleader>ft", "<CMD>Telescope live_grep<CR>", opt_sn)
+keymap("n", "<localleader>fb", "<CMD>Telescope buffers<CR>", opt_sn)
+keymap("n", "<localleader>fh", "<CMD>Telescope command_history<CR>", opt_sn)
 keymap("n", "<localleader>fcd", util.telescope_cd, opt_sn_desc("Change directory"))
 
 -- Open files
 keymap("n", "<localleader>op", function()
-  util.telescope_files({"%.pdf"}, "zathura")
+  util.telescope_files({ "%.pdf" }, "zathura")
 end, opt_sn_desc("Open file in zathura"))
 
 -- Help
-keymap("n", "<localleader>hh", ":Telescope help_tags<CR>", opt_sn)
-keymap("n", "<localleader>hm", ":Telescope man_pages<CR>", opt_sn)
-keymap("n", "<localleader>hk", ":Telescope keymaps<CR>", opt_sn)
+keymap("n", "<localleader>hh", "<CMD>Telescope help_tags<CR>", opt_sn)
+keymap("n", "<localleader>hm", "<CMD>Telescope man_pages<CR>", opt_sn)
+keymap("n", "<localleader>hk", "<CMD>Telescope keymaps<CR>", opt_sn)
 
 -- Move current line
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opt_sn)

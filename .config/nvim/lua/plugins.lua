@@ -1,21 +1,26 @@
 -------------------------------------------------
 -------------------- Plugins --------------------
 -------------------------------------------------
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
-  print("Installing packer close and reopen Neovim...")
-  vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
+
+local PACKER_BOOTSTRAP = ensure_packer()
+
+-- Recompile packer if this file is updated
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -87,6 +92,9 @@ return packer.startup(function(use)
       require("telescope").load_extension("fzf")
     end,
   })
+
+  -- Make stuff prettier
+  use({ "stevearc/dressing.nvim" })
 
   -- Marks
   use({
@@ -165,6 +173,16 @@ return packer.startup(function(use)
     end,
   })
 
+  -- Diagnostics on sepereate lines
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      require("lsp_lines").toggle()
+      -- vim.diagnostics.config({ virtual_lines = false })
+    end,
+  })
+
   -- Autopairs
   use({
     "windwp/nvim-autopairs",
@@ -172,9 +190,6 @@ return packer.startup(function(use)
       require("nvim-autopairs").setup({})
     end,
   })
-
-  -- Task Runner
-  use("stevearc/overseer.nvim")
 
   -- JSON SchemaStore
   use("b0o/schemastore.nvim")
@@ -266,6 +281,7 @@ return packer.startup(function(use)
       })
     end,
   })
+
   -- Debugging startup
   use("dstein64/vim-startuptime")
 

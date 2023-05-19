@@ -70,6 +70,7 @@ main :: IO ()
 main = do
   isDesktop <- doesFileExist "/home/sn/.is_desktop"
   spawn (makeMyKeyFile isDesktop)
+  spawn ("xsetroot -cursor_name left_ptr") -- Default cursor
   xmonad . withSB myStatusBar . docks $
     ewmh
       def

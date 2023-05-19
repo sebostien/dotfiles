@@ -8,9 +8,11 @@ null_ls.setup({
   border = "rounded",
   sources = {
     -- Formatting
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.prettier.with({ extra_args = {} }),
-    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.stylua, -- Lua
+    null_ls.builtins.formatting.prettier.with({ extra_args = {} }), -- Js, Ts, Json
+    null_ls.builtins.formatting.black, -- Python
+    null_ls.builtins.formatting.beautysh, -- Bash
+    null_ls.builtins.formatting.sqlfmt, -- SQL
 
     -- Code actions
     null_ls.builtins.code_actions.shellcheck,

@@ -1,44 +1,79 @@
-return function(config)
-	local wezterm = require("wezterm")
-	local act = wezterm.action
+local wezterm = require("wezterm")
+local act = wezterm.action
+local promptWorkspaces = require("workspaces")
 
+return function(config)
 	config.disable_default_key_bindings = true
 	config.warn_about_missing_glyphs = false
 
+	config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 60 * 1000 }
 	config.keys = {
-		{ key = "l", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
-		{ key = "L", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
-		{ key = "p", mods = "SHIFT|CTRL", action = act.ActivateCommandPalette },
-		{ key = "P", mods = "SHIFT|CTRL", action = act.ActivateCommandPalette },
-		{ key = "r", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },
-		{ key = "R", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },
+		{ key = "o", mods = "LEADER", action = act.ShowDebugOverlay },
+		{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
+		{ key = "r", mods = "LEADER", action = act.ReloadConfiguration },
+		-- { key = "a", mods = "LEADER", action = act.AttachDomain("unix") },
 
 		-- Tabs
 		{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
-		{ key = "Tab", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
-		{ key = "t", mods = "SHIFT|CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-		{ key = "T", mods = "SHIFT|CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-		{ key = "w", mods = "SHIFT|CTRL", action = act.CloseCurrentTab({ confirm = true }) },
-		{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentTab({ confirm = true }) },
+		{ key = "t", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+		{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+		{ key = "1", mods = "LEADER", action = act.ActivateTab(0) },
+		{ key = "2", mods = "LEADER", action = act.ActivateTab(1) },
+		{ key = "3", mods = "LEADER", action = act.ActivateTab(2) },
+		{ key = "4", mods = "LEADER", action = act.ActivateTab(3) },
+		{ key = "5", mods = "LEADER", action = act.ActivateTab(4) },
+		{ key = "6", mods = "LEADER", action = act.ActivateTab(5) },
+		{ key = "7", mods = "LEADER", action = act.ActivateTab(6) },
+		{ key = "8", mods = "LEADER", action = act.ActivateTab(7) },
+		{ key = "9", mods = "LEADER", action = act.ActivateTab(8) },
+
+		-- Panes
+		{ key = "h", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ key = "j", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ key = "k", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ key = "l", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+		{ key = "H", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Left", 10 } }) },
+		{ key = "J", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Down", 10 } }) },
+		{ key = "K", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Up", 10 } }) },
+		{ key = "L", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Right", 10 } }) },
+		{
+			key = "v",
+			mods = "LEADER",
+			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+		},
+		{
+			key = '"',
+			mods = "LEADER|SHIFT",
+			action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
+		},
 
 		-- Font size
-		{ key = ")", mods = "SHIFT|CTRL", action = act.ResetFontSize },
-		{ key = "0", mods = "SHIFT|CTRL", action = act.ResetFontSize },
+		{ key = "0", mods = "CTRL", action = act.ResetFontSize },
 		{ key = "=", mods = "CTRL", action = act.IncreaseFontSize },
 		{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
 
 		-- Clipboard
 		{ key = "C", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
 		{ key = "V", mods = "SHIFT|CTRL", action = act.PasteFrom("Clipboard") },
-		{ key = "X", mods = "SHIFT|CTRL", action = act.ActivateCopyMode },
+		{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
+
+		-- Workspaces
+		{ key = "s", mods = "LEADER", action = act.ShowLauncherArgs({
+			flags = "FUZZY|WORKSPACES",
+		}) },
+		{
+			key = "w",
+			mods = "LEADER",
+			action = wezterm.action_callback(promptWorkspaces),
+		},
 
 		-- Other
 		{
 			key = "u",
-			mods = "SHIFT|CTRL",
+			mods = "LEADER",
 			action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
 		},
-		{ key = "F", mods = "SHIFT|CTRL", action = act.Search({ CaseInSensitiveString = "" }) },
+		{ key = "f", mods = "LEADER", action = act.Search({ CaseInSensitiveString = "" }) },
 	}
 
 	config.key_tables = {
@@ -87,7 +122,7 @@ return function(config)
 
 		search_mode = {
 			{ key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
-			{ key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
+			{ key = "N", mods = "CTRL", action = act.CopyMode("NextMatch") },
 			{ key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
 			{ key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
 			{ key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },

@@ -3,7 +3,6 @@ import SN.EwwBar
 import SN.Globals
 import SN.Keys
 import SN.Layouts
-import SN.ScratchPad
 import SN.Theme
 
 -- Other
@@ -49,7 +48,7 @@ myStartupHook = do
 -- and click on the client you're interested in.
 --
 myManageHook :: XMonad.Query (Endo WindowSet)
-myManageHook = manageSpecific <+> namedScratchpadManageHook myScratchPads
+myManageHook = manageSpecific
  where
   manageSpecific =
     composeAll
@@ -77,6 +76,7 @@ main :: IO ()
 main = do
   isDesktop <- doesFileExist "/home/sn/.is_desktop"
   spawn (makeMyKeyFile isDesktop)
+  spawn ("xsetroot -cursor_name left_ptr") -- Default cursor
   xmonad . withSB myStatusBar . docks $
     ewmh
       def

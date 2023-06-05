@@ -4,9 +4,9 @@
 # |\   ____\|\   ___  \      Sebastian Nielsen (sebostien)
 # \ \  \___|\ \  \\ \  \     http://www.github.com/sebostien/
 #  \ \_____  \ \  \\ \  \
-#   \|____|\  \ \  \\ \  \
-#     ____\_\  \ \__\\ \__\
-#    |\_________\|__| \|__|
+    #   \|____|\  \ \  \\ \  \
+    #     ____\_\  \ \__\\ \__\
+    #    |\_________\|__| \|__|
 #    \|_________|
 #
 
@@ -35,8 +35,8 @@ ask() {
     fi
 
     case "$reply" in
-    Y* | y*) return 0 ;;
-    *) return 1 ;;
+        Y* | y*) return 0 ;;
+        *) return 1 ;;
     esac
 }
 
@@ -140,31 +140,30 @@ sudo dnf install -y network-manager-applet blueman
 
 # Some packages i use, some mor installed with cargo below
 sudo dnf install \
-  -y -q      \
-  neofetch   \ # CL system information
-  flameshot  \ # Screenshot tool
-  fzf        \ # Fuzzy finder
-  bat        \ # cat with colors
-  tealdeer   \ # TLDR client
-  httpie     \ # HTTP client
-  alacritty  \ # Terminal emulator
-  exa        \ # Faster ls
-  rofi       \ # App launcher
-  nitrogen   \ # Wallpaper
-  nautilus   \ # File manager
-  ranger     \ # CLI File manager
-  dunst      \ # Notification-daemon
-  neovim     \ # Editor
-  playerctl  \ # Control players with MPRIS D-Bus
-  vlc        \ # Media player
-  btop       \ # Better htop
-  ripgrep    \ # Faster grep
-  fd-find    \ # Faster find
-  trayer     \ # System tray
-  aria2      \ # Downloader, FTP, BitTorrent, etc,.
-  hyperfine  \ # Command-line benchmarks
-  docker     \ # Docker
-  docker-compose \ # Compose support
+    -y -q      \
+    neofetch   \ # CL system information
+flameshot  \ # Screenshot tool
+fzf        \ # Fuzzy finder
+bat        \ # cat with colors
+tealdeer   \ # TLDR client
+httpie     \ # HTTP client
+exa        \ # Faster ls
+rofi       \ # App launcher
+nitrogen   \ # Wallpaper
+nautilus   \ # File manager
+ranger     \ # CLI File manager
+dunst      \ # Notification-daemon
+neovim     \ # Editor
+playerctl  \ # Control players with MPRIS D-Bus
+vlc        \ # Media player
+btop       \ # Better htop
+ripgrep    \ # Faster grep
+fd-find    \ # Faster find
+trayer     \ # System tray
+aria2      \ # Downloader, FTP, BitTorrent, etc,.
+hyperfine  \ # Command-line benchmarks
+docker     \ # Docker
+docker-compose \ # Compose support
 
 # ffmpeg stuff
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
@@ -252,7 +251,7 @@ if ask "Install Eww?"; then
 
     # Eww Widgets dependencies
     sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
-        cairo-devel cairo-gobject-devel glib2-devel
+        cairo-devel cairo-gobject-devel glib2-devel gtk-layer-shell-devel
 
     git clone https://github.com/elkowar/eww
     cd ~/Apps/eww/ || exit 1
@@ -337,6 +336,7 @@ echo
 echo "Please install these packages manually:"
 echo
 echo "    Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
+echo "    Wez's term       --> https://wezfurlong.org/wezterm/install/linux.html#installing-on-fedora-and-rpm-based-systems"
 echo
 echo "Setup your window manager"
 echo

@@ -37,4 +37,38 @@ M.telescope_cd = function()
     :find()
 end
 
+M.telescope_files = function(extensions, command)
+  local opts = {}
+  local dirs = table.concat(settings.project_dirs, " ")
+
+  local pwd = vim.fn.getcwd()
+  local all = vim.fn.system("find " .. dirs .. " " .. pwd .. " -mindepth 1 -maxdepth 3")
+  local results = {}
+  for f in string.gmatch(all, "([^\n]*)\n?") do
+    for _, ext in ipairs(extensions) do
+      if string.match(f, ext .. "$") then
+        table.insert(results, f)
+      end
+    end
+  end
+
+  pickers
+    .new(opts, {
+      prompt_title = "Select file",
+      finder = finders.new_table({
+        results = results,
+      }),
+      sorter = conf.generic_sorter(opts),
+      attach_mappings = function(promt_bufnr)
+        actions.select_default:replace(function()
+          actions.close(promt_bufnr)
+          local selection = action_state.get_selected_entry()
+          vim.fn.system(command .. " " .. selection[1] .. " &")
+        end)
+        return true
+      end,
+    })
+    :find()
+end
+
 return M

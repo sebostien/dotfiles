@@ -20,7 +20,9 @@ import XMonad.Util.NamedScratchpad (namedScratchpadManageHook)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 ------------------------------------------------------------------------
+
 -- | Startup| ----------------------------------------------------------
+
 ------------------------------------------------------------------------
 
 myStartupHook :: X ()
@@ -36,7 +38,9 @@ myStartupHook = do
   spawnOnce mySysTray
 
 ------------------------------------------------------------------------
+
 -- | Window rules | ----------------------------------------------------
+
 ------------------------------------------------------------------------
 --
 -- To find the property name associated with a program, use

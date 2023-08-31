@@ -88,6 +88,7 @@ myNamedKeys isDesktop
         "Screenshot"
         [ ("<Print>", "Screenshot entire screen", spawn "flameshot screen -c")
         , ("C-<Print>", "Screenshot region", spawn "flameshot gui -d 2000")
+        , ("M-S-s", "Screenshot region", spawn "flameshot gui -d 2000")
         ]
     , KeySection
         "Media"

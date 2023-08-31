@@ -1,15 +1,13 @@
-#!/home/sn/.nvm/versions/node/v19.0.1/bin/node
+#!/home/sn/.nvm/versions/node/v18.16.0/bin/node
 
 const { exec } = require("child_process");
 
 const iconMap = {
-  "Firefox": "",
-  "discord": "ﭮ",
-
-}
+  Firefox: "",
+  discord: "ﭮ",
+};
 
 const mergeObject = (arr) => {
-
   const data = {
     apps: [],
     data: {},
@@ -24,11 +22,11 @@ const mergeObject = (arr) => {
       };
     }
 
-    data.data[row.appname.data].data.push(row);
+    data.data[row.appname.data].data.push(`${row.message.data}`);
   }
 
   return data;
-}
+};
 
 exec("dunstctl history", (error, stdout, stderr) => {
   if (error) {
@@ -41,6 +39,5 @@ exec("dunstctl history", (error, stdout, stderr) => {
   }
 
   const data = JSON.parse(stdout);
-
   console.log(JSON.stringify(mergeObject(data.data[0]), null, 2));
 });

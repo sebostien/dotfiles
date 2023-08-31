@@ -103,7 +103,7 @@ return {
   {
     "MrcJkb/haskell-tools.nvim",
     dependencies = {
-      'nvim-telescope/telescope.nvim', -- Optional
+      'nvim-telescope/telescope.nvim',
     },
     branch = "2.x.x",
     config = function()
@@ -122,6 +122,9 @@ return {
   -- LSP-Config --
   {
     "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim"
+    },
     opts = {
       ensure_installed = {
         "lua_ls",

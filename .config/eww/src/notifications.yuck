@@ -9,30 +9,30 @@
     :class "noti-box"
     (label :class "noti-title" :text "Notifications")
     (scroll
-      :height 720
+      :class "noti-scroll"
+      :space-evenly false
       :hscroll false
       :vscroll true
-      (box ; TODO: Nested for-loops not supported by yuck yet?
+      (box
         :space-evenly false
         :orientation "v"
         (for app in {noti_history.apps}
           (box
-            (for entry in {noti_history.apps}
-              (label :text {entry.icon}) 
+            :class "noti-child-cont"
+            :orientation "v"
+            :space-evenly false
+            :vexpand true
+            :valign "start"
+            (for entry in {noti_history.data[app].data}
+              (box
+                :class "noti-child-cont"
+                :orientation "v"
+                (label :xalign 0 :class "noti-child-title" :text {app})
+                (label :xalign 0 :markup {entry} :wrap true)
+              )
             )
           )
         )
-        ; (for entry in {noti_history.data.discord.data}
-        ;   (box :class "noti-child-cont"
-        ;     :orientation "v"
-        ;     :space-evenly false
-        ;     :vexpand false
-        ;     :hexpand false
-        ;     :valign "start"
-        ;     (label :class "noti-child-title" :xalign 0 :text {entry.summary.data} :wrap true)
-        ;     (label :xalign 0 :markup {entry.message.data} :wrap true)
-        ;   )
-        ; )
       )
     )
   )

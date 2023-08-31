@@ -1,13 +1,14 @@
 local settings = require("settings")
+
+local M = {}
+
+M.telescope_cd = function()
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 
-local M = {}
-
-M.telescope_cd = function()
   local opts = {}
   local dirs = table.concat(settings.project_dirs, " ")
 
@@ -38,6 +39,12 @@ M.telescope_cd = function()
 end
 
 M.telescope_files = function(extensions, command)
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local conf = require("telescope.config").values
+
   local opts = {}
   local dirs = table.concat(settings.project_dirs, " ")
 

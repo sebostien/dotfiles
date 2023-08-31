@@ -1,7 +1,8 @@
-local o = vim.o
-local M = {}
+local M = {
+  project_dirs = { "~/", "~/Documents/", "~/.config", "~/Desktop/" }
+}
 
-M.project_dirs = { "~/", "~/Documents/", "~/.config", "~/Desktop/" }
+local o = vim.o
 
 o.guifont = "Hasklug NF"
 o.termguicolors = true -- Correct terminal colors

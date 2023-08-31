@@ -23,7 +23,7 @@ return function()
 		local cells = {}
 
 		local cwd_uri = pane:get_current_working_dir()
-		table.insert(cells, cwd_uri)
+		-- table.insert(cells, cwd_uri)
 		if cwd_uri then
 			cwd_uri = cwd_uri:sub(8)
 			local slash = cwd_uri:find("/")

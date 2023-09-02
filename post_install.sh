@@ -4,9 +4,9 @@
 # |\   ____\|\   ___  \      Sebastian Nielsen (sebostien)
 # \ \  \___|\ \  \\ \  \     http://www.github.com/sebostien/
 #  \ \_____  \ \  \\ \  \
-    #   \|____|\  \ \  \\ \  \
-    #     ____\_\  \ \__\\ \__\
-    #    |\_________\|__| \|__|
+#   \|____|\  \ \  \\ \  \
+#     ____\_\  \ \__\\ \__\
+#    |\_________\|__| \|__|
 #    \|_________|
 #
 
@@ -138,32 +138,55 @@ sudo dnf install gh -y
 # Applets
 sudo dnf install -y network-manager-applet blueman
 
-# Some packages i use, some mor installed with cargo below
-sudo dnf install \
-    -y -q      \
-    neofetch   \ # CL system information
-flameshot  \ # Screenshot tool
-fzf        \ # Fuzzy finder
-bat        \ # cat with colors
-tealdeer   \ # TLDR client
-httpie     \ # HTTP client
-exa        \ # Faster ls
-rofi       \ # App launcher
-nitrogen   \ # Wallpaper
-nautilus   \ # File manager
-ranger     \ # CLI File manager
-dunst      \ # Notification-daemon
-neovim     \ # Editor
-playerctl  \ # Control players with MPRIS D-Bus
-vlc        \ # Media player
-btop       \ # Better htop
-ripgrep    \ # Faster grep
-fd-find    \ # Faster find
-trayer     \ # System tray
-aria2      \ # Downloader, FTP, BitTorrent, etc,.
-hyperfine  \ # Command-line benchmarks
-docker     \ # Docker
-docker-compose \ # Compose support
+# Some packages I use, some more installed with cargo below
+# sudo dnf install -y -q \
+#   # CL system information
+#   neofetch   \ 
+#   # Screenshot tool
+#   flameshot  \ 
+#   # Fuzzy finder
+#   fzf        \ 
+#   # cat with colors
+#   bat        \ 
+#   # TLDR client
+#   tealdeer   \ 
+#   # HTTP client
+#   httpie     \ 
+#   # Faster ls
+#   exa        \ 
+#   # App launcher
+#   rofi       \ 
+#   # Wallpaper
+#   nitrogen   \ 
+#   # File manager
+#   nautilus   \ 
+#   # CLI File manager
+#   ranger     \ 
+#   # Notification-daemon
+#   dunst      \ 
+#   # Editor
+#   neovim     \ 
+#   # Control players with MPRIS D-Bus
+#   playerctl  \ 
+#   # Media player
+#   vlc        \ 
+#   # Better htop
+#   btop       \ 
+#   # Faster grep
+#   ripgrep    \ 
+#   # Faster find
+#   fd-find    \ 
+#   # System tray
+#   trayer     \ 
+#   # Downloader, FTP, BitTorrent, etc,.
+#   aria2      \ 
+#   # Command-line benchmarks
+#   hyperfine  \ 
+#   # Docker
+#   docker     \
+#   # Compose support
+#   docker-compose
+
 
 # ffmpeg stuff
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y

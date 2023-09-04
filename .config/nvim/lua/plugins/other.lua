@@ -36,9 +36,17 @@ return {
   -- Autopairs
   {
     "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+    }
+  },
+
+  -- Shortcuts for surrounding
+  {
+    'echasnovski/mini.surround',
+    version = '*',
+    opts = {}
   },
 
   -- Highlight word under cursor
@@ -50,7 +58,9 @@ return {
         under_cursor = false,
         min_count_to_highlight = 2,
       })
-      il.pause()
     end,
+    keys = {
+      "<leader>ti", "<CMD>IlluminateToggle<CR>", desc = "Toggle word highlight"
+    },
   },
 }

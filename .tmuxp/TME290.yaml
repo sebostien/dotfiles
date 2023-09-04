@@ -1,9 +1,0 @@
-session_name: TME290
-start_directory: ~/Documents/Chalmers/kurser/TME290
-windows:
-  - window_name: vim
-    panes:
-      - vim
-  - window_name: other
-    panes:
-      - task project:DAT405

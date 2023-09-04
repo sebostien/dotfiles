@@ -30,7 +30,6 @@ keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opt_sn)
 
 -- Current buffer toggles
 keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
-keymap("n", "<leader>ti", "<CMD>IlluminateToggle<CR>", opt_sn)
 -- keymap("n", "<leader>tl", require("lsp_lines").toggle, opt_sn_desc("Toggle lsp lines"))
 
 -- UndoTree

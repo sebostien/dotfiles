@@ -11,7 +11,12 @@ local lsp_theme = require("plugins.lsp.lsp_theme")
 
 return {
   "j-hui/fidget.nvim", -- Show load status
-  "elkowar/yuck.vim",  -- Eww widgets
+  -----------------
+  -- Eww widgets --
+  {
+    "elkowar/yuck.vim",
+    ft = { "yuck" },
+  },
   -----------
   -- Mason --
   {

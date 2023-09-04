@@ -39,7 +39,6 @@ vim.api.nvim_set_hl(0, "LspInfoBorder", { bg = WC.bg1, fg = WC.white.base })
 return {
   {
     "EdenEast/nightfox.nvim",
-    priority = 100, -- Keep 100 for default colorscheme
     config = function()
       require("nightfox").setup({
         palettes = palettes,
@@ -53,8 +52,11 @@ return {
   },
   {
     "LazyVim/LazyVim",
+    dependencies = {
+      "EdenEast/nightfox.nvim", -- Default theme must be loaded before below
+    },
     opts = {
-      colorscheme = "nordfox",
+      colorscheme = "nordfox",  -- Default theme
     },
   }
 }

@@ -2,6 +2,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
     priority = 9998,
     keys = {
       {"<localleader>ff", "<CMD>Telescope find_files<CR>", desc = "Telescope files" },

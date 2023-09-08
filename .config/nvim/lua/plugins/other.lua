@@ -1,6 +1,21 @@
 return {
+
   ---- Other ----
   "stevearc/dressing.nvim", -- Make stuff prettier
+  {
+    "rcarriga/nvim-notify",
+    priority = 9997,
+    config = function()
+      local notify = require("notify")
+      vim.notify = notify
+      ---@diagnostic disable-next-line
+      notify.setup({
+        background_colour = "#0d1117",
+        render = "compact",
+        timeout = 10000,
+      })
+    end
+  },
 
   -- Indentation Guides
   {

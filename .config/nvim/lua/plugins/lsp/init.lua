@@ -1,16 +1,22 @@
 local lsp_keymaps = require("plugins.lsp.lsp_keymap")
 local lsp_theme = require("plugins.lsp.lsp_theme")
 
--- "jose-elias-alvarez/null-ls.nvim", -- LSP config helper
--- "mfussenegger/nvim-dap", -- Debugger
--- DAP
--- {
---   "rcarriga/nvim-dap-ui",
---   dependencies = { "mfussenegger/nvim-dap" }
--- },
-
 return {
   "j-hui/fidget.nvim", -- Show load status
+  ----------
+  -- Spin --
+  {
+    -- "sebostien/spin.nvim",
+    dir = "~/Documents/GitHub/spin.nvim/",
+    ft = { "promela" },
+    opts = {
+      on_attach = function(client, bufnr)
+        lsp_theme()
+        lsp_keymaps.on_attach(client, bufnr)
+        vim.keymap.set("n", "<localleader>s", "<CMD>SpinVerify<CR>")
+      end
+    },
+  },
   -----------------
   -- Eww widgets --
   {

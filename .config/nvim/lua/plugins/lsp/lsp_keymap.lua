@@ -20,7 +20,7 @@ M.on_attach = function(_, bufnr)
     { noremap = true, silent = true, desc = "Open diagnostics float" }
   )
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "Go to prev diagnostics" })
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Go to mext diagnostics" })
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Go to next diagnostics" })
 
   -- Gotos
   -- See `:help vim.lsp.*`

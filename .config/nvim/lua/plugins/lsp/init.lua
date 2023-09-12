@@ -257,6 +257,9 @@ return {
         },
         pyright = {},
         ruff_lsp = {},
+        typst_lsp = {
+          exportPdf = "onSave",
+        }
       },
       -- Setup functions:
       --   Returns true if the server should not be setup with lspconfig.

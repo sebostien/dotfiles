@@ -32,9 +32,6 @@ keymap("n", "<leader>h", "<CMD>nohlsearch<CR>", opt_sn)
 keymap("n", "<leader>tc", "<CMD>CccHighlighterToggle <CR>", opt_sn)
 -- keymap("n", "<leader>tl", require("lsp_lines").toggle, opt_sn_desc("Toggle lsp lines"))
 
--- UndoTree
-keymap("n", "<localleader>u", "<CMD>UndotreeToggle<CR>", opt_sn)
-
 -- Lazy
 keymap("n", "<localleader>ll", "<CMD>Lazy<CR>", opt_sn)
 

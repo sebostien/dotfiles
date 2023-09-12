@@ -27,7 +27,12 @@ return {
 
 
   -- Undotree
-  "mbbill/undotree",
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<localleader>u", "<CMD>UndotreeToggle<CR>", desc = "UndoTree toggle" },
+    }
+  },
 
   -- Color picker/preview
   {

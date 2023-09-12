@@ -212,6 +212,7 @@ if ask "Install Rust toolchain and Rust tools?"; then
     cargo install fselect    # Find with SQL syntax
     cargo install kalker     # CLI Calculator
     cargo install flamegraph # Flamegraph generator
+    cargo install --git https://github.com/typst/typst # Typesetting system
 fi
 
 if ask "Install Node toolchain?"; then

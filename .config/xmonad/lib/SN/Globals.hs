@@ -15,7 +15,7 @@ myBrowser :: String
 myBrowser = "firefox "
 
 mySysTray :: String
-mySysTray = "killall trayer ; stalonetray"
+mySysTray = "killall stalonetray ; stalonetray"
 
 killMySysTray :: String
 killMySysTray = "killall stalonetray"

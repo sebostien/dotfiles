@@ -139,53 +139,29 @@ sudo dnf install gh -y
 sudo dnf install -y network-manager-applet blueman
 
 # Some packages I use, some more installed with cargo below
-# sudo dnf install -y -q \
-#   # CL system information
-#   neofetch   \ 
-#   # Screenshot tool
-#   flameshot  \ 
-#   # Fuzzy finder
-#   fzf        \ 
-#   # cat with colors
-#   bat        \ 
-#   # TLDR client
-#   tealdeer   \ 
-#   # HTTP client
-#   httpie     \ 
-#   # Faster ls
-#   exa        \ 
-#   # App launcher
-#   rofi       \ 
-#   # Wallpaper
-#   nitrogen   \ 
-#   # File manager
-#   nautilus   \ 
-#   # CLI File manager
-#   ranger     \ 
-#   # Notification-daemon
-#   dunst      \ 
-#   # Editor
-#   neovim     \ 
-#   # Control players with MPRIS D-Bus
-#   playerctl  \ 
-#   # Media player
-#   vlc        \ 
-#   # Better htop
-#   btop       \ 
-#   # Faster grep
-#   ripgrep    \ 
-#   # Faster find
-#   fd-find    \ 
-#   # System tray
-#   trayer     \ 
-#   # Downloader, FTP, BitTorrent, etc,.
-#   aria2      \ 
-#   # Command-line benchmarks
-#   hyperfine  \ 
-#   # Docker
-#   docker     \
-#   # Compose support
-#   docker-compose
+sudo dnf install -y -q \
+  neofetch    \ 
+  flameshot   \ 
+  fzf         \ 
+  bat         \ 
+  tealdeer    \ 
+  httpie      \ 
+  rofi        \ 
+  nitrogen    \ 
+  nautilus    \ 
+  ranger      \ 
+  dunst       \ 
+  neovim      \ 
+  playerctl   \ 
+  vlc         \ 
+  btop        \ 
+  ripgrep     \ 
+  fd-find     \ 
+  stalonetray \ 
+  aria2       \ 
+  hyperfine   \ 
+  docker      \
+  docker-compose
 
 
 # ffmpeg stuff
@@ -212,6 +188,7 @@ if ask "Install Rust toolchain and Rust tools?"; then
     cargo install fselect    # Find with SQL syntax
     cargo install kalker     # CLI Calculator
     cargo install flamegraph # Flamegraph generator
+    cargo install eza        # ls alternative
     cargo install --git https://github.com/typst/typst # Typesetting system
 fi
 

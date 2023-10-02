@@ -1,13 +1,13 @@
 #
-#  ________  ________      
+#  ________  ________
 # |\   ____\|\   ___  \      Sebastian Nielsen (sebostien)
 # \ \  \___|\ \  \\ \  \     http://www.github.com/sebostien/
-#  \ \_____  \ \  \\ \  \  
-#   \|____|\  \ \  \\ \  \ 
+#  \ \_____  \ \  \\ \  \
+#   \|____|\  \ \  \\ \  \
 #     ____\_\  \ \__\\ \__\
 #    |\_________\|__| \|__|
-#    \|_________|          
-#    
+#    \|_________|
+#
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -70,18 +70,10 @@ zstyle ':omz:update' frequency 7
 #####################################################################
 
 plugins=(
-  git
   zsh-autosuggestions
-  gh
-  history
-  man
   rust
   k
   aliases
-  nvm
-  web-search
-  copyfile
-  dirhistory
 )
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -89,14 +81,23 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 
-. /home/sn/scripts/z.sh -- Source z
+export DISABLE_AUTO_TITLE='true' # tmuxp
 
 export PATH=$PATH:/home/sn/scripts
 export PATH=$PATH:/home/sn/go/bin
 
+# Source z
+. /home/sn/scripts/z.sh
+
 source $ZSH/oh-my-zsh.sh
-
-export DISABLE_AUTO_TITLE='true' # tmuxp
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh
+
+##### Source languages #####
+
+# NVM
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# GHC
+[ -f "/home/sn/.ghcup/env" ] && source "/home/sn/.ghcup/env" # ghcup-env

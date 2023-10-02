@@ -140,26 +140,25 @@ sudo dnf install -y network-manager-applet blueman
 
 # Some packages I use, some more installed with cargo below
 sudo dnf install -y -q \
-  neofetch    \ 
-  flameshot   \ 
-  fzf         \ 
-  bat         \ 
-  tealdeer    \ 
-  httpie      \ 
-  rofi        \ 
-  nitrogen    \ 
-  nautilus    \ 
-  ranger      \ 
-  dunst       \ 
-  neovim      \ 
-  playerctl   \ 
-  vlc         \ 
-  btop        \ 
-  ripgrep     \ 
-  fd-find     \ 
-  stalonetray \ 
-  aria2       \ 
-  hyperfine   \ 
+  neofetch    \
+  flameshot   \
+  fzf         \
+  bat         \
+  tealdeer    \
+  httpie      \
+  rofi        \
+  nitrogen    \
+  nautilus    \
+  dunst       \
+  neovim      \
+  playerctl   \
+  vlc         \
+  btop        \
+  ripgrep     \
+  fd-find     \
+  stalonetray \
+  aria2       \
+  hyperfine   \
   docker      \
   docker-compose
 
@@ -201,16 +200,35 @@ if ask "Install Node toolchain?"; then
 fi
 
 ####################################
+
+SPOTIFY=0
+ELEMENT=0
+DISCORD=0
+
 if ask "Install Discord via Flatpak?"; then
-    sudo dnf install -y flatpak
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install app/com.discordapp.Discord/x86_64/stable -y
+    DISCORD=1
+fi
+if ask "Install Element (matrix client) via FLatpak?"; then
+    ELEMENT=1
+fi
+if ask "Install Spotify via Flatpak?"; then
+    SPOTIFY=1
 fi
 
-if ask "Install Spotify via Flatpak?"; then
+if [ $((SPOTIFY + ELEMENT + DISCORD)) -ge 1 ]; then
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install com.spotify.Client/x86_64/stable -y
+
+    if [ $DISCORD -eq 1 ]; then 
+        flatpak install app/com.discordapp.Discord/x86_64/stable -y
+    fi
+    if [ $ELEMENT -eq 1 ]; then 
+        flatpak install flathub im.riot.Riot
+    fi
+    if [ $SPOTIFY -eq 1 ]; then 
+        flatpak install com.s potify.Client/x86_64/stable -y
+    fi
+
 fi
 
 ####################################
@@ -246,8 +264,29 @@ if ask "Install picom dependencies?"; then
 fi
 
 ####################################
-if ask "Install Eww?"; then
+EWW=0
+YAZI=0
 
+if ask "Install yazi"; then 
+  YAZI=1;
+fi
+
+if ask "Install Eww?"; then
+   EWW=1;
+fi
+
+if [ $YAZI -eq 1 ]; then
+    cd ~/Apps || exit 1
+    
+    git clone https://github.com/sxyazi/yazi.git
+    cd ~/Apps/yazi/ || exit 1
+    cargo build --release
+    sudo ln -s /home/sn/Apps/yazi/target/release/yazi /usr/bin/yazi
+
+    cd ~/install_tmp || exit 1
+fi
+
+if [ $EWW -eq 1 ]; then
     cd ~/Apps || exit 1
 
     # Eww Widgets dependencies
@@ -257,8 +296,6 @@ if ask "Install Eww?"; then
     git clone https://github.com/elkowar/eww
     cd ~/Apps/eww/ || exit 1
     cargo build --release
-    cd ~/Apps/eww/target/release/ || exit 1
-    chmod +x ~/Apps/eww/target/release/eww
     sudo ln -s /home/sn/Apps/eww/target/release/eww /usr/bin/eww
 
     cd ~/install_tmp || exit 1

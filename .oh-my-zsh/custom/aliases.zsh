@@ -48,3 +48,12 @@ alias kal="cal -ymw"
 
 # Weather
 alias weather="curl wttr.in"
+
+# DNF
+alias dnfi="sudo dnf install"
+alias dnfu="sudo dnf upgrade"
+alias dnfs="dnf search"
+
+# History
+alias h="history"
+alias hg="history | grep"

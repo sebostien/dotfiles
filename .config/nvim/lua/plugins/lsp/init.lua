@@ -274,7 +274,7 @@ return {
           return true
         end,
         ruff_lsp = function(_)
-          require("lazyvim.util").on_attach(function(client, _)
+          lsp_keymaps.on_attach(function(client, _)
             if client.name == "ruff_lsp" then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false

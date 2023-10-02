@@ -48,15 +48,7 @@ return {
           dim_inactive = true,    -- Non focused panes set to alternative background
         },
       })
+      vim.cmd([[ colorscheme nordfox ]])
     end
   },
-  {
-    "LazyVim/LazyVim",
-    dependencies = {
-      "EdenEast/nightfox.nvim", -- Default theme must be loaded before below
-    },
-    opts = {
-      colorscheme = "nordfox",  -- Default theme
-    },
-  }
 }

@@ -22,4 +22,3 @@ return function()
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
   end
 end
-

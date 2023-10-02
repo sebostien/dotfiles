@@ -4,7 +4,7 @@ return {
   keys = {
     {
       "<leader>q",
-    function() require("trouble").open("document_diagnostics") end,
+      function() require("trouble").open("document_diagnostics") end,
       desc = "Show document diagnostics"
     },
     {
@@ -17,4 +17,3 @@ return {
     auto_preview = false,
   },
 }
-

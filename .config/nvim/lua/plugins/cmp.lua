@@ -1,5 +1,20 @@
 return {
   {
+    "uga-rosa/cmp-dictionary",
+    config = function()
+      local dict = require("cmp_dictionary")
+
+      dict.switcher({
+        spelllang = {
+          -- To switch:
+          --   :set spelllang=sv
+          en = "/home/sn/.config/nvim/dict/en.dict",
+          de = "/home/sn/.config/nvim/dict/sv.dict"
+        },
+      })
+    end
+  },
+  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       -- CMP Sources
@@ -8,12 +23,13 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-calc",
-      "f3fora/cmp-spell",
       -- Formatting
       "onsails/lspkind.nvim",
       -- Snippets
       "quangnguyen30192/cmp-nvim-ultisnips",
       "SirVer/ultisnips",
+      -- Dictionary
+      "uga-rosa/cmp-dictionary",
     },
     config = function()
       local cmp = require("cmp")
@@ -32,7 +48,8 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = {
           {
@@ -73,8 +90,9 @@ return {
             group_index = 3,
           },
           {
-            name = "spell",
+            name = "dictionary",
             priority = 50,
+            keyword_length = 4,
             group_index = 3,
           },
         },

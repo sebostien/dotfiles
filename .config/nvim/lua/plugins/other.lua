@@ -1,7 +1,7 @@
+---- Other ----
 return {
-
-  ---- Other ----
-  "stevearc/dressing.nvim", -- Make stuff prettier
+  -- Make stuff prettier
+  "stevearc/dressing.nvim",
   {
     "rcarriga/nvim-notify",
     priority = 9997,
@@ -17,14 +17,58 @@ return {
     end
   },
 
-  -- Indentation Guides
+  -- indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("indent_blankline").setup({})
-    end,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      indent = { char = "│" },
+      scope = { enabled = true },
+      exclude = {
+        filetypes = {
+          "help",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+        },
+      },
+    },
+    main = "ibl",
   },
 
+  {
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local mini = require("mini.indentscope")
+
+      mini.setup({
+        symbol = "│",
+        options = { try_as_border = true },
+        draw = {
+          animation = mini.gen_animation.quadratic({ easing = 'out', duration = 10 })
+        }
+
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+        },
+        callback = function()
+          ---@diagnostic disable-next-line
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
+  },
 
   -- Undotree
   {
@@ -42,16 +86,6 @@ return {
       vim.opt.termguicolors = true
     end,
   },
-
-  -- Diagnostics on sepereate lines
-  -- use({
-  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  --   config = function()
-  --     require("lsp_lines").setup()
-  --     require("lsp_lines").toggle()
-  --     -- vim.diagnostics.config({ virtual_lines = false })
-  --   end,
-  -- })
 
   -- Autopairs
   {
@@ -80,7 +114,7 @@ return {
       })
     end,
     keys = {
-      "<leader>ti", "<CMD>IlluminateToggle<CR>", desc = "Toggle word highlight"
+      { "<leader>ti", "<CMD>IlluminateToggle<CR>", desc = "Toggle word highlight" },
     },
   },
 }

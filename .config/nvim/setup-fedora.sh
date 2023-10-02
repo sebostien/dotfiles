@@ -14,3 +14,9 @@ sudo dnf install latexmk miktex
 sudo dnf install texlive texlive-amsmath texlive-glossaries texlive-todonotes \
                  texlive-tcolorbox texlive-upquote texlive-adjustbox texlive-titling \
                  texlive-ulem
+
+# Dictionary
+sudo dnf install aspell aspell-en aspell-sv
+mkdir -p ~/.config/nvim/dict/
+aspell -d en dump master | aspell -l en expand > ~/.config/nvim/dict/en.dict
+aspell -d sv dump master | aspell -l sv expand > ~/.config/nvim/dict/sv.dict

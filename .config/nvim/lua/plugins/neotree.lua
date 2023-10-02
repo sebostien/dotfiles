@@ -7,7 +7,7 @@ return {
     "MunifTanjim/nui.nvim",
   },
   keys = {
-   {"<localleader>fd", "<CMD>Neotree toggle filesystem position=left <CR>", desc = "File tree" }
+    { "<localleader>fd", "<CMD>Neotree toggle filesystem position=left <CR>", desc = "File tree" }
   },
   opts = {
     popup_border_style = "rounded",

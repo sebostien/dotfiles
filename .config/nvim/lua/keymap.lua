@@ -7,7 +7,7 @@ local function opt_sn_desc(desc)
   return { silent = true, noremap = true, desc = desc }
 end
 
-vim.g.mapleader = " " -- Commands involving current buffer
+vim.g.mapleader = " "      -- Commands involving current buffer
 vim.g.maplocalleader = "," -- Commands beyond buffer
 
 -- Jump between windows

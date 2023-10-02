@@ -20,9 +20,7 @@ import XMonad.Util.NamedScratchpad (namedScratchpadManageHook)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 ------------------------------------------------------------------------
-
 -- | Startup| ----------------------------------------------------------
-
 ------------------------------------------------------------------------
 
 myStartupHook :: X ()
@@ -38,9 +36,7 @@ myStartupHook = do
   spawnOnce mySysTray
 
 ------------------------------------------------------------------------
-
 -- | Window rules | ----------------------------------------------------
-
 ------------------------------------------------------------------------
 --
 -- To find the property name associated with a program, use
@@ -49,27 +45,25 @@ myStartupHook = do
 --
 myManageHook :: XMonad.Query (Endo WindowSet)
 myManageHook = manageSpecific
- where
-  manageSpecific =
-    composeAll
-      [ className =? "confirm" --> doCenterFloat
-      , className =? "file_progress" --> doFloat
-      , className =? "dialog" --> doFloat
-      , className =? "download" --> doFloat
-      , className =? "error" --> doFloat
-      , className =? "zoom" --> doFloat
-      , isRole =? "pop-up" --> doCenterFloat
-      , title =? "Bluetooth Devices" --> doCenterFloat
-      , title =? "Ulauncher Preferences" --> doCenterFloat
-      , isDialog --> doCenterFloat
-      , isFullscreen --> doFullFloat
-      ]
-  isRole = stringProperty "WM_WINDOW_ROLE"
+  where
+    manageSpecific =
+      composeAll
+        [ className =? "confirm" --> doCenterFloat
+        , className =? "file_progress" --> doFloat
+        , className =? "dialog" --> doFloat
+        , className =? "download" --> doFloat
+        , className =? "error" --> doFloat
+        , className =? "zoom" --> doFloat
+        , isRole =? "pop-up" --> doCenterFloat
+        , title =? "Bluetooth Devices" --> doCenterFloat
+        , title =? "Ulauncher Preferences" --> doCenterFloat
+        , isDialog --> doCenterFloat
+        , isFullscreen --> doFullFloat
+        ]
+    isRole = stringProperty "WM_WINDOW_ROLE"
 
 -----------------------------------------------------------
-
 -- | main | -----------------------------------------------
-
 -----------------------------------------------------------
 
 main :: IO ()

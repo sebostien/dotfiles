@@ -115,16 +115,16 @@ myNamedKeys isDesktop
 
 myKeys :: Bool -> [(String, X ())]
 myKeys isDesktop = map (\(a, _, c) -> (a, c)) ys
- where
-  ys = concatMap (\(KeySection _ xs) -> xs) (myNamedKeys isDesktop)
+  where
+    ys = concatMap (\(KeySection _ xs) -> xs) (myNamedKeys isDesktop)
 
 data KeySection = KeySection String [(String, String, X ())]
 
 instance Show KeySection where
   show (KeySection section ks) = "# " ++ section ++ "\n" ++ keys
-   where
-    keys = unlines $ map (\(a, b, _) -> a ++ replicate (l - length a) ' ' ++ b) ks
-    l = maximum (map (\(a, _, _) -> length a) ks) + 3
+    where
+      keys = unlines $ map (\(a, b, _) -> a ++ replicate (l - length a) ' ' ++ b) ks
+      l = maximum (map (\(a, _, _) -> length a) ks) + 3
 
 -- | Create a file with description of all keybindings
 makeMyKeyFile :: Bool -> String

@@ -101,8 +101,8 @@ myNamedKeys isDesktop
         , ("<XF86AudioPrev>", "Prev audio", spawn "playerctl --player=playerctld previous")
         , ("M-<L>", "Prev audio", spawn "playerctl --player=playerctld previous")
         , ("<XF86AudioMute>", "Mute audio", spawn "amixer -D pulse set Master toggle")
-        , ("<XF86AudioRaiseVolume>", "Raise volume", spawn "amixer -D pulse sset Master 2%+")
-        , ("<XF86AudioLowerVolume>", "Lower volume", spawn "amixer -D pulse sset Master 2%-")
+        , ("<XF86AudioRaiseVolume>", "Raise volume", spawn "amixer sset Master 5%+")
+        , ("<XF86AudioLowerVolume>", "Lower volume", spawn "amixer sset Master 5%-")
         ]
     ]
   laptopOnly =

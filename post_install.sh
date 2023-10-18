@@ -235,13 +235,9 @@ fi
 next_part "Installing themes"
 ###################################
 
-wget -P ./ https://github.com/EliverLara/Nordic/releases/download/v2.1.0/Nordic-darker-v40.tar.xz
-tar xf ./Nordic-darker-v40.tar.xz
-mv ./Nordic-darker-v40 ~/.themes/Nordic-darker-v40
-
-# Dark mode for gnome
-gsettings set org.gnome.desktop.interface gtk-theme Nordic-darker-v40
-gsettings set org.gnome.desktop.wm.preferences theme Nordic-darker-v40
+wget -P ./ https://github.com/Mrcuve0/Aritim-Dark/archive/refs/tags/0.7.zip
+unzip 0.7.zip -qq
+mv ./Aritim-Dark/GTK/ ~/.themes/Aritim-Dark-GTK/
 
 # Icons
 sudo dnf install -y papirus-icon-theme

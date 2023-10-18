@@ -1,0 +1,604 @@
+<?xml version='1.0'?>
+<root>
+	<resource name="dock.ui.ThemeMap">
+		<key>smooth</key>
+	</resource>
+	<resource name="ccontrol.frontend">
+		<frontend>
+			<current>
+				<base>
+					<roots>
+						<root name="external">
+							<layout factory="predefined">
+								<replacement id="rootexternal"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<root>true</root>
+									<content delegate="screen dock">
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+										</placeholders>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CExternalizeArea</type>
+								</layout>
+							</adjacent>
+							<children ignore="false"/>
+						</root>
+						<root name="ccontrol north">
+							<layout factory="predefined">
+								<replacement id="rootccontrol north"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<root>true</root>
+									<content delegate="flap dock">
+										<window auto="false" direction="SOUTH"/>
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">size</item>
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+													<item type="s">hold</item>
+												</item>
+												<item key="dock.size" type="i">400</item>
+												<item key="dock.index" type="i">0</item>
+												<item key="dock.id" type="i">0</item>
+												<item key="dock.placeholder" type="s">dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame</item>
+												<item key="dock.hold" type="b">false</item>
+											</entry>
+										</placeholders>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CContentArea.minimize</type>
+								</layout>
+							</adjacent>
+							<children ignore="false">
+								<child>
+									<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame">
+										<replacement id="dockablesingle de.uka.ilkd.key.gui.sourceview.SourceViewFrame"/>
+										<delegate id="delegate_ccontrol backup factory id">
+											<id>de.uka.ilkd.key.gui.sourceview.SourceViewFrame</id>
+											<area/>
+										</delegate>
+									</layout>
+									<children ignore="false"/>
+								</child>
+							</children>
+						</root>
+						<root name="ccontrol south">
+							<layout factory="predefined">
+								<replacement id="rootccontrol south"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<root>true</root>
+									<content delegate="flap dock">
+										<window auto="false" direction="NORTH"/>
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+										</placeholders>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CContentArea.minimize</type>
+								</layout>
+							</adjacent>
+							<children ignore="false"/>
+						</root>
+						<root name="ccontrol east">
+							<layout factory="predefined">
+								<replacement id="rootccontrol east"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<root>true</root>
+									<content delegate="flap dock">
+										<window auto="false" direction="WEST"/>
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+										</placeholders>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CContentArea.minimize</type>
+								</layout>
+							</adjacent>
+							<children ignore="false"/>
+						</root>
+						<root name="ccontrol center">
+							<layout factory="predefined" placeholder="dock.single.ccontrol\ center">
+								<replacement id="rootccontrol center"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<id>ccontrol center</id>
+									<root>true</root>
+									<content delegate="SplitDockStationFactory">
+										<fullscreen-action>false</fullscreen-action>
+										<node nodeId="1697540903225" orientation="HORIZONTAL" divider="0.3390625">
+											<node nodeId="1697540903227" orientation="VERTICAL" divider="0.5686653771760155">
+												<leaf id="0" nodeId="1697540903229">
+													<placeholders>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.TaskTree</placeholder>
+													</placeholders>
+												</leaf>
+												<leaf id="1" nodeId="1697540903236">
+													<placeholders>
+														<placeholder>dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</placeholder>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</placeholder>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</placeholder>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</placeholder>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</placeholder>
+													</placeholders>
+													<placeholder-map>
+														<version>0</version>
+														<format>dock.PlaceholderList</format>
+														<entry>
+															<key shared="false">
+																<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</placeholder>
+															</key>
+															<item key="convert" type="b">true</item>
+															<item key="convert-keys" type="a"/>
+														</entry>
+														<entry>
+															<key shared="false">
+																<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</placeholder>
+															</key>
+															<item key="convert" type="b">true</item>
+															<item key="convert-keys" type="a"/>
+														</entry>
+														<entry>
+															<key shared="false">
+																<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</placeholder>
+															</key>
+															<item key="convert" type="b">true</item>
+															<item key="convert-keys" type="a"/>
+														</entry>
+														<entry>
+															<key shared="false">
+																<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</placeholder>
+															</key>
+															<item key="convert" type="b">true</item>
+															<item key="convert-keys" type="a"/>
+														</entry>
+														<entry>
+															<key shared="false">
+																<placeholder>dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</placeholder>
+															</key>
+															<item key="convert" type="b">true</item>
+															<item key="convert-keys" type="a"/>
+														</entry>
+													</placeholder-map>
+												</leaf>
+											</node>
+											<node nodeId="1697540903241" orientation="HORIZONTAL" divider="0.7022222222222223">
+												<leaf id="2" nodeId="1697540903243">
+													<placeholders>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.nodeviews\.MainFrame</placeholder>
+													</placeholders>
+												</leaf>
+												<leaf id="-1" nodeId="1697540903245">
+													<placeholders>
+														<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame</placeholder>
+													</placeholders>
+												</leaf>
+											</node>
+										</node>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CContentArea.center</type>
+								</layout>
+							</adjacent>
+							<children ignore="false">
+								<child>
+									<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.TaskTree">
+										<replacement id="dockablesingle de.uka.ilkd.key.gui.TaskTree"/>
+										<delegate id="delegate_ccontrol backup factory id">
+											<id>de.uka.ilkd.key.gui.TaskTree</id>
+											<area/>
+										</delegate>
+									</layout>
+									<children ignore="false"/>
+								</child>
+								<child>
+									<layout factory="delegate_StackDockStationFactory">
+										<selected>0</selected>
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+												</item>
+												<item key="dock.index" type="i">0</item>
+												<item key="dock.id" type="i">0</item>
+												<item key="dock.placeholder" type="s">dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</item>
+											</entry>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+												</item>
+												<item key="dock.index" type="i">1</item>
+												<item key="dock.id" type="i">1</item>
+												<item key="dock.placeholder" type="s">dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</item>
+											</entry>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+												</item>
+												<item key="dock.index" type="i">2</item>
+												<item key="dock.id" type="i">2</item>
+												<item key="dock.placeholder" type="s">dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</item>
+											</entry>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+												</item>
+												<item key="dock.index" type="i">3</item>
+												<item key="dock.id" type="i">3</item>
+												<item key="dock.placeholder" type="s">dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</item>
+											</entry>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</placeholder>
+												</key>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+												</item>
+												<item key="dock.index" type="i">4</item>
+												<item key="dock.id" type="i">4</item>
+												<item key="dock.placeholder" type="s">dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</item>
+											</entry>
+										</placeholders>
+									</layout>
+									<children ignore="false">
+										<child>
+											<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView">
+												<replacement id="dockablesingle de.uka.ilkd.key.gui.prooftree.ProofTreeView"/>
+												<delegate id="delegate_ccontrol backup factory id">
+													<id>de.uka.ilkd.key.gui.prooftree.ProofTreeView</id>
+													<area/>
+												</delegate>
+											</layout>
+											<children ignore="false"/>
+										</child>
+										<child>
+											<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.InfoView">
+												<replacement id="dockablesingle de.uka.ilkd.key.gui.InfoView"/>
+												<delegate id="delegate_ccontrol backup factory id">
+													<id>de.uka.ilkd.key.gui.InfoView</id>
+													<area/>
+												</delegate>
+											</layout>
+											<children ignore="false"/>
+										</child>
+										<child>
+											<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView">
+												<replacement id="dockablesingle de.uka.ilkd.key.gui.StrategySelectionView"/>
+												<delegate id="delegate_ccontrol backup factory id">
+													<id>de.uka.ilkd.key.gui.StrategySelectionView</id>
+													<area/>
+												</delegate>
+											</layout>
+											<children ignore="false"/>
+										</child>
+										<child>
+											<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.GoalList">
+												<replacement id="dockablesingle de.uka.ilkd.key.gui.GoalList"/>
+												<delegate id="delegate_ccontrol backup factory id">
+													<id>de.uka.ilkd.key.gui.GoalList</id>
+													<area/>
+												</delegate>
+											</layout>
+											<children ignore="false"/>
+										</child>
+										<child>
+											<layout factory="predefined" placeholder="dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel">
+												<replacement id="dockablesingle org.key_project.slicing.ui.SlicingLeftPanel"/>
+												<delegate id="delegate_ccontrol backup factory id">
+													<id>org.key_project.slicing.ui.SlicingLeftPanel</id>
+													<area/>
+												</delegate>
+											</layout>
+											<children ignore="false"/>
+										</child>
+									</children>
+								</child>
+								<child>
+									<layout factory="predefined" placeholder="dock.single.de\.uka\.ilkd\.key\.gui\.nodeviews\.MainFrame">
+										<replacement id="dockablesingle de.uka.ilkd.key.gui.nodeviews.MainFrame"/>
+										<delegate id="delegate_ccontrol backup factory id">
+											<id>de.uka.ilkd.key.gui.nodeviews.MainFrame</id>
+											<area/>
+										</delegate>
+									</layout>
+									<children ignore="false"/>
+								</child>
+							</children>
+						</root>
+						<root name="ccontrol west">
+							<layout factory="predefined">
+								<replacement id="rootccontrol west"/>
+								<delegate id="delegate_CommonDockStationFactory">
+									<root>true</root>
+									<content delegate="flap dock">
+										<window auto="false" direction="EAST"/>
+										<placeholders>
+											<version>0</version>
+											<format>dock.PlaceholderList</format>
+										</placeholders>
+									</content>
+								</delegate>
+							</layout>
+							<adjacent>
+								<layout factory="dock.RootStationAdjacentFactory">
+									<type>dock.CContentArea.minimize</type>
+								</layout>
+							</adjacent>
+							<children ignore="false"/>
+						</root>
+					</roots>
+					<children/>
+				</base>
+				<modes>
+					<dockables>
+						<entry id="single org.key_project.slicing.ui.SlicingLeftPanel" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</placeholder>
+											<backup-path>
+												<node location="LEFT" size="0.3333333333333333" id="1697540903225"/>
+												<node location="BOTTOM" size="0.6666666666666667" id="1697540903227"/>
+												<leaf id="1697540903236"/>
+											</backup-path>
+										</property>
+										<property factory="StackDockPropertyFactory">
+											<index>4</index>
+											<placeholder>dock.single.org\.key_project\.slicing\.ui\.SlicingLeftPanel</placeholder>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.prooftree.ProofTreeView" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</placeholder>
+											<backup-path>
+												<node location="LEFT" size="0.3333333333333333" id="1697540903225"/>
+												<node location="BOTTOM" size="0.6666666666666667" id="1697540903227"/>
+												<leaf id="1697540903236"/>
+											</backup-path>
+										</property>
+										<property factory="StackDockPropertyFactory">
+											<index>0</index>
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.prooftree\.ProofTreeView</placeholder>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.nodeviews.MainFrame" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.nodeviews\.MainFrame</placeholder>
+											<backup-path>
+												<node location="TOP" size="0.5" id="1697540903208"/>
+												<leaf id="1697540903206"/>
+											</backup-path>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.TaskTree" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.TaskTree</placeholder>
+											<backup-path>
+												<leaf id="1697540903178"/>
+											</backup-path>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.InfoView" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</placeholder>
+											<backup-path>
+												<node location="LEFT" size="0.3333333333333333" id="1697540903225"/>
+												<node location="BOTTOM" size="0.6666666666666667" id="1697540903227"/>
+												<leaf id="1697540903236"/>
+											</backup-path>
+										</property>
+										<property factory="StackDockPropertyFactory">
+											<index>1</index>
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.InfoView</placeholder>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.StrategySelectionView" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</placeholder>
+											<backup-path>
+												<node location="LEFT" size="0.3333333333333333" id="1697540903225"/>
+												<node location="BOTTOM" size="0.6666666666666667" id="1697540903227"/>
+												<leaf id="1697540903236"/>
+											</backup-path>
+										</property>
+										<property factory="StackDockPropertyFactory">
+											<index>2</index>
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.StrategySelectionView</placeholder>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.GoalList" current="dock.mode.normal">
+							<history>
+								<mode>dock.mode.normal</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</placeholder>
+											<backup-path>
+												<node location="LEFT" size="0.3333333333333333" id="1697540903225"/>
+												<node location="BOTTOM" size="0.6666666666666667" id="1697540903227"/>
+												<leaf id="1697540903236"/>
+											</backup-path>
+										</property>
+										<property factory="StackDockPropertyFactory">
+											<index>3</index>
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.GoalList</placeholder>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+						<entry id="single de.uka.ilkd.key.gui.sourceview.SourceViewFrame" current="dock.mode.minimized">
+							<history>
+								<mode>dock.mode.normal</mode>
+								<mode>dock.mode.minimized</mode>
+							</history>
+							<properties>
+								<property id="dock.mode.minimized">
+									<mode>dock.mode.minimized</mode>
+									<root>ccontrol north</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="flap dock">
+											<index>0</index>
+											<holding>false</holding>
+											<size>400</size>
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame</placeholder>
+										</property>
+									</location>
+								</property>
+								<property id="dock.mode.normal">
+									<mode>dock.mode.normal</mode>
+									<root>ccontrol center</root>
+									<applicationDefined>false</applicationDefined>
+									<location>
+										<property factory="SplitDockPlaceholderProperty">
+											<placeholder>dock.single.de\.uka\.ilkd\.key\.gui\.sourceview\.SourceViewFrame</placeholder>
+											<backup-path>
+												<node location="RIGHT" size="0.7052083333333333" id="1697540903225"/>
+												<node location="RIGHT" size="0.2977777777777777" id="1697540903241"/>
+												<leaf id="1697540903245"/>
+											</backup-path>
+										</property>
+									</location>
+								</property>
+							</properties>
+						</entry>
+					</dockables>
+					<modes>
+						<entry id="dock.mode.maximized"/>
+					</modes>
+				</modes>
+			</current>
+		</frontend>
+	</resource>
+	<resource name="ccontrol.preferences"/>
+</root>

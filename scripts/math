@@ -1,0 +1,75 @@
+#!/bin/bash
+
+tex_output="/tmp/math.tex"
+pdf_output="/tmp/math.pdf"
+png_output="/tmp/math.png"
+
+print_help()
+{
+   echo "Convert LaTex to image"
+   echo
+   echo "Syntax: math [OPTIONS] 'input'"
+   echo "        Note: Single quote around input"
+   echo
+   echo "OPTIONS"
+   echo "-s, --show     Open output in default application"
+   echo
+   echo "EXAMPLE"
+   echo "math '$\lnot p \land q$'"
+}
+
+##############
+
+INPUT=""
+SHOW=0
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -h|--help)
+      print_help
+      exit 1
+      ;;
+    -s|--show)
+      SHOW=1
+      shift
+      ;;
+    -*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      INPUT="$INPUT $1"
+      shift
+      ;;
+  esac
+done
+
+printf '
+  \\documentclass{standalone}
+  \\usepackage{amsmath}
+  \\usepackage{amsfonts}
+  \\usepackage{amssymb}
+  \\usepackage{euler}
+  \\usepackage{newpxtext}
+  \\usepackage{mathpartir}
+  \\usepackage{stmaryrd}
+  \\begin{document}
+  %s
+  \\end{document}' "$INPUT" > "$tex_output"
+
+function run_cmd {
+    OUTPUT=$("$@")
+    if [[ $? -ne 0 ]] ; then
+        echo "$OUTPUT"
+        exit 1;
+    fi
+}
+
+run_cmd pdflatex -halt-on-error -output-directory=/tmp/ $tex_output
+run_cmd convert -density 300 $pdf_output -quality 90 $png_output
+
+xclip -selection clipboard -t image/png -i $png_output
+echo "Copied image to clipboard"
+
+[ $SHOW -eq 1 ] && xdg-open "$png_output"
+

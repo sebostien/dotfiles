@@ -41,10 +41,14 @@ o.softtabstop = 2    -- Insert 2 spaces for a tab
 o.tabstop = 2        -- Insert 2 spaces for a tab
 o.list = true
 
-vim.cmd([[nnoremap \ :Neotree reveal<cr>]]) -- Makes Neotree hijack netrw
+-- Remove mouse pop-up text
+vim.cmd([[ aunmenu PopUp.How-to\ disable\ mouse ]])
+vim.cmd([[ aunmenu PopUp.-1- ]])
+
+vim.cmd([[ nnoremap \ :Neotree reveal<cr> ]]) -- Makes Neotree hijack netrw
 
 -- Windows to close with "q"
-vim.cmd([[autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+vim.cmd([[ autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :close<CR> ]])
+vim.cmd([[ autocmd FileType man nnoremap <buffer><silent> q :quit<CR> ]])
 
 return M

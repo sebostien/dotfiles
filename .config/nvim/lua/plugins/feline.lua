@@ -342,29 +342,22 @@ end
 
 M.winbar.active[1] = {
   {
+    provider = " ",
+    left_sep = "circle",
+    hl = {
+      fg = "green",
+      bg = "bg",
+    },
+  },
+  {
     provider = "file_info",
     opts = {
       type = "unique",
     },
     hl = {
-      fg = "cyan",
-      bg = "gray",
+      fg = "white",
+      bg = "bg",
       style = "bold",
-    },
-    left_sep = {
-      " ",
-      {
-        str = "slant_left_2",
-        hl = {
-          fg = "gray",
-          bg = "bg",
-        },
-      },
-      { str = " ", hl = { bg = "gray" } },
-    },
-    right_sep = {
-      { str = " ", hl = { bg = "gray" } },
-      "slant_right_2",
     },
   },
   {
@@ -374,9 +367,19 @@ M.winbar.active[1] = {
       bg = "bg",
     },
   },
+
+
 }
 
 M.winbar.inactive[1] = {
+  {
+    provider = " ",
+    right_sep = "circle",
+    hl = {
+      fg = "gray",
+      bg = "bg",
+    },
+  },
   {
     provider = "file_info",
     opts = {
@@ -384,23 +387,8 @@ M.winbar.inactive[1] = {
     },
     hl = {
       fg = "white",
-      bg = "gray",
+      bg = "bg",
       style = "bold",
-    },
-    left_sep = {
-      " ",
-      {
-        str = "slant_left_2",
-        hl = {
-          fg = "gray",
-          bg = "bg",
-        },
-      },
-      { str = " ", hl = { bg = "gray" } },
-    },
-    right_sep = {
-      { str = " ", hl = { bg = "gray" } },
-      "slant_right_2",
     },
   },
   {

@@ -10,7 +10,7 @@ local SC = colors.syntax
 local palettes = {
   nordfox = {
     bg0 = WC.bg0,
-    bg1 = WC.bg1,
+    bg1 = WC.bg0,
     black = WC.black,
     white = WC.white,
     red = SC.red,
@@ -32,11 +32,12 @@ local specs = {
 }
 
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = WC.bg1 })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = WC.bg1 })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = WC.bg0 })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = WC.bg1 })
 vim.api.nvim_set_hl(0, "LspInfoBorder", { bg = WC.bg1, fg = WC.white.base })
 
 return {
+  "nvim-treesitter/playground",
   {
     "EdenEast/nightfox.nvim",
     config = function()
@@ -51,4 +52,11 @@ return {
       vim.cmd([[ colorscheme nordfox ]])
     end
   },
+  -- {
+  --   dir = "~/Documents/GitHub/seafloor.nvim/",
+  --   name = "seafloor",
+  --   init = function()
+  --     vim.cmd("colorscheme seafloor")
+  --   end
+  -- },
 }

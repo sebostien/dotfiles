@@ -23,7 +23,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       indent = { char = "│" },
-      scope = { enabled = true },
+      scope = { enabled = false },
       exclude = {
         filetypes = {
           "help",
@@ -50,7 +50,6 @@ return {
         draw = {
           animation = mini.gen_animation.quadratic({ easing = 'out', duration = 10 })
         }
-
       })
 
       vim.api.nvim_create_autocmd("FileType", {

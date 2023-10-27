@@ -5,7 +5,6 @@ return {
     -- https://github.com/nvim-treesitter/nvim-treesitter
     ensure_installed = {
       "rust",
-      "org",
       "javascript",
       "typescript",
       "c",
@@ -26,7 +25,6 @@ return {
     },
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = { "org" },
     },
     indent = {
       enable = true,

@@ -3,6 +3,16 @@ local lsp_theme = require("plugins.lsp.lsp_theme")
 
 return {
   "j-hui/fidget.nvim", -- Show load status
+  ---------
+  -- SQL --
+  {
+    'xemptuous/sqlua.nvim',
+    config = function()
+      require('sqlua').setup({
+
+      })
+    end
+  },
   ----------
   -- Spin --
   {
@@ -134,7 +144,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
-      "williamboman/mason.nvim"
+      "williamboman/mason.nvim",
     },
     opts = {
       ensure_installed = {
@@ -157,12 +167,8 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "folke/trouble.nvim",
-      ---------
-      -- Lua --
-      { "folke/neodev.nvim",    opts = {} },
-      ----------
-      -- JSON --
-      { "b0o/SchemaStore.nvim", version = false },
+      { "folke/neodev.nvim",    opts = {} },       -- Lua
+      { "b0o/SchemaStore.nvim", version = false }, -- JSON
     },
     keys = {
       { "<localleader>lr", "<CMD>LspRestart<CR><CMD>e<CR>",                       desc = "Restart lsp servers" },

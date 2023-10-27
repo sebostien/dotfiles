@@ -13,7 +13,8 @@ sudo dnf install fzf ripgrep
 sudo dnf install latexmk miktex
 sudo dnf install texlive texlive-amsmath texlive-glossaries texlive-todonotes \
                  texlive-tcolorbox texlive-upquote texlive-adjustbox texlive-titling \
-                 texlive-ulem
+                 texlive-ulem texlive-euler texlive-euler-math texlive-standalone \
+                 texlive-newpx texlive-mathpartir texlive-stmaryrd texlive-varwidth
 
 # Dictionary
 sudo dnf install aspell aspell-en aspell-sv

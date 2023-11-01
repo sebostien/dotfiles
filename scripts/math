@@ -6,7 +6,7 @@ png_output="/tmp/math.png"
 
 print_help()
 {
-   echo "Convert LaTex to image"
+   echo "Convert LaTex to png"
    echo
    echo "Syntax: math [OPTIONS] 'input'"
    echo "        Note: Single quote around input"
@@ -53,8 +53,11 @@ printf '
   \\usepackage{newpxtext}
   \\usepackage{mathpartir}
   \\usepackage{stmaryrd}
+  \\usepackage{varwidth}
   \\begin{document}
+  \\begin{varwidth}{\linewidth}
   %s
+  \\end{varwidth}
   \\end{document}' "$INPUT" > "$tex_output"
 
 function run_cmd {

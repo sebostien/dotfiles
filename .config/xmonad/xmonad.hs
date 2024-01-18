@@ -32,6 +32,7 @@ myStartupHook = do
   spawnOnce "dunst"
   spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
   spawnOnce "picom --experimental-backend"
+  spawnOnce "~/.config/xmonad/scripts/keyboard.sh"
   spawnOnce myEwwStartupHook
   spawnOnce mySysTray
 

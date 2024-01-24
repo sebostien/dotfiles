@@ -13,6 +13,7 @@ return {
       { "<localleader>hh", "<CMD>Telescope help_tags<CR>",       desc = "NeoVim help pages" },
       { "<localleader>hm", "<CMD>Telescope man_pages<CR>",       desc = "man pages" },
       { "<localleader>hk", "<CMD>Telescope keymaps<CR>",         desc = "Keymaps" },
+      { "<localleader>n",  "<CMD>Telescope notify<CR>",          desc = "Notifications" },
     }
   }
 }

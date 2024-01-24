@@ -48,27 +48,39 @@ return {
   ----------
   -- Rust --
   {
-    "simrat39/rust-tools.nvim",
+    'mrcjkb/rustaceanvim',
+    version = '^3',
+    ft = { 'rust' },
     dependencies = {
       "neovim/nvim-lspconfig",
     },
-    ft = { "rust" },
     config = function()
-      local rt = require("rust-tools")
-      rt.setup({
-        tools = {
-          executor = require("rust-tools.executors").termopen,
-        },
+      vim.g.rustaceanvim = {
+        -- Plugin configuration
+        tools = {},
+        -- LSP configuration
         server = {
           on_attach = function(client, bufnr)
             lsp_theme()
             lsp_keymaps.on_attach(client, bufnr)
-            -- Popup list from rt
-            vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group,
-              lsp_keymaps.bufopts(bufnr, "Code actions"))
+            -- Popup list for code actions
+            vim.keymap.set(
+              "n",
+              "<leader>ca",
+              function()
+                vim.cmd.RustLsp('codeAction')
+              end,
+              { silent = true, buffer = bufnr }
+            )
           end,
+          settings = {
+            -- rust-analyzer language server configuration
+            ['rust-analyzer'] = {},
+          },
         },
-      })
+        -- DAP configuration
+        dap = {},
+      }
     end
   },
   {

@@ -6,9 +6,9 @@ import SN.Layouts
 import SN.Theme
 
 -- Other
-
 import Data.Monoid (Endo)
 import System.Directory (doesFileExist)
+import Control.Monad (when)
 
 import XMonad
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -23,8 +23,8 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 -- | Startup| ----------------------------------------------------------
 ------------------------------------------------------------------------
 
-myStartupHook :: X ()
-myStartupHook = do
+myStartupHook :: Bool -> X ()
+myStartupHook isDesktop = do
   spawnOnce "nm-applet"
   spawnOnce "nitrogen --restore" -- nitrogen last wallpaper
   spawnOnce "blueman-applet"
@@ -32,9 +32,10 @@ myStartupHook = do
   spawnOnce "dunst"
   spawnOnce "systemctl --user start pipewire-pulse.service pipewire-pulse.socket"
   spawnOnce "picom --experimental-backend"
-  spawnOnce "xinput set-prop 10 339"
+  spawnOnce "~/.config/xmonad/scripts/keyboard.sh"
   spawnOnce myEwwStartupHook
   spawnOnce mySysTray
+  when isDesktop $ spawnOnce "xinput set-prop 10 339"
 
 ------------------------------------------------------------------------
 -- | Window rules | ----------------------------------------------------
@@ -78,7 +79,7 @@ main = do
         { manageHook = myManageHook <+> manageDocks
         , modMask = myModMask
         , terminal = myTerminal
-        , startupHook = myStartupHook
+        , startupHook = myStartupHook isDesktop
         , layoutHook = myLayoutHook
         , borderWidth = myBorderWidth
         , normalBorderColor = myNormalBorderColor

@@ -1,6 +1,13 @@
 #!/bin/sh
 
-current=$(localectl | grep X11 | awk '{print $3}')
+
+if [ "$1" = "se" ]; then
+  current="us"
+elif [ "$1" = "us" ]; then
+  current="se"
+else
+  current=$(localectl | grep X11 | awk '{print $3}')
+fi
 
 if [ "$current" != se ]; then
     localectl set-keymap se

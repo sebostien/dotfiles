@@ -1,5 +1,10 @@
 ---- Other ----
 return {
+  -- Personal
+  {
+    dir = "~/Documents/GitHub/unicode.nvim/",
+    opts = { },
+  },
   -- Make stuff prettier
   "stevearc/dressing.nvim",
   {

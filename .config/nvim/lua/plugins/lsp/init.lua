@@ -1,8 +1,17 @@
 local lsp_keymaps = require("plugins.lsp.lsp_keymap")
 local lsp_theme = require("plugins.lsp.lsp_theme")
 
+vim.filetype.add({
+  extension = {
+    typ = "typst",
+    lalrpop = "lalrpop",
+  }
+})
+
 return {
-  "j-hui/fidget.nvim", -- Show load status
+  "j-hui/fidget.nvim",     -- Show load status
+  "mfussenegger/nvim-dap", -- DAP
+  "NoahTheDuke/vim-just",  -- Justfile
   ---------
   -- SQL --
   {
@@ -67,6 +76,14 @@ return {
             vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group,
               lsp_keymaps.bufopts(bufnr, "Code actions"))
           end,
+        },
+        -- debugging stuff
+        dap = {
+          adapter = {
+            type = "executable",
+            command = "lldb-vscode",
+            name = "rt_lldb",
+          },
         },
       })
     end
@@ -264,7 +281,7 @@ return {
         pyright = {},
         ruff_lsp = {},
         typst_lsp = {
-          exportPdf = "onSave",
+          exportPdf = "onType",
         }
       },
       -- Setup functions:

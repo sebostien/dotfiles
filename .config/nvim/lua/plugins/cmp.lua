@@ -1,17 +1,20 @@
 return {
   {
     "uga-rosa/cmp-dictionary",
-    config = function()
-      local dict = require("cmp_dictionary")
-
-      dict.switcher({
-        spelllang = {
-          -- To switch:
-          --   :set spelllang=sv
-          en = "/home/sn/.config/nvim/dict/en.dict",
-          de = "/home/sn/.config/nvim/dict/sv.dict"
-        },
-      })
+    opts = {
+      paths = {
+        -- spelllang = {
+        --   -- To switch:
+        --   --   :set spelllang=sv
+        --   sv = "/home/sn/.config/nvim/dict/en.dict",
+        --   en = "/home/sn/.config/nvim/dict/sv.dict",
+        -- },
+        first_case_insensitive = true,
+        max_number_items = 50,
+      },
+    },
+    config = function(opts)
+      require("cmp_dictionary").setup(opts)
     end
   },
   {
@@ -92,7 +95,7 @@ return {
           {
             name = "dictionary",
             priority = 50,
-            keyword_length = 4,
+            keyword_length = 3,
             group_index = 3,
           },
         },

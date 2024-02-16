@@ -87,6 +87,7 @@ return {
             ['rust-analyzer'] = {},
           },
         },
+<<<<<<< HEAD
         -- debugging stuff
         dap = {
           adapter = {
@@ -95,7 +96,12 @@ return {
             name = "rt_lldb",
           },
         },
+      })
+=======
+        -- DAP configuration
+        dap = {},
       }
+>>>>>>> 3f30f455da62336afbe07659ccc1c56d64fb3c53
     end
   },
   {

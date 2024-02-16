@@ -45,7 +45,7 @@ o.list = true
 vim.cmd([[ aunmenu PopUp.How-to\ disable\ mouse ]])
 vim.cmd([[ aunmenu PopUp.-1- ]])
 
-vim.cmd([[ nnoremap \ :Neotree reveal<cr> ]]) -- Makes Neotree hijack netrw
+vim.cmd([[ nnoremap \ :Oil <cr> ]]) -- Makes Neotree hijack netrw
 
 -- Windows to close with "q"
 vim.cmd([[ autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :close<CR> ]])

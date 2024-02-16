@@ -18,6 +18,7 @@ return {
         background_colour = "#0d1117",
         render = "compact",
         timeout = 10000,
+        animation = "static",
       })
     end
   },
@@ -89,6 +90,10 @@ return {
       -- Enable true color
       vim.opt.termguicolors = true
     end,
+    keys = {
+      { "<leader>tc", "<CMD>CccHighlighterToggle<CR>", desc = "Toggle color preview" }
+
+    }
   },
 
   -- Autopairs

@@ -117,15 +117,15 @@ sudo fwupdmgr get-updates
 sudo fwupdmgr update -y
 
 # Multimedia
-sudo dnf group install -y Multimedia
-sudo dnf group install -y sound-and-video
+sudo dnf group install -y -q Multimedia
+sudo dnf group install -y -q sound-and-video
 
 ####################################
 next_part "Installing packages"
 ####################################
 
 # Switch to zsh with oh-my-zsh
-sudo dnf install -y util-linux-user zsh
+sudo dnf install -y -q util-linux-user zsh
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 # Install plugins for oh-my-zsh
@@ -133,7 +133,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/
 
 # Github CLI
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install gh -y
+sudo dnf install gh -y -q
 
 # Applets
 sudo dnf install -y network-manager-applet blueman
@@ -164,13 +164,13 @@ sudo dnf install -y -q \
 
 
 # ffmpeg stuff
-dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y
+dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y -q
 
 # Pipewire
-sudo dnf install -y pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
+sudo dnf install -y -q pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
 
 # Pip
-sudo dnf install python3-pip -y
+sudo dnf install python3-pip -y -q
 
 ####################################
 next_part "Installing tmux"
@@ -179,15 +179,20 @@ sudo dnf install tmux python3-tmuxp
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ####################################
-if ask "Install Rust toolchain and Rust tools?"; then
+if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-    cargo install fclones    # Duplicate file finder
-    cargo install fselect    # Find with SQL syntax
-    cargo install kalker     # CLI Calculator
-    cargo install flamegraph # Flamegraph generator
-    cargo install eza        # ls alternative
+    cargo install -q fclones    # Duplicate file finder
+    cargo install -q fselect    # Find with SQL syntax
+    cargo install -q kalker     # CLI Calculator
+    cargo install -q flamegraph # Flamegraph generator
+    cargo install -q eza        # ls alternative
+    cargo install -q zoxide     # cd alternative
+
+    sudo dnf install libsmbclient-devel -y -q
+    cargo install -q termscp    # Remote file transfer (SFTP...)
+
     cargo install --git https://github.com/typst/typst # Typesetting system
 fi
 
@@ -202,14 +207,10 @@ fi
 ####################################
 
 SPOTIFY=0
-ELEMENT=0
 DISCORD=0
 
 if ask "Install Discord via Flatpak?"; then
     DISCORD=1
-fi
-if ask "Install Element (matrix client) via FLatpak?"; then
-    ELEMENT=1
 fi
 if ask "Install Spotify via Flatpak?"; then
     SPOTIFY=1
@@ -221,9 +222,6 @@ if [ $((SPOTIFY + ELEMENT + DISCORD)) -ge 1 ]; then
 
     if [ $DISCORD -eq 1 ]; then 
         flatpak install app/com.discordapp.Discord/x86_64/stable -y
-    fi
-    if [ $ELEMENT -eq 1 ]; then 
-        flatpak install flathub im.riot.Riot
     fi
     if [ $SPOTIFY -eq 1 ]; then 
         flatpak install com.s potify.Client/x86_64/stable -y

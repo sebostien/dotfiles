@@ -1,0 +1,43 @@
+% git
+
+# View all available remote for a git repository
+git remote --verbose
+
+# Checkout to branch
+git checkout <branch>
+
+# Create backdated commit for staged files
+git commit --date="<number_of_days_ago> days ago" -m "<commit_description>"
+
+# Pushes committed changes to remote repository
+git push -u <remote_name> <branch_name>
+
+# Pushes changes to a remote repository overwriting another branch
+git push <remote_name> <branch>:<branch_to_overwrite>
+
+# Pulls changes from a remote repo to the local repo
+git pull --ff-only
+
+# Merges changes on one branch into current branch
+git merge <branch_name>
+
+# Abort the current conflict resolution process, and try to reconstruct the pre-merge state.
+git merge --abort
+
+# Displays log of commits for a repo
+git log
+
+# Displays formatted log of commits for a repo
+git log --all --decorate --oneline --graph
+
+# Checkout a branch from a fork
+git fetch origin pull/<pr_number>/head:pr/<pr_number> \
+   && git checkout pr/<pr_number>
+
+# Skip git hooks
+git commit --no-verify
+
+# Create new branch from current HEAD
+git checkout -b <new_branch_name>
+
+$ branch: git branch | awk '{print $NF}'

@@ -1,0 +1,25 @@
+% flatpak
+
+# Run application
+flatpak run <installed_app_name>
+
+# List all installed applications and runtimes
+flatpak list
+
+# List all installed applications
+flatpak list --app
+
+# Add remote source
+flatpak remote-add --if-not-exists <remote_name> <remote_url>
+
+# Update installed applications
+flatpak update
+
+# Show running applications
+flatpak ps
+
+# Kill a running application
+flatpak kill <running_app>
+
+$ installed_app_name: flatpak list --app | awk -F"\t" '{ print $2 }'
+$ running_app: flatpak ps | awk '{ print $3 }'

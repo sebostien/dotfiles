@@ -1,0 +1,34 @@
+% dnf
+
+# List all installed packages
+dnf list installed
+
+# Info about package
+dnf info <package-name>
+
+# List all history actions (install, update and erase)
+dnf history list
+
+# Check updates for installed packages
+dnf check-update
+
+# Update package
+dnf update <package-name>
+
+# Downgrade package
+dnf downgrade <package-name>
+
+# Install local rpm package
+dnf localinstall <file-rpm>
+
+# Install security updates
+dnf update --security
+
+# List dependencies of package
+dnf deplist <package-name>
+
+# What provides package/file/binary
+dnf whatprovides <query>
+
+# List currently enabled repositories
+dnf repolist

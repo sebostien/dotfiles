@@ -183,12 +183,14 @@ if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-    cargo install -q fclones    # Duplicate file finder
-    cargo install -q fselect    # Find with SQL syntax
-    cargo install -q kalker     # CLI Calculator
-    cargo install -q flamegraph # Flamegraph generator
-    cargo install -q eza        # ls alternative
-    cargo install -q zoxide     # cd alternative
+    cargo install -q fclones          # Duplicate file finder
+    cargo install -q fselect          # Find with SQL syntax
+    cargo install -q kalker           # CLI Calculator
+    cargo install -q flamegraph       # Flamegraph generator
+    cargo install -q eza              # ls alternative
+    cargo install -q navi             # Command cheatsheet
+    cargo install -q --locked zoxide  # cd alternative
+    cargo install -q --locked bacon   # Live rust code checker
 
     sudo dnf install libsmbclient-devel -y -q
     cargo install -q termscp    # Remote file transfer (SFTP...)

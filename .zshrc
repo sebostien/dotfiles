@@ -86,12 +86,13 @@ export DISABLE_AUTO_TITLE='true' # tmuxp
 export PATH=$PATH:/home/sn/scripts
 export PATH=$PATH:/home/sn/go/bin
 
-# Source z
-. /home/sn/scripts/z.sh
-
 source $ZSH/oh-my-zsh.sh
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh
+
+eval "$(zoxide init zsh)"
+eval "$(navi widget zsh)"
 
 ##### Source languages #####
 

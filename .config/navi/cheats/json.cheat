@@ -1,0 +1,4 @@
+% json
+
+# Format JSON
+cat <file> | jq .

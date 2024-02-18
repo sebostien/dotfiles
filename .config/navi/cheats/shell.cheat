@@ -1,0 +1,94 @@
+% Shell Usage
+
+# List all running processes
+ps -A
+
+# Kill a running process
+killall <Process-name>
+
+% Shell System
+
+# Get the current path
+pwd
+
+# Get the current hostname
+hostname
+
+# Get the current users
+users
+
+# Show today's date
+date
+
+% Shell Permissions
+
+# Change group
+chgrp <group-name-from> <group-name-to>
+
+% Shell Directories
+
+# List all directory contents sorted by time modified
+ls -t modified -snew
+
+# List all files of type
+find . -name '*.<txt>' -print
+
+% Shell Symlinks
+
+# Create symlink
+ln -s <source-dirname> <destination-dirname>
+
+# Update symlink
+ln -sfn <source-dirname> <destination-dirname>
+
+# Remove symlink
+unlink <sample-dirname>
+
+% Shell Files
+
+# Search for a string inside all files in the current directory and subdrectories
+grep -r <string> *
+
+# MD5 hash for folders
+tar c <folder> | md5sum
+
+# Encrypt file
+openssl enc -aes-256-cbc -e -in <sample-filename-txt> -out <sample-encrypted-txt>
+
+# Decrypt file
+openssl enc -aes-256-cbc -d -in <sample-encrypted> -out <sample-filename>
+
+% SSH
+
+# Access via ssh
+ssh <username_remote>
+
+% Shell System
+
+# Show disc space
+df -h
+
+# Show disc space (inodes)
+df -i
+
+# Show disc space for current directory
+du -hs
+
+# Monitor error log (stream as file grows)
+tail error.log -f -n 0
+
+% Shell Variables
+
+# Unset variable
+unset <Variable>
+
+% Shell Output & Redirects
+
+# Append content from a file to another file
+cat <file1> >> <file2>
+
+# Sort the content of a file (like cat)
+sort <hello-txt>
+
+# Sort and remove duplicates and save to a new file
+sort <file1-txt> | uniq > <uniq-file1-txt>

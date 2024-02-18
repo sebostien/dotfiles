@@ -5,7 +5,8 @@ vim.filetype.add({
   extension = {
     typ = "typst",
     lalrpop = "lalrpop",
-  }
+    cheat = "cheat",
+  },
 })
 
 return {

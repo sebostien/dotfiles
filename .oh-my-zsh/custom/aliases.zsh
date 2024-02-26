@@ -13,8 +13,18 @@ alias dt="cd ~/Desktop"
 alias dl="cd ~/Downloads"
 alias docs="cd ~/Documents"
 
-# vim
+# neovim
 alias vim="nvim"
+alias v="nvim"
+
+# Edit cheatsheet
+alias cheat="nvim ~/.config/navi/cheats/"
+
+# Changing "cd" to "zoxide"
+if hash zoxide 2>/dev/null; then
+  alias cd='z'
+  alias cdi='zi'
+fi
 
 # Changing "ls" to "eza"
 if hash eza 2>/dev/null; then

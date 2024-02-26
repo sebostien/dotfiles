@@ -1,34 +1,36 @@
 [user]
-	name = sebostien
-	email = sebostien@proton.me
+  name  = sebostien
+  email = sebostien@proton.me
 [ui "color"]
-	ui = always
+  ui = always
 [color]
-	ui = true
+  ui = true
 [commit]
-	template = ~/.gitmessage
+	template = /home/sn/.gitmessage
 [core]
-	editor = nvim
-	autocrlf = input
+  editor = nvim
+  autocrlf = input
 [alias]
 	c = commit
 	s = status
-	lg = log --oneline
+  lg = log --oneline
 	last = log -1 HEAD
-	sl = stash list
+  sl = stash list
+	co = checkout
+	br = branch
 [help]
-	autocorrect = 1
+  autocorrect = 1
 [credential]
-	helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
+  helper = !/usr/bin/gh auth git-credential
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [diff]
-    tool = nvimdiff
+  tool = nvimdiff
 [difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-	tool = nvimdiff
+  tool = nvimdiff
 [merge "nvimdiff"]
-	path = nvim
+  path = nvim

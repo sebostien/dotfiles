@@ -1,0 +1,17 @@
+% rust, cargo
+
+# Run miri with nocapture
+cargo +nightly miri -- --nocapture
+
+# Test with backtrace
+RUST_BACKTRACE=1 cargo test
+
+# Test coverage
+CARGO_INCREMENTAL=0 RUSTFLAGS='-Cinstrument-coverage' LLVM_PROFILE_FILE='cargo-test-%p-%m.profraw' cargo test
+
+# Compile HTML test coverage report
+mkdir -p ./target/coverage/
+grcov . --binary-path ./target/debug/deps/ -s . -t html --branch --ignore-not-existing --ignore '../*' --ignore "/*" -o target/coverage/html
+
+# Update all installed binaries
+cargo install $(cargo install --list | egrep "^[a-z0-9_-]+ v[0-9.]+:$" | cut -f1 -d" ")

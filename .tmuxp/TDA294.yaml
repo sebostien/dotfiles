@@ -1,9 +1,0 @@
-session_name: TDA294
-start_directory: ~/Documents/Chalmers/kurser/TDA294
-windows:
-  - window_name: vim
-    panes:
-      - vim
-  - window_name: other
-    panes:
-      - task project:TDA294

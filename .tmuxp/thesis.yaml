@@ -1,0 +1,12 @@
+session_name: Thesis Code
+start_directory: ~/Documents/Chalmers/Github/rust-capq-thesis/
+windows:
+  - window_name: vim
+    panes:
+      - vim
+  - window_name: cargo
+    panes:
+      - task project:thesis
+  - window_name: other
+    panes:
+      -

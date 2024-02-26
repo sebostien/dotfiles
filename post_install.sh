@@ -162,7 +162,6 @@ sudo dnf install -y -q \
   docker      \
   docker-compose
 
-
 # ffmpeg stuff
 dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y -q
 
@@ -173,29 +172,24 @@ sudo dnf install -y -q pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qj
 sudo dnf install python3-pip -y -q
 
 ####################################
-next_part "Installing tmux"
-####################################
-sudo dnf install tmux python3-tmuxp
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-####################################
 if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-    cargo install -q fclones          # Duplicate file finder
-    cargo install -q fselect          # Find with SQL syntax
-    cargo install -q kalker           # CLI Calculator
-    cargo install -q flamegraph       # Flamegraph generator
-    cargo install -q eza              # ls alternative
-    cargo install -q navi             # Command cheatsheet
-    cargo install -q --locked zoxide  # cd alternative
-    cargo install -q --locked bacon   # Live rust code checker
+    cargo +stable install -q fclones          # Duplicate file finder
+    cargo +stable install -q fselect          # Find with SQL syntax
+    cargo +stable install -q kalker           # CLI Calculator
+    cargo +stable install -q flamegraph       # Flamegraph generator
+    cargo +stable install -q eza              # ls alternative
+    cargo +stable install -q navi             # Command cheatsheet
+    cargo +stable install -q zellij           # Terminal workspace
+    cargo +stable install -q --locked zoxide  # cd alternative
+    cargo +stable install -q --locked bacon   # Live rust code checker
 
     sudo dnf install libsmbclient-devel -y -q
-    cargo install -q termscp    # Remote file transfer (SFTP...)
+    cargo +stable install -q termscp    # Remote file transfer (SFTP...)
 
-    cargo install --git https://github.com/typst/typst # Typesetting system
+    cargo +stable install -q --git https://github.com/typst/typst # Typesetting system
 fi
 
 if ask "Install Node toolchain?"; then
@@ -218,7 +212,7 @@ if ask "Install Spotify via Flatpak?"; then
     SPOTIFY=1
 fi
 
-if [ $((SPOTIFY + ELEMENT + DISCORD)) -ge 1 ]; then
+if [ $((SPOTIFY + DISCORD)) -ge 1 ]; then
     sudo dnf install -y flatpak
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -226,7 +220,7 @@ if [ $((SPOTIFY + ELEMENT + DISCORD)) -ge 1 ]; then
         flatpak install app/com.discordapp.Discord/x86_64/stable -y
     fi
     if [ $SPOTIFY -eq 1 ]; then 
-        flatpak install com.s potify.Client/x86_64/stable -y
+        flatpak install com.spotify.Client/x86_64/stable -y
     fi
 
 fi

@@ -1,7 +1,11 @@
 @media (min-width: 1000px) {
 
 
-  #navigator-toolbox { display: flex; flex-wrap: wrap; flex-direction: row; }
+  #navigator-toolbox {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 
 
   #nav-bar {
@@ -10,8 +14,11 @@
     width: var(--uc-urlbar-min-width);
 
   }
-  
-  #nav-bar #urlbar-container { min-width: 0px !important; width: auto !important; }
+
+  #nav-bar #urlbar-container {
+    min-width: 0px !important;
+    width: auto !important;
+  }
 
 
   #titlebar {
@@ -30,8 +37,13 @@
   }
 
 
-  #navigator-toolbox:focus-within #nav-bar { width: var(--uc-urlbar-max-width); }
-  #navigator-toolbox:focus-within #titlebar { width: calc(100vw - var(--uc-urlbar-max-width) - 1px); }
+  #navigator-toolbox:focus-within #nav-bar {
+    width: var(--uc-urlbar-max-width);
+  }
+
+  #navigator-toolbox:focus-within #titlebar {
+    width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
+  }
 
 
 }

@@ -171,6 +171,10 @@ sudo dnf install -y -q pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qj
 # Pip
 sudo dnf install python3-pip -y -q
 
+# Wezterm
+sudo dnf copr enable wezfurlong/wezterm-nightly
+sudo dnf install wezterm
+
 ####################################
 if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
@@ -364,7 +368,6 @@ echo
 echo "Please install these packages manually:"
 echo
 echo "    Picom Compositor --> https://github.com/Arian8j2/picom-jonaburg-fix"
-echo "    Wez's term       --> https://wezfurlong.org/wezterm/install/linux.html#installing-on-fedora-and-rpm-based-systems"
 echo
 echo "Setup your window manager"
 echo

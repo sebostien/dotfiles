@@ -6,6 +6,7 @@ vim.filetype.add({
     typ = "typst",
     lalrpop = "lalrpop",
     cheat = "cheat",
+    svelte = "html",
   },
 })
 
@@ -16,12 +17,10 @@ return {
   ---------
   -- SQL --
   {
-    'xemptuous/sqlua.nvim',
+    "xemptuous/sqlua.nvim",
     config = function()
-      require('sqlua').setup({
-
-      })
-    end
+      require("sqlua").setup({})
+    end,
   },
   ----------
   -- Spin --
@@ -34,7 +33,7 @@ return {
         lsp_theme()
         lsp_keymaps.on_attach(client, bufnr)
         vim.keymap.set("n", "<localleader>s", "<CMD>SpinVerify<CR>")
-      end
+      end,
     },
   },
   -----------------
@@ -58,9 +57,9 @@ return {
   ----------
   -- Rust --
   {
-    'mrcjkb/rustaceanvim',
-    version = '^3',
-    ft = { 'rust' },
+    "mrcjkb/rustaceanvim",
+    version = "^3",
+    ft = { "rust" },
     dependencies = {
       "neovim/nvim-lspconfig",
     },
@@ -74,18 +73,13 @@ return {
             lsp_theme()
             lsp_keymaps.on_attach(client, bufnr)
             -- Popup list for code actions
-            vim.keymap.set(
-              "n",
-              "<leader>ca",
-              function()
-                vim.cmd.RustLsp('codeAction')
-              end,
-              { silent = true, buffer = bufnr }
-            )
+            vim.keymap.set("n", "<leader>ca", function()
+              vim.cmd.RustLsp("codeAction")
+            end, { silent = true, buffer = bufnr })
           end,
           settings = {
             -- rust-analyzer language server configuration
-            ['rust-analyzer'] = {},
+            ["rust-analyzer"] = {},
           },
         },
         -- debugging stuff
@@ -97,13 +91,13 @@ return {
           },
         },
       }
-    end
+    end,
   },
   {
     "saecki/crates.nvim",
-    tag = 'v0.3.0',
+    tag = "v0.3.0",
     event = { "BufRead Cargo.toml" },
-    config = true
+    config = true,
   },
   ------------
   -- Python --
@@ -152,7 +146,7 @@ return {
   {
     "MrcJkb/haskell-tools.nvim",
     dependencies = {
-      'nvim-telescope/telescope.nvim',
+      "nvim-telescope/telescope.nvim",
     },
     branch = "2.x.x",
     config = function()
@@ -162,10 +156,10 @@ return {
             lsp_theme()
             lsp_keymaps.on_attach(client, bufnr)
           end,
-        }
+        },
       }
     end,
-    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
   },
   ----------------
   -- LSP-Config --
@@ -176,15 +170,12 @@ return {
     },
     opts = {
       ensure_installed = {
-        "lua_ls",
-        "tsserver",
-        "jsonls",
-        "rust_analyzer",
-        "eslint",
-        "marksman",
-        "texlab",
-        "pyright",
+        "clangd", "cssls", "eslint", "jsonls",
+        "lua_ls", "ltex", "marksman", "yamlls",
+        "pyright", "sqlls", "tsserver", "texlab",
+        "typst_lsp",
       },
+
       automatic_installation = true,
     },
   },
@@ -210,9 +201,7 @@ return {
         lsp_theme()
         lsp_keymaps.on_attach(client, bufnr)
       end,
-      capabilities = {
-
-      },
+      capabilities = {},
       servers = {
         lua_ls = {
           settings = {
@@ -224,8 +213,11 @@ return {
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
               },
-            }
-          }
+            },
+          },
+        },
+        svelte = {
+          filetypes = { "svelte", "html" },
         },
         rust_analyzer = {},
         hls = {},
@@ -235,8 +227,12 @@ return {
             vim.o.wrap = true -- Wrap lines
 
             -- Save and build
-            vim.keymap.set("n", "<leader>b", "<CMD>write<CR><CMD>TexlabBuild<CR>",
-              lsp_keymaps.bufopts(bufnr, "Build Latex"))
+            vim.keymap.set(
+              "n",
+              "<leader>b",
+              "<CMD>write<CR><CMD>TexlabBuild<CR>",
+              lsp_keymaps.bufopts(bufnr, "Build Latex")
+            )
 
             -- Open pdf in zathura
             vim.keymap.set("n", "<localleader><enter>", function()
@@ -259,10 +255,10 @@ return {
         },
         ltex = {
           autostart = false,
-          filetypes = { "rust", "tex", "markdown" },
+          filetypes = { "rust", "tex", "markdown", "latex" },
           settings = {
             ltex = {
-              enabled = { "rust", "tex", "markdown" },
+              enabled = { "rust", "tex", "markdown", "latex" },
               ["ltex-ls"] = {
                 logLevel = "warning",
               },
@@ -293,7 +289,7 @@ return {
         ruff_lsp = {},
         typst_lsp = {
           exportPdf = "onType",
-        }
+        },
       },
       -- Setup functions:
       --   Returns true if the server should not be setup with lspconfig.
@@ -315,19 +311,15 @@ return {
             end
           end)
         end,
-      }
+      },
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
       lsp_theme()
 
       local servers = opts.servers
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        opts.capabilities or {}
-      )
+      local capabilities =
+          vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), opts.capabilities or {})
 
       local function setup_server(server)
         local server_opts = vim.tbl_deep_extend(
@@ -353,6 +345,6 @@ return {
 
       -- Apply default handler for mason
       require("mason-lspconfig").setup_handlers({ setup_server })
-    end
+    end,
   },
 }

@@ -5,6 +5,7 @@ return {
     -- https://github.com/nvim-treesitter/nvim-treesitter
     ensure_installed = {
       "rust",
+      "ron",
       "javascript",
       "typescript",
       "c",
@@ -17,6 +18,8 @@ return {
       "css",
       "scss",
       "markdown",
+      "zathurarc",
+      "latex",
       "markdown_inline",
       "help", -- Vim help
     },

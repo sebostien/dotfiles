@@ -15,7 +15,8 @@ sudo dnf install texlive texlive-amsmath texlive-glossaries texlive-todonotes \
                  texlive-tcolorbox texlive-upquote texlive-adjustbox texlive-titling \
                  texlive-ulem texlive-euler texlive-euler-math texlive-standalone \
                  texlive-newpx texlive-mathpartir texlive-stmaryrd texlive-varwidth \
-                 texlive-algpseudocodex texlive-algorithmicx
+                 texlive-algpseudocodex texlive-algorithmicx texlive-moreverb texlive-minted \
+                 texlive-biblatex-ieee texlive-datetime2
 
 # Dictionary
 sudo dnf install aspell aspell-en aspell-sv

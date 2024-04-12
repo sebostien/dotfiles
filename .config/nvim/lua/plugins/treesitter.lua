@@ -7,6 +7,7 @@ return {
       "rust",
       "ron",
       "javascript",
+      "just",
       "typescript",
       "c",
       "cmake",

@@ -1,6 +1,9 @@
 local lsp_keymaps = require("plugins.lsp.lsp_keymap")
 local lsp_theme = require("plugins.lsp.lsp_theme")
 
+-- Just lsp
+require("plugins.lsp.just")
+
 vim.filetype.add({
   extension = {
     typ = "typst",
@@ -8,12 +11,23 @@ vim.filetype.add({
     cheat = "cheat",
     svelte = "html",
   },
+  filename = {
+    ["justfile"] = "just"
+  }
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = { "justfile" },
+  command = "TSBufEnable highlight"
 })
 
 return {
-  "j-hui/fidget.nvim",     -- Show load status
+  { -- Show load status
+    "j-hui/fidget.nvim",
+    lazy = false,
+    priority = 1337,
+  },
   "mfussenegger/nvim-dap", -- DAP
-  "NoahTheDuke/vim-just",  -- Justfile
   ---------
   -- SQL --
   {
@@ -95,7 +109,7 @@ return {
   },
   {
     "saecki/crates.nvim",
-    tag = "v0.3.0",
+    tag = "stable",
     event = { "BufRead Cargo.toml" },
     config = true,
   },
@@ -187,6 +201,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "folke/trouble.nvim",
       { "folke/neodev.nvim",    opts = {} },       -- Lua
+      { "folke/neoconf.nvim",   opts = {} },
       { "b0o/SchemaStore.nvim", version = false }, -- JSON
     },
     keys = {

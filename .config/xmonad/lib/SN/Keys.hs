@@ -49,10 +49,8 @@ myNamedKeys isDesktop
         "Run"
         [ ("M-S-<Return>", "Run Prompt", spawn "~/.config/rofi/scripts/runmenu.sh")
         , ("M-S-p", "Appsmenu Prompt", spawn "~/.config/rofi/scripts/appsmenu.sh")
-        , ("M-<Return>", "Open Terminal", spawn myTerminal)
-        , ("M-p t", "Open with unix domain", spawn "wezterm connect unix")
-        , ("M-p c", "Open calculator", spawnAndDo (doCenterFloat) "wezterm start -- kalker")
-        , ("M-p k", "Open calendar", spawn "wezterm start -- kal")
+        , ("M-<Return>", "Open Terminal Multiplexer", spawn "wezterm connect unix")
+        , ("M-C-<Return>"  , "Open Terminal", spawn "wezterm start --always-new-process")
         , ("M-p b", "Open Browser", spawn myBrowser)
         ]
     , KeySection

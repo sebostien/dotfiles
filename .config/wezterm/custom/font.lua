@@ -1,6 +1,9 @@
 local wezterm = require("wezterm")
 
-return function(config)
+local M = {}
+
+---@param config _.wezterm.ConfigBuilder
+M.apply_to_config = function(config)
   config.font = wezterm.font("Hasklug NFM", { weight = "Regular", stretch = "Normal", style = "Normal" })
   config.font_size = 13
 
@@ -34,3 +37,5 @@ return function(config)
     },
   }
 end
+
+return M

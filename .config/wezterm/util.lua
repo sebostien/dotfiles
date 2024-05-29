@@ -12,14 +12,19 @@ local M = {}
 
 ---@param opts ListSelectOpts
 M.list_select = function(opts)
-  opts.window:perform_action(act.InputSelector({
-    title = opts.title,
-    choices = opts.choices,
-    action = wezterm.action_callback(function(win1, pane1, id)
-      if not id then return end
-      opts.callback(win1, pane1, id)
-    end)
-  }), opts.pane)
+  opts.window:perform_action(
+    act.InputSelector({
+      title = opts.title,
+      choices = opts.choices,
+      action = wezterm.action_callback(function(win1, pane1, id)
+        if not id then
+          return
+        end
+        opts.callback(win1, pane1, id)
+      end),
+    }),
+    opts.pane
+  )
 end
 
 ---@class PromptInputOpts
@@ -34,11 +39,14 @@ M.prompt_input = function(opts)
     act.PromptInputLine({
       description = opts.prompt,
       action = wezterm.action_callback(function(window, pane, input)
-        if not input or #input == 0 then return end
+        if not input or #input == 0 then
+          return
+        end
         opts.callback(window, pane, input)
-      end)
-    }
-    ), opts.pane)
+      end),
+    }),
+    opts.pane
+  )
 end
 
 ---@class SwitchWorkspaceOpts
@@ -57,6 +65,5 @@ M.switch_workspace = function(opts)
     opts.window:perform_action(act.SwitchToWorkspace(ws), opts.pane)
   end
 end
-
 
 return M

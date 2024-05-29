@@ -1,0 +1,8 @@
+% snips.sh, snippets, share code
+
+# Upload file to snips.sh
+cat FILE_NAME | ssh snips.sh
+
+# Upload file to snips.sh, expires after 5min
+cat FILE_NAME | ssh snips.sh --ttl 5m -private
+

@@ -1,15 +1,22 @@
 [user]
-  name  = sebostien
-  email = sebostien@proton.me
+	name = sebostien
+	email = sebostien@proton.me
 [ui "color"]
   ui = always
 [color]
   ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 [commit]
 	template = /home/sn/.gitmessage
 [core]
-  editor = nvim
-  autocrlf = input
+	editor = nvim
+	autocrlf = input
+	excludesfile = /home/sn/.gitignore_global
+	ignorecase = false
+	safecrlf = warn
 [alias]
 	c = commit
 	s = status
@@ -27,10 +34,24 @@
 [init]
 	defaultBranch = main
 [diff]
-  tool = nvimdiff
+	tool = nvimdiff
+	colorMoved = default
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-  tool = nvimdiff
+	tool = nvimdiff
+	conflictstyle = diff3
 [merge "nvimdiff"]
   path = nvim
+[g2 "panic"]
+	excludes = -e .classpath -e .settings -e *.iml
+[sequence]
+	editor = interactive-rebase-tool
+[mergetool "nvimdiff"]
+	trustExitCode = false
+[pull]
+	rebase = true
+[push]
+	default = current
+[mergetool]
+	keepBackup = false

@@ -79,6 +79,7 @@ plugins=(
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 export EDITOR=nvim
+export VISUAL=nvim
 export LANG=en_US.UTF-8
 
 export DISABLE_AUTO_TITLE='true' # tmuxp
@@ -102,3 +103,11 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # GHC
 [ -f "/home/sn/.ghcup/env" ] && source "/home/sn/.ghcup/env" # ghcup-env
+
+# pnpm
+export PNPM_HOME="/home/sn/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

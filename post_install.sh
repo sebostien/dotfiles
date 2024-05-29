@@ -10,12 +10,10 @@
 #    \|_________|
 #
 
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    if [ "$NAME" != "Fedora Linux" ]; then
-        echo "Running $NAME, this script only supports Fedora Linux"
-        exit 1
-    fi
+. /etc/os-release || (echo "Could not detect distrubtion"; exit 1)
+if [ "$NAME" != "Fedora Linux" ]; then
+    echo "Running $NAME, this script only supports Fedora Linux"
+    exit 1
 fi
 
 # Check if sudo
@@ -23,6 +21,33 @@ if [[ "$EUID" = 0 ]]; then
     echo "Don't run with sudo"
     exit 1
 fi
+
+SYSTEM_UPDATE=1
+INSTALL_DNF=1
+INSTALL_CARGO=1
+INSTALL_FLATPAK=1
+
+print_help() {
+  echo "Setup fedora system."
+  echo
+  echo "Syntax: ./post_install.sh [OPTIONS] [CMD?]"
+  echo
+  echo "CMD"
+  echo "update"
+  echo
+  echo "OPTIONS"
+  echo "--dnf"
+}
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -h|--help)
+      print_help
+      exit 0
+      ;;
+  esac
+done
+
 
 ask() {
     local reply
@@ -93,7 +118,7 @@ sudo dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-relea
 sudo dnf install "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm" -y
 sudo dnf install -y rpmfusion-free-release-tainted
 
-# RPM Sphere, for trayer
+# RPM Sphere
 sudo dnf install "https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-$(rpm -E %fedora)-1.noarch.rpm" -y
 
 # Add Fedora third party repository
@@ -124,13 +149,6 @@ sudo dnf group install -y -q sound-and-video
 next_part "Installing packages"
 ####################################
 
-# Switch to zsh with oh-my-zsh
-sudo dnf install -y -q util-linux-user zsh
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-
-# Install plugins for oh-my-zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-
 # Github CLI
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf install gh -y -q
@@ -151,19 +169,29 @@ sudo dnf install -y -q \
   nautilus    \
   dunst       \
   neovim      \
+  python3-neovim \
   playerctl   \
   vlc         \
   btop        \
   ripgrep     \
   fd-find     \
-  stalonetray \
   aria2       \
   hyperfine   \
   docker      \
-  docker-compose
+  docker-compose \
+  fish \
+  zathura \
+  fselect \
+  eza \
+  navi \
+  zoxide \
+  jq \
+  unar \
+  sd \
+  tokei
 
 # ffmpeg stuff
-dnf install ffmpeg ffmpeg-libs compat-ffmpeg28 -y -q
+dnf install -y -q ffmpeg ffmpeg-libs compat-ffmpeg28 ffmpegthumbnailer 
 
 # Pipewire
 sudo dnf install -y -q pipewire-alsa pipewire-plugin-jack pipewire-pulseaudio qjackctl pipewire-plugin-jack
@@ -180,28 +208,23 @@ if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-    cargo +stable install -q fclones          # Duplicate file finder
-    cargo +stable install -q fselect          # Find with SQL syntax
-    cargo +stable install -q kalker           # CLI Calculator
-    cargo +stable install -q flamegraph       # Flamegraph generator
-    cargo +stable install -q eza              # ls alternative
-    cargo +stable install -q navi             # Command cheatsheet
-    cargo +stable install -q zellij           # Terminal workspace
-    cargo +stable install -q --locked zoxide  # cd alternative
-    cargo +stable install -q --locked bacon   # Live rust code checker
+    cargo +stable install -q fclones                   # Duplicate file finder
+    cargo +stable install -q kalker                    # CLI Calculator
+    cargo +stable install -q flamegraph                # Flamegraph generator
+    cargo +stable install -q zellij                    # Terminal workspace
+    cargo +stable install -q --locked bacon            # Live rust code checker
+    cargo +stable install -q --locked starship         # Shell prompt
+    cargo +stable install -q --locked yazi-fm yazi-cli # File browser
+    cargo +stable install -q tailspin                  # Log file tail
+    cargo +stable install -q atuin                     # Shell history
 
     sudo dnf install libsmbclient-devel -y -q
     cargo +stable install -q termscp    # Remote file transfer (SFTP...)
 
     cargo +stable install -q --git https://github.com/typst/typst # Typesetting system
-fi
 
-if ask "Install Node toolchain?"; then
-    # nvm, node, npm, yarn
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    . ~/.nvm/nvm.sh # Load nvm
-    nvm install node
-    curl -o- -L https://yarnpkg.com/install.sh | bash
+    # Yazi
+
 fi
 
 ####################################
@@ -258,38 +281,19 @@ if ask "Install picom dependencies?"; then
 fi
 
 ####################################
-EWW=0
-YAZI=0
-
-if ask "Install yazi"; then 
-  YAZI=1;
-fi
-
 if ask "Install Eww?"; then
-   EWW=1;
-fi
-
-if [ $YAZI -eq 1 ]; then
-    cd ~/Apps || exit 1
-    
-    git clone https://github.com/sxyazi/yazi.git
-    cd ~/Apps/yazi/ || exit 1
-    cargo build --release
-    sudo ln -s /home/sn/Apps/yazi/target/release/yazi /usr/bin/yazi
-
-    cd ~/install_tmp || exit 1
-fi
-
-if [ $EWW -eq 1 ]; then
     cd ~/Apps || exit 1
 
     # Eww Widgets dependencies
-    sudo dnf install -y gtk3-devel pango-devel gdk-pixbuf2-devel \
-        cairo-devel cairo-gobject-devel glib2-devel gtk-layer-shell-devel
+    sudo dnf install -y \
+        gtk3-devel pango-devel gdk-pixbuf2-devel libdbusmenu-gtk3-devel \
+        cairo-devel cairo-gobject-devel glib2-devel gtk-layer-shell-devel \
+        libdbusmenu-gtk3-devel
 
-    git clone https://github.com/elkowar/eww
+
+    git clone https://github.com/elkowar/eww.git
     cd ~/Apps/eww/ || exit 1
-    cargo build --release
+    cargo +stable build --release --no-default-features --features x11
     sudo ln -s /home/sn/Apps/eww/target/release/eww /usr/bin/eww
 
     cd ~/install_tmp || exit 1
@@ -349,8 +353,8 @@ xdg-mime default org.pwmt.zathura.desktop application/pdf
 sudo dnf autoremove -y
 
 # Change default shell
-echo "Change shell to zsh:"
-chsh -s "$(which zsh)"
+echo "Change shell to fish:"
+chsh -s "$(which fish)"
 
 # Remove temporary files used by the script
 cd ~ || exit 1

@@ -16,6 +16,7 @@
       (statContainer
         :markup workspaces_listen
       )
+      (tray)  
     )
     (statContainer
       :text windowTitle
@@ -147,6 +148,19 @@
         :text {round(EWW_DISK["/"].free / 1073741824, 0) + "G" }
       )
       (power :laptop true)
+    )
+  )
+)
+
+(defwidget tray [?laptop]
+  (box :orientation "h"
+       :class "stat-container-${laptop == true ? 'lt' : 'dt'} field"
+       :space-evenly false
+    (systray
+      :spacing 8
+      :orientation "h"
+      :space-evenly true
+      :icon-size 24
     )
   )
 )

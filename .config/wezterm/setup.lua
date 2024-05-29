@@ -15,7 +15,7 @@ local M = {}
 ---@field key_tables table<string, _.wezterm.KeyBinding[]>
 
 ---@class Setup
----@field leader { key: string, mods: string, timeout_milliseconds: integer }
+---@field leader { key: string, mods: string, timeout_milliseconds: integer }|nil
 ---@field keys KeyTables
 
 ---@param config _.wezterm.ConfigBuilder
@@ -26,22 +26,21 @@ M.apply_to_config = function(config, custom)
   config.keys = {}
   config.key_tables = {}
 
-  config.leader = custom.leader
-  -- Leader twice will input leader raw
-  table.insert(config.keys,
-    {
+  if custom.leader ~= nil then
+    config.leader = custom.leader
+    -- Leader twice will input leader raw
+    table.insert(config.keys, {
       key = custom.leader.key,
       mods = custom.leader.mods,
-      action = act.SendKey({ key = custom.leader.key, mods = custom.leader.mods })
+      action = act.SendKey({ key = custom.leader.key, mods = custom.leader.mods }),
     })
+  end
 
   -- Insert keys
   config.key_tables = custom.keys.key_tables
   for _, v in ipairs(custom.keys.normal) do
     if v.key ~= nil then
-      table.insert(config.keys,
-        { key = v.key, mods = v.mods, action = v.action }
-      )
+      table.insert(config.keys, { key = v.key, mods = v.mods, action = v.action })
     end
 
     -- Insert into command palette
@@ -54,7 +53,9 @@ M.apply_to_config = function(config, custom)
     end
   end
 
-  wezterm.on("augment-command-palette", function() return command_palette_extra end)
+  wezterm.on("augment-command-palette", function()
+    return command_palette_extra
+  end)
 end
 
 return M

@@ -13,9 +13,3 @@ myTerminal = "wezterm"
 
 myBrowser :: String
 myBrowser = "firefox "
-
-mySysTray :: String
-mySysTray = "killall stalonetray ; stalonetray"
-
-killMySysTray :: String
-killMySysTray = "killall stalonetray"

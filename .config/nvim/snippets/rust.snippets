@@ -1,5 +1,5 @@
 snippet clippy "Clippy lints" b
-#![warn(
+  #![warn(
     missing_copy_implementations,
     clippy::all,
     clippy::doc_markdown,
@@ -38,29 +38,28 @@ snippet clippy "Clippy lints" b
     clippy::perf,
     clippy::style,
     clippy::pedantic
-)]
-endsnippet
+  )]
 
 snippet AOCTest "AOC Test" b
-pub fn get_solution() -> crate::Solution<i64, i64> {
+  pub fn get_solution() -> crate::Solution<i64, i64> {
     crate::Solution {
-        date: (2023, $0),
-        part_1: Box::new(part_1),
-        part_2: Box::new(part_2),
-        answer: (0, 0),
+      date: (2024, ${0}),
+      part_1: Box::new(part_1),
+      part_2: Box::new(part_2),
+      answer: (0, 0),
     }
-}
+  }
 
-fn part_1(_input: &str) -> anyhow::Result<i64> {
+  fn part_1(_input: &str) -> anyhow::Result<i64> {
     Ok(0)
-}
+  }
 
-fn part_2(_input: &str) -> anyhow::Result<i64> {
+  fn part_2(_input: &str) -> anyhow::Result<i64> {
     Ok(0)
-}
+  }
 
-#[test]
-fn dayXXX() {
+  #[test]
+  fn day${0:NNN}() {
     let input = r#"
 
     "#
@@ -68,9 +67,4 @@ fn dayXXX() {
 
     assert_eq!(0, part_1(input).unwrap());
     assert_eq!(0, part_2(input).unwrap());
-}
-endsnippet
-
-
-
-# vim:ft=snippets
+  }

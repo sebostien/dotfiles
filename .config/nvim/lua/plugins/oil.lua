@@ -1,13 +1,18 @@
 return {
   {
     "refractalize/oil-git-status.nvim",
+    event = "VeryLazy",
     dependencies = {
       "stevearc/oil.nvim",
     },
-    config = true,
+    opts = { show_ignored = true },
   },
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
+    event = { "VeryLazy" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {
       win_options = {
         signcolumn = "yes:2",
@@ -22,12 +27,16 @@ return {
       },
       keymaps = {
         ["<ESC>"] = "actions.close",
-      }
+      },
     },
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "<localleader>fd", function() require("oil").toggle_float() end, desc = "File tree" }
+      {
+        "<localleader>\\",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "File tree float",
+      },
     },
   },
 }

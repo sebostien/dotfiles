@@ -1,0 +1,4 @@
+% util
+
+# Count number of lines in many files
+fd --extension <extension> --exec wc -l | awk '{ print $1 }' | paste -sd+ | bc

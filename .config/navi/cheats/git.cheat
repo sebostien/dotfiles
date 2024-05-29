@@ -15,6 +15,9 @@ git diff --cached
 # Remove staged files
 git rm --cached \*.log
 
+# Merge fast forward
+git merge --ff-only origin/main
+
 ;;;;;;;;;;;;;;;;;;;
 ; Log
 

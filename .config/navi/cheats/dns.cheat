@@ -1,0 +1,6 @@
+% DNS
+
+# Flush cache
+resolvectl flush-caches
+resolvectl statistics
+

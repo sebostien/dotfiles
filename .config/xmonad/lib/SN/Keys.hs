@@ -1,7 +1,7 @@
 module SN.Keys (myKeys, myNamedKeys, makeMyKeyFile) where
 
 import SN.EwwBar (myEwwCloseBar, myEwwSpawnBar)
-import SN.Globals (killMySysTray, myBrowser, mySysTray, myTerminal)
+import SN.Globals (myBrowser, myTerminal)
 import System.Exit (exitSuccess)
 import XMonad (
   ChangeLayout (NextLayout),
@@ -49,8 +49,7 @@ myNamedKeys isDesktop
         "Run"
         [ ("M-S-<Return>", "Run Prompt", spawn "~/.config/rofi/scripts/runmenu.sh")
         , ("M-S-p", "Appsmenu Prompt", spawn "~/.config/rofi/scripts/appsmenu.sh")
-        , ("M-<Return>", "Open Terminal Multiplexer", spawn "wezterm connect unix")
-        , ("M-C-<Return>"  , "Open Terminal", spawn "wezterm start --always-new-process")
+        , ("M-<Return>", "Open Terminal Multiplexer", spawn "wezterm start --always-new-process")
         , ("M-p b", "Open Browser", spawn myBrowser)
         ]
     , KeySection
@@ -73,8 +72,6 @@ myNamedKeys isDesktop
         "Docks"
         [ ("M-S-e o", "Open top bar", spawn myEwwSpawnBar)
         , ("M-S-e c", "Close top bar", spawn myEwwCloseBar)
-        , ("M-S-t o", "Open tray", spawn mySysTray)
-        , ("M-S-t c", "Close tray", spawn killMySysTray)
         ]
     , KeySection
         "Workspaces"

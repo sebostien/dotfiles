@@ -1,246 +1,183 @@
-local M = {}
+---@class Color
+---@field bright string Very bright
+---@field base string   Pretty bright
+---@field mantle string Pretty Dark
+---@field crust string  Very Dark
 
-local x = {
-  '#01060e',
-  '#0a0e14',
-  '#0d1016',
-  '#161f2a',
-  '#121922',
-  '#191e25',
-  '#1d2936',
-  '#242831',
-  '#292d36',
-  '#2e323c',
-  '#3d424d',
-  '#626a73',
-  '#b3b1ad',
-  '#ffffff',
-  '#e1af4b',
-  '#ffb454',
-  '#e6b450',
-  '#f9af4f',
-  '#f29668',
-  '#fae994',
-  '#ffee99',
-  '#ff3333',
-  '#d96c75',
-  '#ea6c73',
-  '#f07178',
-  '#91b362',
-  '#90e1c6',
-  '#c7c7c7',
-  '#686868',
-  '#c2d94c',
-  '#6994bf',
-  '#39bae6',
-  '#53bdfa',
-  '#59c2ff',
-  '#95e6cb',
-}
-
-M.palette = {
-  black   = {
-    base = "#0D1117",
-    bright = "#272B31",
-  },
-  red     = {
-    base = "#f44336",
-    bright = "#ff5252",
-    syntax = "#ff6c6b"
-  },
-  green   = {
-    base = "#27ae60",
-    bright = "#2ecc71",
-    syntax = "#98be65"
-  },
-  yellow  = {
-    base = "#FBC02D",
-    bright = "#ecbe7b",
-    syntax = "#986801",
-  },
-  blue    = {
-    base = "#2880fe",
-    bright = "#03A9F4",
-    syntax = "#4078f2"
-  },
-  magenta = {
-    base = "#9C27B0",
-    bright = "#EA80FC",
-    syntax = "#c678dd",
-  },
-  cyan    = {
-    base = "#00c8d4",
-    bright = "#34e7e4",
-    syntax = "#79c0ff",
-  },
-  white   = {
-    base = "#FAFAFA",
-    bright = "#FFFFFF",
-    syntax = "#FAFAFA",
-  },
-  orange  = {
-    base = "#fa951a",
-    bright = "#da8548",
-    syntax = "#da8548"
-  },
-  pink    = {
-    base   = "#c678dd",
-    bright = "#ffafd2",
-    syntax = "#ffafd2",
-  },
-
-  comment = "#6B6E74",
-
-  bg0     = "#0D1117",
-  bg1     = "#0D1117",
-  bg2     = "#1A1E24",
-  bg3     = "#272B31",
-  bg4     = "#34383E",
-  fg0     = "#EFEFEF",
-  fg1     = "#C3C4C6",
-  fg2     = "#97999D",
-  fg3     = "#6B6E74",
-
-  sel0    = "#34383E", -- Popup bg, visual selection bg
-  sel1    = "#3F4349", -- Popup sel bg, search bg
-}
-
-M.window = {
-  bg0 = "#0d1117",
-  bg1 = "#13171d",
-
+---@class SNColors
+---@field bg string
+---@field fg string
+---@field accent string
+---@field black Color
+---@field white Color
+---@field red Color
+---@field green Color
+---@field yellow Color
+---@field blue Color
+---@field purple Color
+local COLORS = {
+  bg = "#0D1117",
+  fg = "#F8FAFC",
+  accent = "#2ecc71",
   black = {
-    base = "#0d1117",
-    bright = "#4a576f",
+    bright = "#222934",
+    base = "#1c222b", -- TODO: Change this
+    mantle = "#151a22",
+    crust = "#0D1117",
   },
   white = {
-    base = "#fafafa",
-    bright = "#ffffff",
+    bright = "#F8FAFC",
+    base = "#E2E5E7",
+    mantle = "#CCCFD2",
+    crust = "#A0A3A7",
   },
   red = {
-    base = "#F44336",
-    bright = "#ff5252",
+    bright = "#F29D9D",
+    base = "#F97878",
+    mantle = "#FF5252",
+    crust = "#F44336",
   },
   green = {
-    base = "#27ae60",
-    bright = "#2ecc71",
+    -- bright = "#E0E7CD",
+    bright = "#BAE67E",
+    -- base =  "#A6CC70",
+    base = "#98Be65",
+    mantle = "#50A14F",
+    -- mantle = "#2Ecc71",
+    crust = "#27AE60",
   },
   yellow = {
-    base = "#Fa951a",
+    base = "#FFD580",
     bright = "#FBC02D",
+    mantle = "#FA951A",
+    crust = "#FF8F40",
   },
   blue = {
-    base = "#2880fe",
-    bright = "#03A9F4",
-  },
-  magenta = {
-    base = "#9C27B0",
-    bright = "#EA80FC",
-  },
-  cyan = {
-    base = "#00c8d4",
+    -- bright = "#95E6CB",
+    -- bright = "#90E1C6",
     bright = "#34e7e4",
+    base = "#4cd4bd",
+    -- base = "#4CBF99",
+    mantle = "#03a9F4",
+    crust = "#2880FE",
+    -- "#39BAE6",
+    -- "#53BDFA",
+    -- "#59C2FF",
+    -- "#61BDFF",
+    -- "#5CCFE6",
+    -- "#73D0FF",
+  },
+  purple = {
+    bright = "#FFAFD2",
+    base = "#D3B8F9",
+    mantle = "#AD6FF7",
+    crust = "#9C27B0",
+    -- "#EA80FC",
+    -- "#C678DD",
+    -- "#CB9FF8",
   },
 }
 
-M.syntax = {
-  red = {
-    base = "#ff6c6b",
-    bright = "#e45649",
-  },
-  green = {
-    base = "#98be65",
-    bright = "#50a14f",
-  },
-  orange = {
-    base = "#da8548",
-    bright = "#da8548",
-  },
-  yellow = {
-    base = "#ecbe7b",
-    bright = "#986801",
-  },
-  blue = {
-    base = "#51afef",
-    bright = "#4078f2",
-  },
-  magenta = {
-    base = "#c678dd",
-    bright = "#a626a4",
-  },
-  cyan = {
-    base = "#0184bc",
-    bright = "#46d9ff",
-  },
+local tmp = {
+
+  "#4D5566",
+  "#575F66",
+  "#707A8C",
+  "#B3B1AD",
+  "#8A9199",
+  "#CBCCC6",
+  "#5C6773",
+  "#626A73",
+  "#313D37",
+  "#3E373A",
+  "#404755",
+  "#5F687A",
+  "#33415E",
+  "#323A4C",
+  "#232A4C",
+  "#576070",
+  "#383E4C",
+  "#323945",
+  "#464D5E",
+  "#273747",
+  "#304357",
+  "#393F4D",
+  "#607080",
+  "#3E4B59",
+  "#ABB0B6",
+  "#EFF0F1",
+  "#FFFFFF",
+  "#CCCED0",
+  "#F0F0F0",
+  "#CDD0D3",
+  "#A0A6AC",
+  "#D1E4F4",
+  "#E7E8E9",
+  "#E1E1E2",
+  "#D3D5D8",
+  "#E6E7E9",
+  "#828C99",
+  "#C1C9E6",
+  "#A3AAC2",
+  "#8E94AB",
+  "#686868",
+  "#6B6E74",
+  "#6B6E74",
 }
 
-M.window = {
-  bg1 = "#13171d",
-  bg0 = "#0d1117",
-
-  black = {
-    base = "#0d1117",
-    bright = "#4a576f",
-  },
-  white = {
-    base = "#fafafa",
-    bright = "#ffffff",
-  },
-  red = {
-    base = "#F44336",
-    bright = "#ff5252",
-  },
-  green = {
-    base = "#27ae60",
-    bright = "#2ecc71",
-  },
-  yellow = {
-    base = "#Fa951a",
-    bright = "#FBC02D",
-  },
-  blue = {
-    base = "#2880fe",
-    bright = "#03A9F4",
-  },
-  magenta = {
-    base = "#9C27B0",
-    bright = "#EA80FC",
-  },
-  cyan = {
-    base = "#00c8d4",
-    bright = "#34e7e4",
-  },
+local macchiato = {
+  rosewater = "#F5B8AB",
+  flamingo = "#F29D9D",
+  pink = "#AD6FF7",
+  mauve = "#FF8F40",
+  red = "#E66767",
+  maroon = "#EB788B",
+  peach = "#FAB770",
+  yellow = "#FACA64",
+  green = "#70CF67",
+  teal = "#4CD4BD",
+  sky = "#61BDFF",
+  sapphire = "#4BA8FA",
+  blue = "#00BFFF",
+  lavender = "#00BBCC",
+  text = "#C1C9E6",
+  subtext1 = "#A3AAC2",
+  subtext0 = "#8E94AB",
+  overlay2 = "#7D8296",
+  overlay1 = "#676B80",
+  overlay0 = "#464957",
+  surface2 = "#3A3D4A",
+  surface1 = "#2F313D",
+  surface0 = "#1D1E29",
+  base = "#0b0b12",
+  mantle = "#11111a",
+  crust = "#191926",
+  rosewater = "#f5e0dc",
+  flamingo = "#f2cdcd",
+  mauve = "#cba6f7",
+  pink = "#f5c2e7",
+  base = "#1e1e2e",
+  blue = "#89b4fa",
+  crust = "#11111b",
+  green = "#a6e3a1",
+  lavender = "#b4befe",
+  mantle = "#181825",
+  maroon = "#eba0ac",
+  overlay0 = "#6c7086",
+  overlay1 = "#7f849c",
+  overlay2 = "#9399b2",
+  peach = "#fab387",
+  red = "#f38ba8",
+  sapphire = "#74c7ec",
+  sky = "#89dceb",
+  subtext0 = "#a6adc8",
+  subtext1 = "#bac2de",
+  surface0 = "#313244",
+  surface1 = "#45475a",
+  surface2 = "#585b70",
+  teal = "#94e2d5",
+  text = "#cdd6f4",
+  yellow = "#f9e2af",
 }
 
-M.syntax = {
-  red = {
-    base = "#ff6c6b",
-    bright = "#e45649",
-  },
-  green = {
-    base = "#98be65",
-    bright = "#50a14f",
-  },
-  orange = {
-    base = "#da8548",
-    bright = "#da8548",
-  },
-  yellow = {
-    base = "#ecbe7b",
-    bright = "#986801",
-  },
-  blue = {
-    base = "#51afef",
-    bright = "#4078f2",
-  },
-  magenta = {
-    base = "#c678dd",
-    bright = "#a626a4",
-  },
-  cyan = {
-    base = "#0184bc",
-    bright = "#46d9ff",
-  },
-}
-
-return M
+return COLORS

@@ -1,62 +1,121 @@
 -------------------------------------------------
 --------------------- Theme ---------------------
 -------------------------------------------------
+local a = {}
+---@class Colors
+local Colors = {
+  rosewater = "#F5B8AB",
+  flamingo = "#F29D9D",
+  pink = "#AD6FF7",
+  mauve = "#D87937",
+  -- mauve = "#C6A0F6",
+  red = "#f65f54",
+  maroon = "#E76A77",
+  peach = "#FAB770",
+  -- peach = "#F5A97F",
+  -- yellow = "#EED49F",
+  yellow = "#FACA64",
+  green = "#70CF67",
+  teal = "#4CD4BD",
+  sky = "#61BDFF",
+  sapphire = "#4BA8FA",
+  blue = "#03A9F4",
+  lavender = "#B7BDF8",
+  text = "#EFF2F6",
+  subtext1 = "#A3AAC2",
+  subtext0 = "#8E94AB",
+  overlay2 = "#7D8296",
+  overlay1 = "#676B80",
+  overlay0 = "#464957",
+  surface2 = "#3A3D4A",
+  surface1 = "#2F313D",
+  surface0 = "#1D1E29",
+  base = "#0D1117",
+  mantle = "#0D1117",
+  crust = "#191926",
 
-local colors = require("colors")
+  -- Whites
+  fg0 = "#EFF2F6",
+  fg1 = "#D5D9DF",
+  fg2 = "#BCC0C6",
+  fg3 = "#A3A7AD",
+  fg4 = "#838589",
 
-local WC = colors.window
-local SC = colors.syntax
-
-local palettes = {
-  nordfox = {
-    bg0 = WC.bg0,
-    bg1 = WC.bg0,
-    black = WC.black,
-    white = WC.white,
-    red = SC.red,
-    green = SC.green,
-    yellow = SC.yellow,
-    blue = SC.blue,
-    magenta = SC.magenta,
-    cyan = SC.cyan,
-    orange = SC.orange,
-  },
+  -- Extra
+  grass = "#91B362",
+  cyan = "#90E1C6",
+  ketchup = "#F44336",
+  kiwi = "#2ECC71",
+  cactus = "#27AE60",
+  tangarine = "#FBC02D",
+  orange = "#FA951A",
+  pinker = "#C8A5FF",
+  blueberry = "#2880FE",
+  violet = "#EA80FC",
+  turquoise = "#00C8D4",
+  bluish = "#45D7FC",
 }
 
-local specs = {
-  nordfox = {
-    git = {
-      changed = WC.yellow.base,
-    },
-  },
-}
+---@param colors Colors
+local custom_highlights = function(colors)
+  return {
+    -- NeoVim
+    FloatBorder = { fg = colors.surface2, bg = colors.base },
+    CurSearch = { bg = colors.overlay1 },
+    IncSearch = { bg = colors.overlay1 },
+    CursorLineNr = { fg = colors.blue, style = { "bold" } },
+    DashboardFooter = { fg = colors.overlay0 },
+    WinSeparator = { fg = colors.overlay0, style = { "bold" } },
+    Headline = { fg = colors.blue, style = { "bold" } },
 
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = WC.bg1 })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = WC.bg0 })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = WC.bg1 })
-vim.api.nvim_set_hl(0, "LspInfoBorder", { bg = WC.bg1, fg = WC.white.base })
+    -- Telescope
+    TelescopeNormal = { link = "background" },
+    TelescopePreviewTitle = { fg = colors.base, bg = colors.green },
+    TelescopePromptTitle = { fg = colors.base, bg = colors.peach },
+    TelescopeResultsTitle = { fg = colors.base, bg = colors.blue },
+
+    -- Mini
+    MiniIndentscopeSymbol = { link = "Comment" },
+    MiniSurround = { bg = colors.pink, fg = colors.surface1 },
+
+    -- ["@markup.italic"] = { fg = colors.blue, style = { "italic" } },
+    -- ["@markup.strong"] = { fg = colors.blue, style = { "bold" } },
+
+    -- Syntax
+    String = { fg = colors.grass },
+    Comment = { fg = colors.fg4 },
+    Include = { fg = colors.bluish },
+    ["@property"] = { link = "@lsp.type.variable" },
+    ["@module"] = { fg = colors.bluish },
+    ["@lsp.type.interface"] = { fg = colors.red },
+  }
+end
 
 return {
-  "nvim-treesitter/playground",
   {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      require("nightfox").setup({
-        palettes = palettes,
-        specs = specs,
-        options = {
-          terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-          dim_inactive = true,    -- Non focused panes set to alternative background
-        },
-      })
-      vim.cmd([[ colorscheme nordfox ]])
-    end
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1337,
+    opts = {
+      flavour = "macchiato",
+      dim_inactive = {
+        enabled = false,
+      },
+      custom_highlights = custom_highlights,
+      default_integrations = true,
+      color_overrides = {
+        macchiato = Colors,
+      },
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        treesitter = true,
+        notify = true,
+      },
+    },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin")
+    end,
   },
-  -- {
-  --   dir = "~/Documents/GitHub/seafloor.nvim/",
-  --   name = "seafloor",
-  --   init = function()
-  --     vim.cmd("colorscheme seafloor")
-  --   end
-  -- },
 }

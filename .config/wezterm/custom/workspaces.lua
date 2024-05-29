@@ -91,7 +91,11 @@ M.select = wezterm.action_callback(function(window, pane)
     choices = format_labels(choices),
     callback = function(win1, pane1, eid)
       local exists
-      if string.sub(eid, 1, 1) == "T" then exists = true else exists = false end
+      if string.sub(eid, 1, 1) == "T" then
+        exists = true
+      else
+        exists = false
+      end
       local id = string.sub(eid, 2)
 
       if id == "new" then
@@ -104,13 +108,17 @@ M.select = wezterm.action_callback(function(window, pane)
               window = win2,
               pane = pane2,
               name = name,
-              cwd = home
+              cwd = home,
             })
-          end
+          end,
         })
       else
         local name
-        if exists then name = id else name = H.basename(id) end
+        if exists then
+          name = id
+        else
+          name = H.basename(id)
+        end
         util.switch_workspace({
           window = win1,
           pane = pane1,
@@ -118,7 +126,7 @@ M.select = wezterm.action_callback(function(window, pane)
           cwd = id,
         })
       end
-    end
+    end,
   })
 end)
 

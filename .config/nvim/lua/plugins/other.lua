@@ -1,10 +1,5 @@
 ---- Other ----
 return {
-  -- Personal
-  {
-    dir = "~/Documents/GitHub/unicode.nvim/",
-    opts = { },
-  },
   -- Make stuff prettier
   "stevearc/dressing.nvim",
   {
@@ -20,13 +15,13 @@ return {
         timeout = 10000,
         animation = "static",
       })
-    end
+    end,
   },
 
-  -- indent guides for Neovim
+  -- Indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy" },
     opts = {
       indent = { char = "│" },
       scope = { enabled = false },
@@ -46,7 +41,7 @@ return {
 
   {
     "echasnovski/mini.indentscope",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "VeryLazy" },
     config = function()
       local mini = require("mini.indentscope")
 
@@ -54,8 +49,8 @@ return {
         symbol = "│",
         options = { try_as_border = true },
         draw = {
-          animation = mini.gen_animation.quadratic({ easing = 'out', duration = 10 })
-        }
+          animation = mini.gen_animation.quadratic({ easing = "out", duration = 10 }),
+        },
       })
 
       vim.api.nvim_create_autocmd("FileType", {
@@ -80,50 +75,32 @@ return {
     "mbbill/undotree",
     keys = {
       { "<localleader>u", "<CMD>UndotreeToggle<CR>", desc = "UndoTree toggle" },
-    }
+    },
   },
 
   -- Color picker/preview
   {
     "uga-rosa/ccc.nvim",
-    config = function()
-      -- Enable true color
-      vim.opt.termguicolors = true
-    end,
+    opts = {},
     keys = {
-      { "<leader>tc", "<CMD>CccHighlighterToggle<CR>", desc = "Toggle color preview" }
-
-    }
+      { "<leader>tc", "<CMD>CccHighlighterToggle<CR>", desc = "Toggle color preview" },
+    },
   },
 
   -- Autopairs
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = "VeryLazy",
     opts = {
       check_ts = true,
-    }
+    },
   },
 
   -- Shortcuts for surrounding
   {
-    'echasnovski/mini.surround',
-    version = '*',
-    opts = {}
-  },
-
-  -- Highlight word under cursor
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      local il = require("illuminate")
-      il.configure({
-        under_cursor = false,
-        min_count_to_highlight = 2,
-      })
-    end,
-    keys = {
-      { "<leader>ti", "<CMD>IlluminateToggle<CR>", desc = "Toggle word highlight" },
-    },
+    "echasnovski/mini.surround",
+    event = "VeryLazy",
+    version = "*",
+    opts = {},
   },
 }

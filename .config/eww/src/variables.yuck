@@ -49,5 +49,5 @@
 )
 
 (defpoll interfaceId
-  :interval "24h" "route | grep default | head -n1 | awk '{print $8}'"
+  :interval "24h" "ip route list | grep default | head -n1 | awk '{print $5}'"
 )

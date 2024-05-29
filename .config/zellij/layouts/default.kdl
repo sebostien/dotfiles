@@ -2,13 +2,48 @@ layout {
     default_tab_template {
         children
         pane size=1 borderless=true {
-            plugin location="zellij:tab-bar"
-        }
-        pane size=2 borderless=true {
-            plugin location="zellij:status-bar"
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left  "{mode}#[bg=black,fg=blue]#[fg=black,bg=blue] {session} #[fg=blue,bg=black] {tabs}"
+                format_space "#[bg=black]"
+
+                hide_frame_for_single_pane "false"
+
+                mode_locked        "#[bg=blue] {name} #[fg=blue,bg=black]"
+                mode_normal        "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_resize        "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_pane          "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_tab           "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_scroll        "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_enter_search  "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_search        "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_rename_tab    "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_rename_pane   "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_session       "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_move          "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_prompt        "#[bg=green] {name} #[fg=green,bg=black]"
+                mode_tmux          "#[bg=yellow] {name} #[fg=yellow,bg=black]"
+
+                tab_normal              "#[fg=black,bg=white] {name} "
+                tab_normal_fullscreen   "#[fg=black,bg=white] {name} {fullscreen_indicator} "
+                tab_normal_sync         "#[fg=black,bg=white] {name} {sync_indicator} "
+                tab_active              "#[fg=black,bg=green] {name} "
+                tab_active_fullscreen   "#[fg=black,bg=green] {name} {fullscreen_indicator} "
+                tab_active_sync         "#[fg=black,bg=green] {name} {sync_indicator} "
+
+                tab_sync_indicator       "<> "
+                tab_fullscreen_indicator "[] "
+                tab_floating_indicator   "⬚ "
+
+
+                datetime          "#[fg=#6C7086,bg=#b1bbfa,bold] {format}   "
+                notification_format_unread           "#[fg=black,bg=orange,blink]  {message} "
+                notification_format_no_notifications "#[fg=green,bg=black,dim]   "
+                notification_show_interval           "10"
+            }
         }
     }
-    tab name="A" {
+    tab name="1" borderless=true {
         pane
     }
 }
+

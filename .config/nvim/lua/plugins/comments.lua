@@ -1,7 +1,12 @@
 return {
   {
     "numToStr/Comment.nvim",
+    event = { "VeryLazy" },
     opts = {},
   },
-  "JoosepAlviste/nvim-ts-context-commentstring", -- Detect embedded language and comment correctly
+  {
+    -- Detect embedded language and comment correctly
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = { "BufAdd", "BufEnter" },
+  },
 }

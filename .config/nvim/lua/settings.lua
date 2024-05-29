@@ -1,51 +1,60 @@
 local M = {
-  project_dirs = { "~/", "~/Documents/", "~/.config", "~/Desktop/" }
+	project_dirs = { "~/", "~/Documents/", "~/.config", "~/Desktop/" }
 }
 
 local o = vim.o
 
-o.guifont = "Hasklug NF"
+o.showmode = false
+o.wrap = false
+o.breakindent = false
+o.inccommand = "split"
+o.incsearch = true
+
+o.guifont = "Hasklug NF" -- TODO: New font, see wezterm
 o.termguicolors = true -- Correct terminal colors
 
-o.viminfo = "'1000"    -- Increase the size of file history
-o.scrolloff = 8        -- Always keep space when scrolling to bottom/top edge
-o.signcolumn = "yes"
+-- Default: "!,'100,<50,s10,h"
+o.shada = "!,'250,<50,s50,h"
+o.history = 10000
 
 o.swapfile = false
-o.backup = false
 o.undodir = os.getenv("HOME") .. "/.vim/undodir"
-o.undofile = true   -- Sets undo to file
+o.undofile = true -- Sets undo to file
 
-o.timeoutlen = 500  -- Faster completion
-o.splitright = true -- Vertical splits will automatically be to the right
-o.updatetime = 200
-
-o.wildmode = "list:longest"
-o.pumheight = 10 -- Max num of items in completion menu
-
-o.incsearch = true
-o.smartcase = true  -- Uses case in search
-o.ignorecase = true -- Needed for smartcase
+o.scrolloff = 8
+o.signcolumn = "yes"
+o.timeoutlen = 500 -- Trigger which-key
+o.splitbelow = false
+o.splitright = true
+o.updatetime = 1000
+o.wildmode = "list,full"
+o.wildignorecase = true
+o.pumheight = 12 -- Number of completions
+o.ignorecase = true
+o.smartcase = true
 
 o.number = true
 o.relativenumber = true
 
-o.wrap = false
-
 o.autoindent = true
-o.expandtab = true   -- Use spaces instead of tabs
-o.shiftwidth = 2     -- Change a number of space characeters inserted for indentation
-o.smarttab = true    -- Makes tabbing smarter will realize you have 2 vs 4
-o.smartindent = true -- Makes indenting "smarter"
-o.softtabstop = 2    -- Insert 2 spaces for a tab
-o.tabstop = 2        -- Insert 2 spaces for a tab
+o.expandtab = true
+o.smarttab = true
+o.smartindent = true
+o.shiftwidth = 2
+o.softtabstop = 2
+o.tabstop = 8
+
 o.list = true
+o.listchars = "tab:» ,trail:·,nbsp:␣"
 
 -- Remove mouse pop-up text
 vim.cmd([[ aunmenu PopUp.How-to\ disable\ mouse ]])
 vim.cmd([[ aunmenu PopUp.-1- ]])
 
-vim.cmd([[ nnoremap \ :Oil <cr> ]]) -- Makes Neotree hijack netrw
+-- Use Oil.nvim instead of netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.cmd([[ nnoremap \ :Oil <cr> ]])
 
 -- Windows to close with "q"
 vim.cmd([[ autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :close<CR> ]])

@@ -1,38 +1,28 @@
---- conform.nvim - Lightweight yet powerful formatter plugin for Neovim
---- https://github.com/stevearc/conform.nvim
 return {
   "stevearc/conform.nvim",
+  lazy = false,
   keys = {
     {
-      "<leader>cf",
+      "<leader>f",
       function()
-        require("conform").format()
+        require("conform").format({
+          async = true,
+          lsp_fallback = true,
+        })
       end,
-      desc = "Format with conform.nvim",
+      desc = "Format buffer",
     },
   },
-  cmd = "ConformInfo",
-  --- @class ConformOpts
   opts = {
-    format = {
-      timeout_ms = 3000,
-      async = false,
-      quiet = false,
-    },
-    ---@type = table<string, conform.FormatterUnit[]>
     formatters_by_ft = {
-      -- Conform will run multiple formatters sequentially
-      -- Use a sub-list to run only the first available formatter
       lua = { "stylua" },
-      python = { "isort", "black" },
+      python = { "ruff_format", "isort", "black" },
       javascript = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
+      markdown = { { "prettierd", "prettier" } },
       sh = { "shfmt" },
       rust = { "rustfmt" },
-    },
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_fallback = true,
+      typst = { "typstfmt" },
     },
   },
 }

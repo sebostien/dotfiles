@@ -1,5 +1,5 @@
 local blame_full = function()
-  package.loaded.gitsigns.blame_line { full = true }
+  package.loaded.gitsigns.blame_line({ full = true })
 end
 
 return {
@@ -8,6 +8,7 @@ return {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     keys = {
+      -- TODO: Git Keymaps
       { "<localleader>gt", "<CMD>Gitsigns diffthis<CR>",       desc = "Git toggle diff" },
       { "<localleader>gd", "<CMD>Gitsigns toggle_deleted<CR>", desc = "Git toggle inline deleted" },
       { "<localleader>gb", blame_full,                         desc = "Git blame line" },

@@ -34,7 +34,6 @@ myStartupHook isDesktop = do
   spawnOnce "picom --experimental-backend"
   spawnOnce "~/.config/xmonad/scripts/keyboard.sh"
   spawnOnce myEwwStartupHook
-  spawnOnce mySysTray
   when isDesktop $ spawnOnce "xinput set-prop 10 339"
 
 ------------------------------------------------------------------------

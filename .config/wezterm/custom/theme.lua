@@ -46,9 +46,9 @@ M.apply_to_config = function(config)
   config.use_fancy_tab_bar = false
   config.tab_bar_at_bottom = true
   config.window_padding = {
-    left = 2,
-    right = 2,
-    top = 5,
+    left = 0,
+    right = 0,
+    top = 0,
     bottom = 0,
   }
 

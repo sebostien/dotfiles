@@ -1,0 +1,99 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# --  
+# --  
+
+format = """
+[ 󰣛 ](fg:black bg:white)\
+[](bg:blue fg:white)\
+$directory\
+[](fg:blue bg:green)\
+$git_branch\
+$git_status\
+[](fg:green bg:yellow)\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+[](fg:yellow bg:purple)\
+$docker_context\
+[](fg:purple bg:yellow)\
+$cmd_duration\
+[](fg:yellow bg:white)\
+$time\
+[](fg:white bg:black)
+$character
+"""
+
+add_newline = false
+
+[line_break]
+disabled = true
+
+[directory]
+style = "bg:blue bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…᳟᳟᳟/"
+
+[c]
+symbol = " "
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:yellow fg:black"
+format = '[ $symbol $context ]($style)'
+
+[git_branch]
+symbol = ""
+style = "bg:green fg:black"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:green fg:black"
+format = '[$all_status$ahead_behind ]($style)'
+
+[golang]
+symbol = " "
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:yellow fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:white fg:black"
+format = '[ $time ]($style)'
+
+[cmd_duration]
+style = "bg:yellow fg:black"
+format = "[  $duration ]($style)"

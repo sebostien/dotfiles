@@ -1,33 +1,34 @@
 return {
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     opts = {
-      icons = {
-        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        separator = "  ", -- symbol used between a key and it's label
-        group = "+", -- symbol prepended to a group
+      plugins = {
+        marks = true,
+        registers = true,
       },
-
-      popup_mappings = {
-        scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>",   -- binding to scroll up inside the popup
-      },
-
       window = {
-        border = "single", -- none/single/double/shadow
-      },
-
-      layout = {
-        spacing = 6, -- spacing between columns
-      },
-
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-
-      triggers_blacklist = {
-        -- list of mode / prefixes that should never be hooked by WhichKey
-        i = { "j", "k" },
-        v = { "j", "k" },
+        border = "single",
       },
     },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+
+      wk.register({
+        ["<localleader>f"] = { name = "Find stuff", _ = "which_key_ignore" },
+        ["<localleader>t"] = { name = "Show TODOs", _ = "which_key_ignore" },
+        ["<localleader>h"] = { name = "Help pages", _ = "which_key_ignore" },
+        ["<localleader>l"] = { name = "Lazy", _ = "which_key_ignore" },
+        ["<localleader>o"] = { name = "Open with program", _ = "which_key_ignore" },
+        ["<localleader>g"] = { name = "Git info", _ = "which_key_ignore" },
+        ["<localleader>c"] = { name = "Change", _ = "which_key_ignore" },
+        ["<leader>t"] = { name = "Buffer toggles", _ = "which_key_ignore" },
+        ["<leader>r"] = { name = "Rename symbols", _ = "which_key_ignore" },
+        ["<leader>s"] = { name = "Search with LSP", _ = "which_key_ignore" },
+        ["<leader>l"] = { name = "Start LSPs", _ = "which_key_ignore" },
+        ["<leader>c"] = { name = "Codeactions LSP", _ = "which_key_ignore" },
+      })
+    end,
   },
 }

@@ -2,31 +2,38 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
     keys = {
       {
-        "<leader>q",
-        function()
-          require("trouble").open("document_diagnostics")
-        end,
-        desc = "Trouble document diagnostics",
+        "<leader>xw",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Workspace Diagnostics (Trouble)",
       },
       {
-        "<leader>w",
-        function()
-          require("trouble").open("workspace_diagnostics")
-        end,
-        desc = "Trouble workspace diagnostics",
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
       },
       {
-        "<localleader>q",
-        function()
-          require("trouble").open("quickfix")
-        end,
-        desc = "Trouble quickfix",
+        "<leader>xs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
       },
-    },
-    opts = {
-      auto_preview = false,
+      {
+        "<leader>xl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xq",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
     },
   },
 }

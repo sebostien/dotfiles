@@ -22,11 +22,6 @@ if [[ "$EUID" = 0 ]]; then
     exit 1
 fi
 
-SYSTEM_UPDATE=1
-INSTALL_DNF=1
-INSTALL_CARGO=1
-INSTALL_FLATPAK=1
-
 print_help() {
   echo "Setup fedora system."
   echo
@@ -65,29 +60,6 @@ ask() {
     esac
 }
 
-optimize_dnf() {
-
-    printf "%0.s=" {1..60}
-    printf "\n Optimizing dnf\n\n"
-
-    defaultyes=$(grep defaultyes </etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
-    if [ -z "$defaultyes" ]; then
-        echo "defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    elif [ "$defaultyes" != "True" ]; then
-        echo "Can't set defaultyes to True in dnf.conf, set manually"
-    fi
-
-    max_parallel_downloads=$(grep max_parallel_downloads </etc/dnf/dnf.conf | awk -F '=' '{print $NF}')
-    if [ -z "$max_parallel_downloads" ]; then
-        echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf >/dev/null
-    elif [ "$max_parallel_downloads" != "10" ]; then
-        echo "Can't set max_parallel_downloads in dnf.conf, set manually"
-    fi
-
-    printf "%0.s=" {1..60}
-    echo
-}
-
 # Prints string so its visible clearly
 next_part() {
     output="------ $1 ------"
@@ -104,14 +76,12 @@ mkdir ~/install_tmp
 mkdir -p ~/Apps
 cd ~/install_tmp || exit 1
 
-# Optimize dnf config
-optimize_dnf
-
 ####################################
 next_part "Adding third party repositories"
 ####################################
 
 sudo dnf install 'dnf-command(config-manager)'
+sudo dnf install rpmconf
 
 # RPM Fusion
 sudo dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" -y

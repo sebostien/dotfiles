@@ -1,25 +1,33 @@
 -------------------------------------------------
 --------------------- Theme ---------------------
 -------------------------------------------------
-local a = {}
 ---@class Colors
 local Colors = {
   rosewater = "#F5B8AB",
   flamingo = "#F29D9D",
   pink = "#AD6FF7",
+  pinker = "#C8A5FF",
+  violet = "#EA80FC",
   mauve = "#D87937",
-  -- mauve = "#C6A0F6",
   red = "#f65f54",
+  ketchup = "#F44336",
   maroon = "#E76A77",
   peach = "#FAB770",
-  -- peach = "#F5A97F",
-  -- yellow = "#EED49F",
   yellow = "#FACA64",
+  tangarine = "#FBC02D",
+  orange = "#FA951A",
   green = "#70CF67",
+  kiwi = "#2ECC71",
+  cactus = "#27AE60",
+  grass = "#91B362",
+  cyan = "#90E1C6",
   teal = "#4CD4BD",
+  turquoise = "#00C8D4",
+  bluish = "#45D7FC",
   sky = "#61BDFF",
   sapphire = "#4BA8FA",
   blue = "#03A9F4",
+  blueberry = "#2880FE",
   lavender = "#B7BDF8",
   text = "#EFF2F6",
   subtext1 = "#A3AAC2",
@@ -40,20 +48,6 @@ local Colors = {
   fg2 = "#BCC0C6",
   fg3 = "#A3A7AD",
   fg4 = "#838589",
-
-  -- Extra
-  grass = "#91B362",
-  cyan = "#90E1C6",
-  ketchup = "#F44336",
-  kiwi = "#2ECC71",
-  cactus = "#27AE60",
-  tangarine = "#FBC02D",
-  orange = "#FA951A",
-  pinker = "#C8A5FF",
-  blueberry = "#2880FE",
-  violet = "#EA80FC",
-  turquoise = "#00C8D4",
-  bluish = "#45D7FC",
 }
 
 ---@param colors Colors
@@ -77,9 +71,6 @@ local custom_highlights = function(colors)
     -- Mini
     MiniIndentscopeSymbol = { link = "Comment" },
     MiniSurround = { bg = colors.pink, fg = colors.surface1 },
-
-    -- ["@markup.italic"] = { fg = colors.blue, style = { "italic" } },
-    -- ["@markup.strong"] = { fg = colors.blue, style = { "bold" } },
 
     -- Syntax
     String = { fg = colors.grass },

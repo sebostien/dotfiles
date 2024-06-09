@@ -19,7 +19,7 @@ return {
       python = { "ruff_format", "isort", "black" },
       javascript = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
-      markdown = { { "prettierd", "prettier" } },
+      markdown = { { "prettierd", "prettier" }, "markdownlint" },
       sh = { "shfmt" },
       rust = { "rustfmt" },
       typst = { "typstfmt" },

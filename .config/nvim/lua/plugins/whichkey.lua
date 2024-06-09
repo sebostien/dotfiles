@@ -23,6 +23,7 @@ return {
         ["<localleader>o"] = { name = "Open with program", _ = "which_key_ignore" },
         ["<localleader>g"] = { name = "Git info", _ = "which_key_ignore" },
         ["<localleader>c"] = { name = "Change", _ = "which_key_ignore" },
+        ["<localleader>d"] = { name = "DAP", _ = "which_key_ignore" },
         ["<leader>t"] = { name = "Buffer toggles", _ = "which_key_ignore" },
         ["<leader>r"] = { name = "Rename symbols", _ = "which_key_ignore" },
         ["<leader>s"] = { name = "Search with LSP", _ = "which_key_ignore" },

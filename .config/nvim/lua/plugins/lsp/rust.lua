@@ -5,35 +5,34 @@ return {
     ft = { "rust" },
     dependencies = {
       "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
     },
     config = function()
       vim.g.rustaceanvim = {
         inlay_hints = {
-          highlight = "NonText"
+          highlight = "NonText",
         },
         -- Plugin configuration
         tools = {},
         -- LSP configuration
         server = {
-          on_attach = function(client, bufnr)
-            -- Popup list for code actions
-            vim.keymap.set("n", "<leader>ca", function()
-              vim.cmd.RustLsp("codeAction")
-            end, { silent = true, buffer = bufnr })
+          on_attach = function(_, bufnr)
+            local map = function(keys, func, desc)
+              vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+            end
 
-            require("lsp-inlayhints").on_attach(client, bufnr)
+            -- Popup list for code actions
+            map("<leader>ca", function()
+              vim.cmd.RustLsp("codeAction")
+            end, "Code Action")
+
+            map("<leader>cd", function()
+              vim.cmd.RustLsp("debug")
+            end, "Debug")
           end,
           settings = {
             -- rust-analyzer language server configuration
             ["rust-analyzer"] = {},
-          },
-        },
-        -- debugging stuff
-        dap = {
-          adapter = {
-            type = "executable",
-            command = "lldb-vscode",
-            name = "rt_lldb",
           },
         },
       }

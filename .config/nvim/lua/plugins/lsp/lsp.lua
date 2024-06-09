@@ -14,14 +14,8 @@ vim.filetype.add({
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  group = vim.api.nvim_create_augroup("ts-highligh-just", { clear = true }),
-  pattern = { "justfile" },
-  command = "TSBufEnable highlight",
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  group = vim.api.nvim_create_augroup("ts-highligh-yuck", { clear = true }),
-  pattern = { "*.yuck" },
+  group = vim.api.nvim_create_augroup("ts-highligh-enable-extra", { clear = true }),
+  pattern = { "justfile", "*.yuck" },
   command = "TSBufEnable highlight",
 })
 
@@ -38,29 +32,14 @@ return {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
       { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-      -- Lua
-      { "folke/neodev.nvim", opts = {}, priority = 1 },
-      { "folke/neoconf.nvim", opts = {}, priority = 1 },
-      -- Other
-      { "mfussenegger/nvim-dap" },
+      -- Conifg in lua.lua
+      "folke/lazydev.nvim",
+      "folke/neoconf.nvim",
     },
     ---@class PluginLspOpts
     opts = {
       capabilities = {},
       servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
-              },
-            },
-          },
-        },
         svelte = {
           filetypes = { "svelte", "html" },
         },
@@ -79,7 +58,7 @@ return {
             -- Open pdf in zathura
             vim.keymap.set("n", "<localleader><enter>", function()
               local file = vim.fn.expand("%:r") .. ".pdf"
-              vim.fn.execute("!zathura '" .. file .. "' &", true)
+              vim.fn.execute("!zathura '" .. file .. "' &", "silent")
             end, { bufnr = bufnr, desc = "Open pdf in Zathura" })
           end,
           settings = {
@@ -151,13 +130,17 @@ return {
       --   Returns true if the server should not be setup with lspconfig.
       ---@type table<string, fun(opts: table): nil|boolean>
       setup = {
-        -- Setup found at rust-tools plugin
+        -- Setup found in rust.lua
         rust_analyzer = function(_)
           return true
         end,
         -- Setup found at haskell-tools plugin
         hls = function(_)
           return true
+        end,
+        lua_ls = function(_)
+          -- Setup found at LazyDev plugin
+          return false
         end,
         ruff_lsp = function(opts)
           opts.on_attach = function(client, bufnr)

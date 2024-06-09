@@ -68,9 +68,9 @@ return {
     },
     config = function(_, opts)
       local telescope = require("telescope")
-      local trouble = require("trouble.providers.telescope")
-      opts.defaults.mappings.i["<c-t>"] = trouble.open_with_trouble
-      opts.defaults.mappings.n["<c-t>"] = trouble.open_with_trouble
+      local trouble = require("trouble.sources.telescope")
+      opts.defaults.mappings.i["<c-t>"] = trouble.open
+      opts.defaults.mappings.n["<c-t>"] = trouble.open
 
       telescope.setup(opts)
 

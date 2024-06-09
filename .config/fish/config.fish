@@ -1,8 +1,9 @@
 fish_add_path $HOME/scripts
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
-fish_add_path $HOME/.local/share/pnpm
 fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.local/share/pnpm
+fish_add_path $HOME/.local/share/nvm/v22.1.0/bin/
 
 set -x SHELL /usr/bin/fish
 set -x EDITOR nvim

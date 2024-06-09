@@ -4,6 +4,7 @@ local M = {
 
 local o = vim.o
 
+o.background = "dark"
 o.showmode = false
 o.wrap = false
 o.breakindent = false
@@ -57,7 +58,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.cmd([[ nnoremap \ :Oil <cr> ]])
 
 -- Windows to close with "q"
-vim.cmd([[ autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :close<CR> ]])
+vim.cmd([[ autocmd FileType vim,help,qf,lspinfo nnoremap <buffer><silent> q :close<CR> ]])
 vim.cmd([[ autocmd FileType man nnoremap <buffer><silent> q :quit<CR> ]])
 
 return M

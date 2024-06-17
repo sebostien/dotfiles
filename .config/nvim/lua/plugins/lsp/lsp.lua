@@ -122,6 +122,11 @@ return {
             },
           },
         },
+        -- TODO: Is this any good?
+        bacon_ls = {
+          enable = true,
+          settings = {},
+        },
         typst_lsp = {
           exportPdf = "onType",
         },
@@ -210,6 +215,8 @@ return {
           "misspell",
           "shfmt",
           "harper-ls",
+          "codelldb",
+          "ast_grep",
         },
       })
     end,

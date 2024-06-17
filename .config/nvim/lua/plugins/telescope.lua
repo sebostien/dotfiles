@@ -10,6 +10,7 @@ return {
       "folke/trouble.nvim",
       "Myzel394/jsonfly.nvim",
       "nvim-lua/plenary.nvim",
+      "Marskey/telescope-sg",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -29,6 +30,7 @@ return {
       { "<localleader>fn", "<CMD>Telescope notify<CR>", desc = "Search notifications" },
       { "<localleader>fd", "<CMD>Telescope diagnostics<CR>", desc = "Search diagnostics" },
       { "<localleader>fo", "<CMD>Telescope oldfiles<CR>", desc = "Search recent files" },
+      { "<localleader>fa", "<CMD>Telescope ast_grep<CR>", desc = "Ast Grep" },
 
       -- Help stuff
       { "<localleader>hh", "<CMD>Telescope help_tags<CR>", desc = "NeoVim help pages" },
@@ -63,6 +65,14 @@ return {
             prompt_position = "top",
             preview_width = 0.45,
           },
+        },
+        ast_grep = {
+          command = {
+            "sg",
+            "--json=stream",
+          },
+          grep_open_files = false,
+          lang = nil,
         },
       },
     },

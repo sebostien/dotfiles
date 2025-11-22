@@ -13,7 +13,7 @@ dnf history list
 dnf check-update
 
 # Update package
-dnf update <package-name>
+sudo dnf update <package-name>
 
 # Downgrade package
 dnf downgrade <package-name>
@@ -22,7 +22,7 @@ dnf downgrade <package-name>
 dnf localinstall <file-rpm>
 
 # Install security updates
-dnf update --security
+sudo dnf update --security
 
 # List dependencies of package
 dnf deplist <package-name>
@@ -32,3 +32,6 @@ dnf whatprovides <query>
 
 # List currently enabled repositories
 dnf repolist
+
+# Update but skip broken
+sudo dnf update --skip-broken

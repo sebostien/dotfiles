@@ -19,11 +19,10 @@ cheats:
   paths:
     - /home/sn/.local/share/navi/cheats
     - /home/sn/.config/navi/cheats
-    - /path/to/some/dir # on unix-like os
 
 # search:
 # tags: git,!checkout # equivalent to the --tag-rules option
 
 shell:
-  command: zsh
+  command: fish
 

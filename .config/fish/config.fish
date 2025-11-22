@@ -26,7 +26,7 @@ end
 if status is-interactive
   zoxide init --cmd cd fish | source
   starship init fish | source
-  navi widget fish | source
-  atuin init fish --disable-up-arrow | source
+  navi widget fish | source # CTRL-G
+  atuin init fish --disable-up-arrow | source # CTRL-R
   bits completions fish | source
 end

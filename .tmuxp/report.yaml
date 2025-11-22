@@ -1,9 +1,0 @@
-session_name: Thesis Report
-start_directory: ~/Documents/Chalmers/Github/rust-capq-thesis-report/
-windows:
-  - window_name: vim
-    panes:
-      - vim
-  - window_name: other
-    panes:
-      - task project:thesis

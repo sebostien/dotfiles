@@ -1,5 +1,7 @@
 module SN.Layouts where
 
+import Data.Ratio ((%))
+
 import XMonad ( (|||) )
 import XMonad.Hooks.ManageDocks ( avoidStruts )
 
@@ -7,7 +9,7 @@ import XMonad.Layout.LayoutModifier ( ModifiedLayout )
 import XMonad.Layout.Spacing ( spacingRaw, Border(Border), Spacing )
 import XMonad.Layout.ResizableTile ( ResizableTall(ResizableTall) )
 import XMonad.Layout.Grid (Grid(Grid))
-import XMonad.Layout.Circle (Circle(Circle))
+import XMonad.Layout.CircleEx (circleEx, cNMaster, cMasterRatio, cStackRatio, cMultiplier, cDelta)
 import XMonad.Layout.MultiToggle ( (??), mkToggle, EOT(EOT) )
 import XMonad.Layout.MultiToggle.Instances ( StdTransformers(NBFULL) )
 
@@ -18,7 +20,11 @@ grid = mySpacing gap
      $ Grid
 
 circle = mySpacing gap
-       $ Circle
+       $ circleEx { 
+           cNMaster = 0,
+           cStackRatio = 3 % 5,
+           cMultiplier = 1
+         }
 
 gap :: Integer
 gap = 8

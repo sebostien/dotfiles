@@ -42,7 +42,7 @@ myNamedKeys isDesktop
         , ("M-S-r", "Restart XMonad", spawn "xmonad --restart")
         , ("M-S-q", "Quit XMonad", io exitSuccess)
         , ("M-S-l", "Lock Screen", spawn "betterlockscreen -l dim")
-        , ("M-S-k", "Toggle keyboard layout", spawn "~/.config/xmonad/scripts/keyboard.sh")
+        , ("M-S-k", "Toggle keyboard layout", spawn "~/scripts/keyboard.sh")
         , ("M-s k", "Show keybindings", spawn "~/.config/rofi/scripts/keybindings.sh")
         ]
     , KeySection

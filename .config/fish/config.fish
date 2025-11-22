@@ -5,12 +5,20 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.local/share/pnpm
 fish_add_path $HOME/.local/share/nvm/v22.1.0/bin/
 
+
+# Include mason in path
+if test -d "$HOME/.local/share/nvim/mason/bin"
+  fish_add_path $HOME/.local/share/nvim/mason/bin
+end
+
+if test -f /usr/bin/nvim 
+  set -x MANPAGER '/usr/bin/nvim +Man!'
+end
+
 set -x SHELL /usr/bin/fish
 set -x EDITOR nvim
 set -x VISUAL nvim
 set -x LANG en_US.UTF-8
-
-fish_vi_key_bindings
 
 function fish_greeting
 end
@@ -20,5 +28,5 @@ if status is-interactive
   starship init fish | source
   navi widget fish | source
   atuin init fish --disable-up-arrow | source
+  bits completions fish | source
 end
-

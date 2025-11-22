@@ -6,10 +6,10 @@ if [[ ! $(pidof eww) ]]; then
 	sleep 1
 fi
 
-if [[ -f ~/.is_desktop ]]; then
-	eww open-many \
-			leftBar   \
-			rightBar
-else
+if [[ -f ~/.is_laptop ]]; then
 	eww open laptopBar
+else
+	eww open-many \
+		leftBar \
+		rightBar
 fi

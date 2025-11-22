@@ -1,57 +1,52 @@
 [user]
-	name = sebostien
-	email = sebostien@proton.me
+  name = sebostien
+  email = sebostien@proton.me
 [ui "color"]
   ui = always
 [color]
   ui = true
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-[commit]
-	template = /home/sn/.gitmessage
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 [core]
-	editor = nvim
-	autocrlf = input
-	excludesfile = /home/sn/.gitignore_global
-	ignorecase = false
-	safecrlf = warn
+  editor = nvim
+  autocrlf = input
+  excludesfile = /home/sn/.gitignore_global
+  ignorecase = false
+  safecrlf = warn
 [alias]
-	c = commit
-	s = status
+  ca = commit --amend
+  c = commit
+  s = status
   lg = log --oneline
-	last = log -1 HEAD
+  sh = show HEAD
   sl = stash list
-	co = checkout
-	br = branch
+  co = checkout
+  br = branch
 [help]
   autocorrect = 1
 [credential]
   helper = cache --timeout=3600
-[credential "https://github.com"]
-  helper = !/usr/bin/gh auth git-credential
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [diff]
-	tool = nvimdiff
-	colorMoved = default
+  tool = nvimdiff
+  colorMoved = default
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-	tool = nvimdiff
-	conflictstyle = diff3
+  tool = nvimdiff
+  conflictstyle = diff3
 [merge "nvimdiff"]
   path = nvim
 [g2 "panic"]
-	excludes = -e .classpath -e .settings -e *.iml
-[sequence]
-	editor = interactive-rebase-tool
+  excludes = -e .classpath -e .settings -e *.iml
 [mergetool "nvimdiff"]
-	trustExitCode = false
+  trustExitCode = false
 [pull]
-	rebase = true
+  rebase = true
 [push]
-	default = current
+  default = current
 [mergetool]
-	keepBackup = false
+  keepBackup = false

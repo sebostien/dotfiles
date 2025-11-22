@@ -128,7 +128,7 @@ sudo dnf install -y network-manager-applet blueman
 
 # Some packages I use, some more installed with cargo below
 sudo dnf install -y -q \
-  neofetch    \
+  fastfetch   \
   flameshot   \
   fzf         \
   bat         \
@@ -152,12 +152,10 @@ sudo dnf install -y -q \
   fish \
   zathura \
   fselect \
-  eza \
   navi \
   zoxide \
   jq \
   unar \
-  sd \
   tokei
 
 # ffmpeg stuff
@@ -173,6 +171,12 @@ sudo dnf install python3-pip -y -q
 sudo dnf copr enable wezfurlong/wezterm-nightly
 sudo dnf install wezterm
 
+if ask "Install Brave browser?"; then
+  sudo dnf install dnf-plugins-core
+  sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+  sudo dnf install brave-browser
+fi
+
 ####################################
 if ask "Install Rust toolchain and crates.io binaries?"; then
     # Rustup, rustc, cargo
@@ -187,16 +191,17 @@ if ask "Install Rust toolchain and crates.io binaries?"; then
     cargo +stable install -q --locked yazi-fm yazi-cli # File browser
     cargo +stable install -q tailspin                  # Log file tail
     cargo +stable install -q atuin                     # Shell history
+    cargo +stable install -q eza                       # ls
+    cargo +stable install -q sd                        # sed
 
     sudo dnf install libsmbclient-devel -y -q
     cargo +stable install -q termscp    # Remote file transfer (SFTP...)
 
     cargo +stable install -q --git https://github.com/typst/typst # Typesetting system
-
-    # Yazi
-
 fi
 
+####################################
+next_part "Installing Flatpaks"
 ####################################
 
 SPOTIFY=0

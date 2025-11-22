@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 tex_output="/tmp/math.tex"
 pdf_output="/tmp/math.pdf"

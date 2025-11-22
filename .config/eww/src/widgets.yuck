@@ -10,7 +10,7 @@
     (box :orientation "h"
       :space-evenly false
       (date)
-      (statContainer :label-text ""
+      (statContainer :label-text "󱑖"
         :text time
       )
       (statContainer

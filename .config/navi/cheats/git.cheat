@@ -40,7 +40,5 @@ git log --since=2.weeks
 git commit --amend
 
 
-;;;;;;;;;;;;;;;;;;;
-; Cmd
 
 $ branch: git branch | awk '{print $NF}'

@@ -1,5 +1,7 @@
-List cron jobs
-> crontab -l
+%crontab
 
-Edit cron job
-> crontab -e
+# List cron jobs
+crontab -l
+
+# Edit cron job
+crontab -e

@@ -1,5 +1,12 @@
+% dns
 
-Flush dns cache
-> resolvectl flush-caches
-> resolvectl statistics
+# Flush DNS cache
+resolvectl flush-caches
+resolvectl statistics
 
+# Set DNS server
+resolvectl status <interface>
+resolvectl dns <interface> <ip>
+
+
+$ interface: nmcli device show | grep "GENERAL.DEVICE" | awk '{ print $2 }'
